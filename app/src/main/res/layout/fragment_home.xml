@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,56 +12,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Aplicacion SER"
+        android:layout_marginTop="80dp"
+        android:textSize="40dp"
+        android:text="Psicología"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/border_redondo"
+        android:orientation="vertical"
+        app:circularflow_radiusInDP="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/txt_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:hint="Nombre de usuario" />
+
+        <Button
+            android:id="@+id/btn_Login"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_redondo"
+            android:gravity="center"
+            android:text="Login" />
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/txt_texto"
+        android:id="@+id/txt_Registrarse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="fill"
-        android:padding="10dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at vehicula diam, sed cursus dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent tempor augue justo, eget fermentum orci tincidunt vel. Morbi auctor rhoncus dapibus. Aenean nec ullamcorper nulla. Nunc scelerisque, dolor at auctor lacinia, orci arcu vehicula dolor, eu vehicula neque neque et sapien. Donec feugiat sapien nunc, a efficitur urna lobortis imperdiet. Nam molestie gravida tellus, sed accumsan nunc pharetra quis."
-        android:textSize="16dp"
+        android:gravity="center"
+        android:text="No tienes una cuenta?"
+        android:textSize="14dp"
+        android:textStyle="italic"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="200dp" />
-
-    <Button
-        android:id="@+id/btn_Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registarse"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_texto" />
-
-    <Button
-        android:id="@+id/btn_Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Register" />
-
-    <Button
-        android:id="@+id/btn_List_Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Lista de Regi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/txt_texto" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/txt_Lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Lista registrados"
+        android:textSize="14dp"
+        android:textStyle="italic"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Registrarse" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Usuario (
+data class UsuarioEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = -1,
     @ColumnInfo(name = "email")
@@ -20,4 +20,4 @@ data class Usuario (
     val create_at: String = ""
 )
 
-data class UsuarioList (val results: List<Usuario> = listOf() )
+data class UsuarioList (val results: List<UsuarioEntity> = listOf() )

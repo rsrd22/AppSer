@@ -27,9 +27,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val txtEdad = binding.txtEdad
             val txtGenero = binding.txtGenero
             val txtEmail = binding.txtEmail
-            Toast.makeText(requireContext(), "Nombre complero: ${txtNombre.text} \n Edad: ${txtEdad.text}\n" +
-                    " Genero: ${txtGenero.text} \n" +
-                    " Email: ${txtEmail.text}", Toast.LENGTH_LONG).show()
+
+
         }
     }
 

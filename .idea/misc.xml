@@ -3,12 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/RICHARD/AndroidStudioProjects/AppSer/app/src/main/res/drawable/border_redondo.xml" value="0.1375" />
         <entry key="..\:/Users/RICHARD/AndroidStudioProjects/AppSer/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/nelso/StudioProjects/AppSer/app/src/main/res/layout/activity_main.xml" value="0.13272543059777103" />
-        <entry key="..\:/Users/nelso/StudioProjects/AppSer/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/nelso/StudioProjects/AppSer/app/src/main/res/layout/fragment_register.xml" value="0.25" />
-        <entry key="..\:/Users/nelso/StudioProjects/AppSer/app/src/main/res/layout/fragment_register_list.xml" value="0.13272543059777103" />
-        <entry key="..\:/Users/nelso/StudioProjects/AppSer/app/src/main/res/layout/item_register.xml" value="0.13272543059777103" />
+        <entry key="..\:/Users/RICHARD/AndroidStudioProjects/AppSer/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/RICHARD/AndroidStudioProjects/AppSer/app/src/main/res/layout/fragment_register.xml" value="0.25" />
       </map>
     </option>
   </component>

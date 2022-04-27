@@ -5,19 +5,23 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Usuario (
+data class Persona(
     @PrimaryKey(autoGenerate = true)
     val id: Int = -1,
+    @ColumnInfo(name = "nombre_completo")
+    val nombre_completo: String = "",
+    @ColumnInfo(name = "edad")
+    val edad: Int =-1,
+    @ColumnInfo(name = "genero")
+    val genero: String = "",
     @ColumnInfo(name = "email")
     val email: String = "",
-    @ColumnInfo(name = "estado")
-    val estado: Int = -1,
-    @ColumnInfo(name = "id_rol")
-    val rolId: Int = -1,
     @ColumnInfo(name = "user_create")
     val user_create: String = "",
     @ColumnInfo(name = "create_at")
     val create_at: String = ""
+
 )
 
-data class UsuarioList (val results: List<Usuario> = listOf() )
+data class PersonaList (val results: List<Persona> = listOf())
+

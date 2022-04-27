@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Roles(
+data class Rol(
     @PrimaryKey(autoGenerate = true)
     val id: Int = -1,
     @ColumnInfo(name = "descripcion")
@@ -18,4 +18,4 @@ data class Roles(
     val create_at: String = ""
 )
 
-data class RolesList (val results: List<Roles> = listOf() )
+data class RolList (val results: List<Rol> = listOf() )

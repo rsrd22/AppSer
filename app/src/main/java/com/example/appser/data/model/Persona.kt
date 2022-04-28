@@ -7,15 +7,13 @@ import androidx.room.PrimaryKey
 @Entity
 data class PersonaEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = -1,
+    val id: Long = 0,
     @ColumnInfo(name = "nombre_completo")
     val nombre_completo: String ?= "",
     @ColumnInfo(name = "edad")
     val edad: Int ?=-1,
     @ColumnInfo(name = "genero")
     val genero: String ?= "",
-    @ColumnInfo(name = "email")
-    val email: String ?= "",
     @ColumnInfo(name = "user_create")
     val user_create: String ?= "",
     @ColumnInfo(name = "create_at")

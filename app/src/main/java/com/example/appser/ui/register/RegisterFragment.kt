@@ -14,11 +14,16 @@ import androidx.lifecycle.Observer
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
+import com.example.appser.data.resource.PersonaDataSource
 import com.example.appser.data.resource.UsuarioDataSource
 import com.example.appser.databinding.FragmentRegisterBinding
+import com.example.appser.presentation.PersonaViewModel
+import com.example.appser.presentation.PersonaViewModelFactory
 import com.example.appser.presentation.UsuarioViewModel
 import com.example.appser.presentation.UsuarioViewModelFactory
+import com.example.appser.repository.PersonaRepositoryImpl
 import com.example.appser.repository.UsuarioRepositoryImpl
 
 
@@ -30,6 +35,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         UsuarioViewModelFactory(
             UsuarioRepositoryImpl(
                 UsuarioDataSource(AppDatabase.getDatabase(requireContext()).usuarioDao())
+            )
+        )
+    }
+    private val viewModelPersona by viewModels<PersonaViewModel> {
+        PersonaViewModelFactory(
+            PersonaRepositoryImpl(
+                PersonaDataSource(AppDatabase.getDatabase(requireContext()).personaDao())
             )
         )
     }
@@ -46,7 +58,29 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val txtGenero = binding.txtGenero
             val txtEmail = binding.txtEmail
 
-            val usuario =  UsuarioEntity(0, txtEmail.text.toString(), 1, 1, "rsrd", "2022-04-27")
+            val persona = PersonaEntity(nombre_completo = txtNombre.text.toString(), edad = Integer.parseInt(txtEdad.text.toString()), genero = txtGenero.text.toString(), user_create =  "rsrd", create_at =  "2022-04-27")
+            viewModelPersona.fetchSavePersona(persona).observe(viewLifecycleOwner, Observer{result ->
+                when(result){
+                    is Resource.Loading ->{
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Success ->{
+                        Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Failure -> {
+                        Log.d("Error LiveData", "${result.exception}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${result.exception}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+            })
+            Log.d("Persona", "${persona}")
+            val usuario =  UsuarioEntity(0, txtEmail.text.toString(), 1, persona.id, 1, "rsrd", "2022-04-27")
             viewModel.fetchSaveUsuario(usuario).observe(viewLifecycleOwner, Observer{result ->
                 when(result){
                     is Resource.Loading ->{

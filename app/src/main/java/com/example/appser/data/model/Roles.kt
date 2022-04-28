@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class RolEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = -1,
+    val id: Long = 0,
     @ColumnInfo(name = "descripcion")
     val descripcion: String = "",
     @ColumnInfo(name = "estado")

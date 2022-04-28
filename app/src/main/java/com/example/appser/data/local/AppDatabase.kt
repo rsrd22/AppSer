@@ -11,6 +11,9 @@ import com.example.appser.data.model.UsuarioEntity
 @Database(entities = [PersonaEntity::class, UsuarioEntity::class, RolEntity::class], version = 1)
 abstract class AppDatabase: RoomDatabase(){
 
+    abstract fun usuarioDao(): UsuarioDao
+    abstract fun rolDao(): RolDao
+    abstract fun personaDao(): PersonaDao
 
     companion object{
         private var INSTANCE: AppDatabase? = null

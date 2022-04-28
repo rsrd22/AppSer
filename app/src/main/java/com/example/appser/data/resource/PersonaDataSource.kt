@@ -17,7 +17,4 @@ class PersonaDataSource(private val personaDao: PersonaDao) {
     suspend fun savePersona(persona: PersonaEntity){
         personaDao.savePersona(persona)
     }
-    suspend fun updatePersona(persona: PersonaEntity){
-        personaDao.updatePersona(persona)
-    }
 }

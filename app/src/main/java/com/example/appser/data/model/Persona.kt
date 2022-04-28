@@ -9,17 +9,17 @@ data class PersonaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = -1,
     @ColumnInfo(name = "nombre_completo")
-    val nombre_completo: String = "",
+    val nombre_completo: String ?= "",
     @ColumnInfo(name = "edad")
-    val edad: Int =-1,
+    val edad: Int ?=-1,
     @ColumnInfo(name = "genero")
-    val genero: String = "",
+    val genero: String ?= "",
     @ColumnInfo(name = "email")
-    val email: String = "",
+    val email: String ?= "",
     @ColumnInfo(name = "user_create")
-    val user_create: String = "",
+    val user_create: String ?= "",
     @ColumnInfo(name = "create_at")
-    val create_at: String = ""
+    val create_at: String ?= ""
 
 )
 

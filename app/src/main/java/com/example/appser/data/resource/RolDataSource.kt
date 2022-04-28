@@ -14,11 +14,9 @@ class RolDataSource(private val rolDao: RolDao) {
         return rolDao.getRol(id)
     }
 
-    suspend fun savePersona(rol: RolEntity){
+    suspend fun saveRol(rol: RolEntity){
         rolDao.saveRol(rol)
     }
-    suspend fun updatePersona(rol: RolEntity){
-        rolDao.updateRol(rol)
-    }
+
 
 }

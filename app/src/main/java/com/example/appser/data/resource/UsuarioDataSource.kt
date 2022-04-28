@@ -16,7 +16,4 @@ class UsuarioDataSource(private val usuarioDao: UsuarioDao) {
     suspend fun saveUsuario(usuario: UsuarioEntity){
         usuarioDao.saveUsuario(usuario)
     }
-    suspend fun updateUsuario(usuario: UsuarioEntity){
-        usuarioDao.updateUsuario(usuario)
-    }
 }

@@ -1,9 +1,6 @@
 package com.example.appser.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
 
@@ -13,13 +10,12 @@ interface PersonaDao {
     @Query("SELECT * FROM PersonaEntity")
     suspend fun getAllPersona(): List<PersonaEntity>
 
-    @Query("SELECT * FROM UsuarioEntity WHERE id = :id")
+    @Query("SELECT * FROM PersonaEntity WHERE id = :id")
     suspend fun getPersona(id: Int): PersonaEntity
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePersona(personaEntity: PersonaEntity)
 
-    @Update
-    suspend fun updatePersona(personaEntity: PersonaEntity)
+
 
 }

@@ -11,10 +11,9 @@ interface RolDao {
     @Query("SELECT * FROM RolEntity WHERE id = :id")
     suspend fun getRol(id: Int):RolEntity
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveRol(rolEntity: RolEntity)
 
-    @Update
-    suspend fun updateRol(rolEntity: RolEntity)
+
 
 }

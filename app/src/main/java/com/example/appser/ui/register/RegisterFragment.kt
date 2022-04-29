@@ -58,30 +58,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val txtGenero = binding.txtGenero
             val txtEmail = binding.txtEmail
 
-            val persona = PersonaEntity(nombre_completo = txtNombre.text.toString(), edad = Integer.parseInt(txtEdad.text.toString()), genero = txtGenero.text.toString(), user_create =  "rsrd", create_at =  "2022-04-27")
-            viewModelPersona.fetchSavePersona(persona).observe(viewLifecycleOwner, Observer{result ->
-                when(result){
-                    is Resource.Loading ->{
-                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
-                    }
-                    is Resource.Success ->{
-                        Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_LONG).show()
-                    }
-                    is Resource.Failure -> {
-                        Log.d("Error LiveData", "${result.exception}")
-                        Toast.makeText(
-                            requireContext(),
-                            "Error: ${result.exception}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                }
+            var persona = PersonaEntity(nombre_completo = txtNombre.text.toString(), edad = Integer.parseInt(txtEdad.text.toString()), genero = txtGenero.text.toString(), user_create =  "rsrd", create_at =  "2022-04-27")
 
-            })
-            Log.d("Persona", "${persona}")
-            val usuario =  UsuarioEntity(0, txtEmail.text.toString(), 1, persona.id, 1, "rsrd", "2022-04-27")
-            viewModel.fetchSaveUsuario(usuario).observe(viewLifecycleOwner, Observer{result ->
+            persona.usuario = UsuarioEntity(0, txtEmail.text.toString(), 1, 0, 1, "rsrd", "2022-04-27")
+
+
+            viewModel.fetchPersonaWithUsuario(persona).observe(viewLifecycleOwner, Observer{result ->
                 when(result){
                     is Resource.Loading ->{
                         Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()

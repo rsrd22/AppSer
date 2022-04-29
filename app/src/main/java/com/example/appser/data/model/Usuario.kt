@@ -1,20 +1,9 @@
 package com.example.appser.data.model
 
 import android.app.Person
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
-@Entity(
-    foreignKeys = [
-        ForeignKey(
-            entity = PersonaEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["id_persona"]
-        )
-    ]
-)
+@Entity
 data class UsuarioEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
@@ -23,13 +12,22 @@ data class UsuarioEntity(
     @ColumnInfo(name = "estado")
     val estado: Int = -1,
     @ColumnInfo(name = "id_persona")
-    val personaId: Long = 0,
+    var personaId:Long  = 0,
     @ColumnInfo(name = "id_rol")
     val rolId: Long = 0,
     @ColumnInfo(name = "user_create")
     val user_create: String = "",
     @ColumnInfo(name = "create_at")
     val create_at: String = ""
+)
+
+data class PersonaAndUsuario(
+    @Embedded val persona: PersonaEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "id_persona"
+    )
+    val usuario: UsuarioEntity
 )
 
 data class UsuarioList(val results: List<UsuarioEntity> = listOf())

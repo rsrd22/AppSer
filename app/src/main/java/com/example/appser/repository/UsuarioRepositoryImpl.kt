@@ -1,5 +1,6 @@
 package com.example.appser.repository
 
+import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
 import com.example.appser.data.model.UsuarioList
 import com.example.appser.data.resource.UsuarioDataSource
@@ -15,5 +16,9 @@ class UsuarioRepositoryImpl(private val usuarioDataSource: UsuarioDataSource): U
 
     override suspend fun saveUsuario(usuarioEntity: UsuarioEntity){
         return usuarioDataSource.saveUsuario(usuarioEntity)
+    }
+
+    override suspend fun insertPersonaWithUsuario(persona: PersonaEntity) {
+        return usuarioDataSource.insertPersonaWithUsuario(persona)
     }
 }

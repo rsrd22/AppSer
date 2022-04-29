@@ -1,5 +1,6 @@
 package com.example.appser.repository
 
+import com.example.appser.data.model.PersonaAndUsuario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
 import com.example.appser.data.model.UsuarioList
@@ -11,6 +12,8 @@ interface UsuarioRepository {
     suspend fun getUsuarioById(id: Int): UsuarioEntity
 
     suspend fun saveUsuario(usuarioEntity: UsuarioEntity)
+
+    suspend fun getPersonasAndUsuario():List<PersonaAndUsuario>
 
     suspend fun insertPersonaWithUsuario(persona: PersonaEntity)
 

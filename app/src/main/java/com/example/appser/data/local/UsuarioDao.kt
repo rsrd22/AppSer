@@ -22,7 +22,7 @@ interface UsuarioDao {
 
     @Transaction
     @Query("SELECT * FROM UsuarioEntity")
-    fun getPersonasAndUsuario(): List<PersonaAndUsuario>
+    suspend fun getPersonasAndUsuario(): List<PersonaAndUsuario>
 
 
     suspend fun insertPersonaWithUsuario(persona: PersonaEntity) {
@@ -30,7 +30,6 @@ interface UsuarioDao {
         if (usuario!= null) {
             val id_persona: Long = savePersona(persona)
             usuario.personaId = id_persona
-
             saveUsuario(usuario)
 
         }

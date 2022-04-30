@@ -21,7 +21,7 @@ interface UsuarioDao {
     suspend fun savePersona(personaEntity: PersonaEntity): Long
 
     @Transaction
-    @Query("SELECT * FROM UsuarioEntity")
+    @Query("SELECT * FROM PersonaEntity")
     suspend fun getPersonasAndUsuario(): List<PersonaAndUsuario>
 
 

@@ -30,4 +30,13 @@ data class PersonaAndUsuario(
     val usuario: UsuarioEntity
 )
 
+data class RolAndUsuario(
+    @Embedded val rol: RolEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "rolId"
+    )
+    val usuarios: List<UsuarioEntity>
+)
+
 data class UsuarioList(val results: List<UsuarioEntity> = listOf())

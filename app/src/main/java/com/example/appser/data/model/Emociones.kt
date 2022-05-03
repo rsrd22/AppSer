@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Emociones (
+class EmocionesEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val descripcion: String = "",
@@ -15,3 +15,5 @@ class Emociones (
     @ColumnInfo(name = "create_at")
     val create_at: String = ""
 )
+
+data class EmocionesList(val result: List<EmocionesEntity> = listOf())

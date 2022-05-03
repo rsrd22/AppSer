@@ -1,9 +1,9 @@
 package com.example.appser.data.local
 
 import androidx.room.*
-import com.example.appser.data.model.PersonaAndUsuario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
+import com.example.appser.data.model.relations.PersonaAndUsuario
 
 @Dao
 interface UsuarioDao {

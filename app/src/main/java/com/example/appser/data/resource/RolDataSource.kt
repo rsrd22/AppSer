@@ -10,7 +10,7 @@ class RolDataSource(private val rolDao: RolDao) {
     suspend fun  getAllRol(): RolList {
         return RolList(rolDao.getAllRol())
     }
-    suspend fun getRol(id: Int): RolEntity {
+    suspend fun getRol(id: Long): RolEntity {
         return rolDao.getRol(id)
     }
 

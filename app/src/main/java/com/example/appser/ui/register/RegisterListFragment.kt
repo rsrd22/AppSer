@@ -15,6 +15,7 @@ import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.PersonaEntity
+import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.data.resource.UsuarioDataSource
 import com.example.appser.databinding.FragmentRegisterListBinding
 import com.example.appser.presentation.UsuarioViewModel
@@ -47,8 +48,7 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
                     Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Success->{
-                    Log.d("Success", "Result---------")
-                    Toast.makeText(requireContext(), "Success rsrd..${result.data}", Toast.LENGTH_LONG).show()
+
                     Log.d("Success", "Result: ${result.data}")
                     adapter = RegisterListAdapter(result.data,
                         this@RegisterListFragment)
@@ -69,7 +69,7 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
         })
     }
 
-    override fun onRegisterListClick(persona: PersonaEntity) {
-        TODO("Not yet implemented")
+    override fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario) {
+        Toast.makeText(requireContext(), "Usuario: ${personasAndUsuario.usuario?.email}", Toast.LENGTH_LONG).show()
     }
 }

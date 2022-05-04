@@ -14,19 +14,14 @@ import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
-import com.example.appser.data.model.CategoriasEntity
-import com.example.appser.data.model.CicloVitalEntity
-import com.example.appser.data.model.EmocionesEntity
-import com.example.appser.data.model.RolEntity
-import com.example.appser.data.resource.CategoriasDataSource
-import com.example.appser.data.resource.CicloVitalDataResource
-import com.example.appser.data.resource.EmocionesDataSource
-import com.example.appser.data.resource.RolDataSource
+import com.example.appser.data.model.*
+import com.example.appser.data.resource.*
 import com.example.appser.presentation.*
 import com.example.appser.repository.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -44,6 +39,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         cargarCiclos()
         cargarCategorias()
         cargarEmociones()
+        cargarActividades()
 
 
 
@@ -60,6 +56,45 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         }
         btnLista.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
+        }
+    }
+
+    fun cargarActividades(){
+        val viewModel by viewModels<ActividadesViewModel> {
+            ActividadesViewModelFactory(
+                ActividadesRepositoryImpl(
+                    ActividadesDataSource(
+                        appDatabase.actividadesDao()
+                    )
+                )
+            )
+        }
+
+        val actividades = listOf(
+            ActividadesEntity(0,"","","",0,0,1,"SAdmin", "2022-05-03")
+        )
+
+        actividades.forEach {
+            viewModel.fetchSaveActividad(it).observe(viewLifecycleOwner, Observer { result ->
+                when(result){
+                    is Resource.Loading ->{
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Success ->{
+                        Toast.makeText(requireContext(), "Save Actividad exitoso..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Failure -> {
+                        Log.d("Error LiveData", "${result.exception}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${result.exception}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+            })
         }
     }
 

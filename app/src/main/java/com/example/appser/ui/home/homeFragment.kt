@@ -40,7 +40,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         cargarCategorias()
         cargarEmociones()
         cargarActividades()
-
+        cargarPreguntas()
 
 
         val btnLogin = view.findViewById<Button>(R.id.btn_Login)
@@ -56,6 +56,44 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         }
         btnLista.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
+        }
+    }
+
+    fun cargarPreguntas(){
+        val viewModel by viewModels<PreguntasViewModel>{
+            PreguntasViewModelFactory(
+                PreguntasRepositoryImpl(
+                    PreguntasDataSource(
+                        appDatabase.preguntasDao()
+                    )
+                )
+            )
+        }
+
+        val preguntas = listOf (
+            PreguntasEntity(0,"", 0,0,1,"SAdmin", "2022-05-03")
+        )
+
+        preguntas.forEach {
+            viewModel.fetchSavePregunta(it).observe(viewLifecycleOwner, Observer {result->
+                when(result){
+                    is Resource.Loading ->{
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Success ->{
+                        Toast.makeText(requireContext(), "Save Pregunta exitoso..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Failure -> {
+                        Log.d("Error LiveData", "${result.exception}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${result.exception}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            })
         }
     }
 
@@ -253,4 +291,5 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         }
         Toast.makeText(requireContext(), "End Cargando Roles..", Toast.LENGTH_LONG).show()
     }
+
 }

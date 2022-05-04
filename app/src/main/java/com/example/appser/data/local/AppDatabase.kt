@@ -15,7 +15,7 @@ import com.example.appser.data.model.*
 abstract class AppDatabase: RoomDatabase(){
 
 //    abstract fun actividadesDao(): ActividadesDao
-//    abstract fun categoriasDao(): CategoriasDao
+    abstract fun categoriasDao(): CategoriasDao
     abstract fun ciclovitalDao(): CicloVitalDao
 //    abstract fun cuestionarioDao(): CuestionarioDao
 //    abstract fun cuestionariopreguntasDao(): CuestionarioPreguntasDao

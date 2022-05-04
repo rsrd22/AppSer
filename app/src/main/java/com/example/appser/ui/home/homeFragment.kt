@@ -18,17 +18,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.CategoriasEntity
 import com.example.appser.data.model.CicloVitalEntity
 import com.example.appser.data.model.RolEntity
+import com.example.appser.data.resource.CategoriasDataSource
 import com.example.appser.data.resource.CicloVitalDataResource
 import com.example.appser.data.resource.RolDataSource
-import com.example.appser.presentation.CicloVitalViewModel
-import com.example.appser.presentation.CicloVitalViewModelFactory
-import com.example.appser.presentation.RolViewModel
-import com.example.appser.presentation.RolViewModelFactory
-import com.example.appser.repository.CicloVitalRepository
-import com.example.appser.repository.CicloVitalRepositoryImpl
-import com.example.appser.repository.RolRepositoryImpl
+import com.example.appser.presentation.*
+import com.example.appser.repository.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
 
@@ -42,6 +39,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
         cargarRoles()
         cargarCiclos()
+        cargarCategorias()
 
 
 
@@ -58,6 +56,44 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         }
         btnLista.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
+        }
+    }
+
+    fun cargarCategorias(){
+        val viewModel by viewModels<CategoriasViewModel> {
+            CategoriasViewModelFactory(
+                CategoriasRepositoryImpl(
+                    CategoriasDataSource(
+                        appDatabase.categoriasDao()
+                    )
+                )
+            )
+        }
+
+        val categorias = listOf(
+            CategoriasEntity(0, "", 1, "SAdmin", "2022-05-03")
+        )
+
+        categorias.forEach {
+            viewModel.fetchSaveCategoria(it).observe(viewLifecycleOwner, Observer { result ->
+                when(result){
+                    is Resource.Loading ->{
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Success ->{
+                        Toast.makeText(requireContext(), "Save CicloVital exitoso..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Failure -> {
+                        Log.d("Error LiveData", "${result.exception}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${result.exception}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            })
         }
     }
 

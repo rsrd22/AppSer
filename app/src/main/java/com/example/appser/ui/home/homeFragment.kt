@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,9 +21,11 @@ import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.CategoriasEntity
 import com.example.appser.data.model.CicloVitalEntity
+import com.example.appser.data.model.EmocionesEntity
 import com.example.appser.data.model.RolEntity
 import com.example.appser.data.resource.CategoriasDataSource
 import com.example.appser.data.resource.CicloVitalDataResource
+import com.example.appser.data.resource.EmocionesDataSource
 import com.example.appser.data.resource.RolDataSource
 import com.example.appser.presentation.*
 import com.example.appser.repository.*
@@ -40,6 +43,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         cargarRoles()
         cargarCiclos()
         cargarCategorias()
+        cargarEmociones()
 
 
 
@@ -56,6 +60,45 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         }
         btnLista.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
+        }
+    }
+
+    fun cargarEmociones(){
+        val viewModel by viewModels<EmocionesViewModel> {
+            EmocionesViewModelFactory(
+                EmocionesRepositoryImpl(
+                    EmocionesDataSource(
+                        appDatabase.emocionesDao()
+                    )
+                )
+            )
+        }
+
+        val emociones = listOf(
+            EmocionesEntity(0, "", 1, "SAdmin", "2022-05-03")
+        )
+
+        emociones.forEach {
+            viewModel.fetchSaveEmocion(it).observe(viewLifecycleOwner, Observer { result ->
+                when(result){
+                    is Resource.Loading ->{
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Success ->{
+                        Toast.makeText(requireContext(), "Save Emociones exitoso..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Failure -> {
+                        Log.d("Error LiveData", "${result.exception}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${result.exception}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+            })
         }
     }
 

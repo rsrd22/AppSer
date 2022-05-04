@@ -19,7 +19,7 @@ abstract class AppDatabase: RoomDatabase(){
     abstract fun ciclovitalDao(): CicloVitalDao
 //    abstract fun cuestionarioDao(): CuestionarioDao
 //    abstract fun cuestionariopreguntasDao(): CuestionarioPreguntasDao
-//    abstract fun emocionesDao(): EmocionesDao
+    abstract fun emocionesDao(): EmocionesDao
     abstract fun personaDao(): PersonaDao
 //    abstract fun preguntasDao(): PreguntasDao
     abstract fun rolDao(): RolDao

@@ -9,5 +9,11 @@ class EmocionesDataSource(private val emocionesDao: EmocionesDao) {
         return emocionesDao.getAllEmociones()
     }
 
-    suspecvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    suspend fun getEmocionbyId(id: Long): EmocionesEntity{
+        return emocionesDao.getEmocionbyId(id)
+    }
+
+    suspend fun saveEmocion(emocion: EmocionesEntity){
+        return emocionesDao.saveEmocion(emocion)
+    }
 }

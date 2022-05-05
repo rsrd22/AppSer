@@ -8,7 +8,6 @@
     tools:context=".ui.dashboard.DashboardFragment">
 
 
-
     <ImageView
         android:id="@+id/img_LogoGrande"
         android:layout_width="150dp"

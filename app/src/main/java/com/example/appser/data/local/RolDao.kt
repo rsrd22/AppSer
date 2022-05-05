@@ -2,14 +2,15 @@ package com.example.appser.data.local
 
 import androidx.room.*
 import com.example.appser.data.model.RolEntity
-import com.example.appser.data.model.relations.PersonaAndUsuario
-import com.example.appser.data.model.relations.RolAndUsuario
+import com.example.appser.data.model.relations.RolWithUsuario
 
 @Dao
 interface RolDao {
+    @Transaction
     @Query("SELECT * FROM RolEntity")
     suspend fun getAllRol(): List<RolEntity>
 
+    @Transaction
     @Query("SELECT * FROM RolEntity WHERE id = :id")
     suspend fun getRol(id: Long):RolEntity
 
@@ -18,7 +19,7 @@ interface RolDao {
 
     @Transaction
     @Query("SELECT * FROM RolEntity WHERE id = :idRol")
-    suspend fun getRolAndUsuario(idRol: Long): RolAndUsuario
+    suspend fun getRolAndUsuario(idRol: Long): List<RolWithUsuario>
 
 
 }

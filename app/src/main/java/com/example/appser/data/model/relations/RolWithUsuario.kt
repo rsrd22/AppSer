@@ -5,7 +5,7 @@ import androidx.room.Relation
 import com.example.appser.data.model.RolEntity
 import com.example.appser.data.model.UsuarioEntity
 
-data class RolAndUsuario(
+data class RolWithUsuario(
     @Embedded val rol: RolEntity,
     @Relation(
         parentColumn = "id",

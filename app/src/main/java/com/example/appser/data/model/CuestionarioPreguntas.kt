@@ -8,12 +8,12 @@ import androidx.room.PrimaryKey
 class CuestionarioPreguntasEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    @ColumnInfo(name = "id_persona")
-    val personaId: Long = 0,
-    @ColumnInfo(name = "id_actividad_asignada")
-    val actividadAsignadaId: Long = 0,
-    @ColumnInfo(name = "fecha")
-    val fecha: String = "",
+    @ColumnInfo(name = "id_cuestionario")
+    val cuestionarioId: Long = 0,
+    @ColumnInfo(name = "id_pregunta")
+    val preguntaId: Long = 0,
+    @ColumnInfo(name = "respuesta")
+    val respuesta: String = "",
     @ColumnInfo(name = "user_create")
     val user_create: String = "",
     @ColumnInfo(name = "create_at")

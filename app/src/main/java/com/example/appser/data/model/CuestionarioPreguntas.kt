@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class CuestionarioPreguntasEntity (
+data class CuestionarioPreguntasEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     @ColumnInfo(name = "id_cuestionario")

@@ -36,11 +36,11 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         cargarRoles()
-        cargarCiclos()
-        cargarCategorias()
-        cargarEmociones()
-        cargarActividades()
-        cargarPreguntas()
+//        cargarCiclos()
+//        cargarCategorias()
+//        cargarEmociones()
+//        cargarActividades()
+//        cargarPreguntas()
 
 
         val btnLogin = view.findViewById<Button>(R.id.btn_Login)

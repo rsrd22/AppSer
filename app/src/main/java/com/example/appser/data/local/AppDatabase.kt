@@ -11,14 +11,14 @@ import com.example.appser.data.model.*
     (entities = [PersonaEntity::class, UsuarioEntity::class, RolEntity::class, CicloVitalEntity::class,
     ActividadesEntity::class, CategoriasEntity::class, CuestionarioEntity::class,
     CuestionarioPreguntasEntity::class, EmocionesEntity::class, PreguntasEntity::class],
-    version = 2)
+    version = 1)
 abstract class AppDatabase: RoomDatabase(){
 
     abstract fun actividadesDao(): ActividadesDao
     abstract fun categoriasDao(): CategoriasDao
     abstract fun ciclovitalDao(): CicloVitalDao
-//    abstract fun cuestionarioDao(): CuestionarioDao
-//    abstract fun cuestionariopreguntasDao(): CuestionarioPreguntasDao
+    abstract fun cuestionarioDao(): CuestionarioDao
+    abstract fun cuestionariopreguntasDao(): CuestionarioPreguntasDao
     abstract fun emocionesDao(): EmocionesDao
     abstract fun personaDao(): PersonaDao
     abstract fun preguntasDao(): PreguntasDao
@@ -33,7 +33,7 @@ abstract class AppDatabase: RoomDatabase(){
             INSTANCE= INSTANCE?: Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "app_ser_db"
+                "application_ser_db"
             ).build()
 
             return INSTANCE!!

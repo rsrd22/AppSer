@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="ExtraText"
+    tools:context=".ui.MainActivity">
+    <item
+        android:id="@+id/identify_emotion"
+        android:title="Identificar Emoción" />
+    <item android:id="@+id/activity_history"
+        android:title="Histórico Emociones"/>
+</menu>

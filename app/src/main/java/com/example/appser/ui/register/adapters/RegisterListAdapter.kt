@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appser.core.BaseViewHolder
-import com.example.appser.data.model.PersonaAndUsuario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.PersonaList
+import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.databinding.ItemRegisterBinding
 
 class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario>,
@@ -16,7 +16,7 @@ class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario
                           ): RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnRegisterListClickListener{
-        fun onRegisterListClick(persona: PersonaEntity)
+        fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -26,7 +26,7 @@ class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario
         itemBinding.root.setOnClickListener {
             val position = holder.bindingAdapterPosition.takeIf { it != DiffUtil.DiffResult.NO_POSITION}
                 ?: return@setOnClickListener
-            itemClickListener.onRegisterListClick(personasAndUsuario[position].persona)
+            itemClickListener.onRegisterListClick(personasAndUsuario[position])
         }
         return holder
     }

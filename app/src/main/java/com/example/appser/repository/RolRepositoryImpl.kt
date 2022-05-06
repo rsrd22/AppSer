@@ -9,7 +9,7 @@ class RolRepositoryImpl(private val rolDataSource: RolDataSource): RolRepository
         return rolDataSource.getAllRol()
     }
 
-    override suspend fun getRolById(id: Int): RolEntity {
+    override suspend fun getRolById(id: Long): RolEntity {
         return rolDataSource.getRol(id)
     }
 

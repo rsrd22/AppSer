@@ -21,13 +21,8 @@ data class UsuarioEntity(
     val create_at: String = ""
 )
 
-data class PersonaAndUsuario(
-    @Embedded val persona: PersonaEntity,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "id_persona"
-    )
-    val usuario: UsuarioEntity
-)
+
+
+
 
 data class UsuarioList(val results: List<UsuarioEntity> = listOf())

@@ -24,11 +24,11 @@
             android:id="@+id/reg_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/reg_num"
             android:layout_marginStart="16dp"
-            tools:text="Nombre Completo"
+            android:layout_toEndOf="@+id/reg_num"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Nombre Completo" />
 
 
         <TextView

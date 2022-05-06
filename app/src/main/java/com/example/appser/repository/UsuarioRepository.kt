@@ -1,9 +1,9 @@
 package com.example.appser.repository
 
-import com.example.appser.data.model.PersonaAndUsuario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
 import com.example.appser.data.model.UsuarioList
+import com.example.appser.data.model.relations.PersonaAndUsuario
 
 interface UsuarioRepository {
 

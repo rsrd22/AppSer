@@ -8,7 +8,7 @@ interface RolRepository {
 
     suspend fun getRoles(): RolList
 
-    suspend fun getRolById(id: Int): RolEntity
+    suspend fun getRolById(id: Long): RolEntity
 
     suspend fun saveRol(rolEntity: RolEntity)
 }

@@ -11,7 +11,7 @@ import com.example.appser.data.model.CuestionarioPreguntasList
 interface CuestionarioPreguntasDao {
 
     @Query("SELECT * FROM CuestionarioPreguntasEntity")
-    suspend fun getAllCuestionarioPreguntas(): CuestionarioPreguntasList
+    suspend fun getAllCuestionarioPreguntas(): List<CuestionarioPreguntasEntity>
 
     @Query("SELECT * FROM CuestionarioPreguntasEntity WHERE id = :id")
     suspend fun getCuestionarioPreguntasbyId(id: Long): CuestionarioPreguntasEntity

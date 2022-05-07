@@ -7,7 +7,7 @@ import com.example.appser.data.model.CuestionarioList
 class CuestionarioDataSource(private val cuestionarioDao: CuestionarioDao) {
 
     suspend fun getAllCuestionario(): CuestionarioList{
-        return cuestionarioDao.getAllCuestionario()
+        return CuestionarioList(cuestionarioDao.getAllCuestionario())
     }
 
     suspend fun getCuestionariobyId(id: Long): CuestionarioEntity{

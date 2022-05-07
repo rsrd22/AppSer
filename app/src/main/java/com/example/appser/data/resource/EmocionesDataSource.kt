@@ -6,7 +6,7 @@ import com.example.appser.data.model.EmocionesList
 
 class EmocionesDataSource(private val emocionesDao: EmocionesDao) {
     suspend fun getAllEmociones(): EmocionesList{
-        return emocionesDao.getAllEmociones()
+        return EmocionesList(emocionesDao.getAllEmociones())
     }
 
     suspend fun getEmocionbyId(id: Long): EmocionesEntity{

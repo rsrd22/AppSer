@@ -6,7 +6,7 @@ import com.example.appser.data.model.ActividadesList
 
 class ActividadesDataSource(private val actividadesDao: ActividadesDao) {
     suspend fun getAllActividades(): ActividadesList {
-        return actividadesDao.getAllActividades()
+        return ActividadesList(actividadesDao.getAllActividades())
     }
 
     suspend fun getActividadbyId(id: Long): ActividadesEntity {

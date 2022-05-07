@@ -10,7 +10,7 @@ import com.example.appser.data.model.PreguntasList
 @Dao
 interface PreguntasDao {
     @Query("SELECT * FROM PreguntasEntity")
-    suspend fun getAllPreguntas(): PreguntasList
+    suspend fun getAllPreguntas(): List<PreguntasEntity>
 
     @Query("SELECT * FROM PreguntasEntity WHERE id = :id")
     suspend fun getPreguntabyId(id: Long): PreguntasEntity

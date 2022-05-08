@@ -43,8 +43,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         cargarPreguntas()
 
 
-        val btnLogin = view.findViewById<Button>(R.id.btn_Login)
-        val btnRegistrarse = view.findViewById<TextView>(R.id.txt_Registrarse)
+                val btnLogin = view.findViewById<Button>(R.id.btn_Login)val btnRegistrarse = view.findViewById<TextView>(R.id.txt_Registrarse)
+
         val btnLista = view.findViewById<TextView>(R.id.txt_Lista)
 
         btnLogin.setOnClickListener{
@@ -77,7 +77,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         preguntas.forEach {
             viewModel.fetchSavePregunta(it).observe(viewLifecycleOwner, Observer {result->
                 when(result){
-                    is Resource.Loading ->{
+                        is Resource.Loading ->{
                         Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
                     }
                     is Resource.Success ->{

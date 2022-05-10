@@ -22,6 +22,7 @@ import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.*
 import com.example.appser.data.resource.*
+import com.example.appser.databinding.FragmentRegisterBinding
 import com.example.appser.presentation.*
 import com.example.appser.repository.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -30,7 +31,9 @@ import kotlinx.coroutines.launch
 
 class homeFragment : Fragment(R.layout.fragment_home) {
 
-    private val appDatabase: AppDatabase = AppDatabase.getDatabase(requireContext())
+    private var appDatabase: AppDatabase = AppDatabase.getDatabase(requireContext())
+    private lateinit var binding: homeFragment
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,12 +46,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 //        cargarPreguntas()
 
 
-        val btnLogin = view.findViewById<Button>(R.id.btn_Login)
-        val btnRegistrarse = view.findViewById<TextView>(R.id.txt_Registrarse)
-        val btnLista = view.findViewById<TextView>(R.id.txt_Lista)
+        val btnLogin = binding.btn_Login
+        val btnRegistrarse = binding.txt_Registrarse
+
+        val btnLista = binding.txt_Lista
 
         btnLogin.setOnClickListener{
-            val txtUsuario = view.findViewById<EditText>(R.id.txt_usuario)
+            val txtUsuario = binding.txt_usuario
             Toast.makeText(requireContext(), "Usuario: ${txtUsuario.text}", Toast.LENGTH_LONG).show()
         }
         btnRegistrarse.setOnClickListener{
@@ -97,7 +101,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         preguntas.forEach {
             viewModel.fetchSavePregunta(it).observe(viewLifecycleOwner, Observer {result->
                 when(result){
-                    is Resource.Loading ->{
+                        is Resource.Loading ->{
                         Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
                     }
                     is Resource.Success ->{

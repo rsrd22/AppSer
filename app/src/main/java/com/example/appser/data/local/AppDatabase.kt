@@ -33,7 +33,7 @@ abstract class AppDatabase: RoomDatabase(){
             INSTANCE= INSTANCE?: Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "application_ser_db"
+                "app1_ser_db"
             ).build()
 
             return INSTANCE!!

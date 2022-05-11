@@ -11,7 +11,7 @@ import com.example.appser.data.model.relations.EmocionesWithPreguntas
 interface EmocionesDao {
     @Transaction
     @Query("SELECt * FROM EmocionesEntity")
-    suspend fun getAllEmociones(): EmocionesList
+    suspend fun getAllEmociones(): List<EmocionesEntity>
 
     @Transaction
     @Query("SELECt * FROM EmocionesEntity WHERE id = :id")

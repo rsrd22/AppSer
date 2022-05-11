@@ -10,7 +10,7 @@ import com.example.appser.data.model.relations.PersonaWithCuestionario
 interface ActividadesDao {
     @Transaction
     @Query("SELECT * FROM ActividadesEntity")
-    suspend fun getAllActividades(): ActividadesList
+    suspend fun getAllActividades(): List<ActividadesEntity>
 
     @Transaction
     @Query("SELECT * FROM ActividadesEntity WHERE id = :id")

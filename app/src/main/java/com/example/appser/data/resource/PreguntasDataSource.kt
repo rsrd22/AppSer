@@ -6,7 +6,7 @@ import com.example.appser.data.model.PreguntasList
 
 class PreguntasDataSource(private val preguntasDao: PreguntasDao) {
     suspend fun getAllPreguntas():PreguntasList{
-        return preguntasDao.getAllPreguntas()
+        return PreguntasList(preguntasDao.getAllPreguntas())
     }
 
     suspend fun getPreguntabyId(id: Long): PreguntasEntity{

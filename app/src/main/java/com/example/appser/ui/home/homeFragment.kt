@@ -42,11 +42,11 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         cargarRoles()
-        cargarCiclos()
-        cargarCategorias()
-        cargarEmociones()
-        cargarActividades()
-        cargarPreguntas()
+//        cargarCiclos()
+//        cargarCategorias()
+//        cargarEmociones()
+//        cargarActividades()
+//        cargarPreguntas()
 
 
         val btnLogin = binding.btnLogin

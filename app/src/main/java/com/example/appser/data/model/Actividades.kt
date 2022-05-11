@@ -5,25 +5,25 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class ActividadesEntity (
+data class ActividadesEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     @ColumnInfo(name="titulo")
-    val titulo: String = "",
+    val titulo: String ?= "",
     @ColumnInfo(name="descripcion")
-    val descripcion: String = "",
+    val descripcion: String ?= "",
     @ColumnInfo(name="enlace")
-    val enlace: String = "",
+    val enlace: String ?= "",
     @ColumnInfo(name="id_emocion")
-    val emocionId: Long = 0,
+    val emocionId: Long ?= 0,
     @ColumnInfo(name="id_ciclo")
-    val cicloId: Long = 0,
+    val cicloId: Long ?= 0,
     @ColumnInfo(name="estado")
-    val estado: Int = -1,
+    val estado: Int ?= -1,
     @ColumnInfo(name = "user_create")
-    val user_create: String = "",
+    val user_create: String ?= "",
     @ColumnInfo(name = "create_at")
-    val create_at: String = ""
+    val create_at: String ?= ""
 )
 
-data class ActividadesList(val result:List<ActividadesEntity> = listOf())
+data class ActividadesList(val result: List<ActividadesEntity> = listOf())

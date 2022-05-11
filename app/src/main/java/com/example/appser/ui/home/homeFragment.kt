@@ -81,7 +81,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             viewModel.fetchUsuarioByEmail(email.toString()).observe(viewLifecycleOwner, Observer { result->
                 when(result){
                     is Resource.Loading ->{
-                        Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success ->{
                         if(result.data != null){

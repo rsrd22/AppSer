@@ -15,8 +15,13 @@ import androidx.core.content.res.ColorStateListInflaterCompat.inflate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.appser.R
+import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.databinding.FragmentDashboardBinding
+import com.example.appser.databinding.FragmentHomeBinding
 import com.example.appser.presentation.MainViewModel
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_menu_test.*
@@ -25,20 +30,42 @@ import kotlinx.android.synthetic.main.app_bar_menu_test.*
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
+    private lateinit var personaAndUsuario: PersonaAndUsuario
+    private lateinit var binding: FragmentDashboardBinding
     private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentDashboardBinding.bind(view)
 
+        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
+            personaAndUsuario = result
+            if (personaAndUsuario != null) {
+                setBienvenidoUsuario()
+            }
+        })
 
- }
+        val btnIdentify = binding.txtIdentifyEmotion
+
+        btnIdentify.setOnClickListener {
+            identificarEmocion()
+        }
+    }
+
+    fun setBienvenidoUsuario(){
+        binding.txtUser.text = "Bienvenido: ${personaAndUsuario.persona.nombre_completo}"
+    }
+
+    fun identificarEmocion(){
+        findNavController().navigate(R.id.action_dashboardFragment_to_questionsFragment2)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       // var drawerLayout : DrawerLayout77777777777777777777777777777777777777-swt5r_open)
+        // var drawerLayout : DrawerLayout77777777777777777777777777777777777777-swt5r_open)
         //drawer_layout.addDrawerListener(toggle)
         //toggle.syncState()
 
@@ -49,26 +76,27 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     override fun setHasOptionsMenu(hasMenu: Boolean) {
         super.setHasOptionsMenu(hasMenu)
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu,menu)
+        inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        
+
     }
 
 //override fun onOptionsItemSelected(item: MenuItem): Boolean {
-  //  val id: Int = item.getItemId()
+    //  val id: Int = item.getItemId()
     //if (id == R.id.identify_emotion) {
 
     //}
-      //  return true
-        // lo ideal aquí sería hacer un intent para abrir una nueva clase como lo siguiente
-        //Log.i("ActionBar", "Settings!")
-        //val about = Intent(
-          //  ApplicationProvider.getApplicationContext<Context>(),
-            //About::class.java
-        //)
-        //startActivity(about)
-       // return true
+    //  return true
+    // lo ideal aquí sería hacer un intent para abrir una nueva clase como lo siguiente
+    //Log.i("ActionBar", "Settings!")
+    //val about = Intent(
+    //  ApplicationProvider.getApplicationContext<Context>(),
+    //About::class.java
+    //)
+    //startActivity(about)
+    // return true
     //}
     //return super.onOptionsItemSelected(item)
 //}

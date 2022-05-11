@@ -33,5 +33,36 @@
         android:id="@+id/dashboardFragment"
         android:name="com.example.appser.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_questionsFragment2"
+            app:destination="@id/questionsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionsFragment2"
+        android:name="com.example.appser.ui.questions.QuestionsFragment"
+        android:label="fragment_questions"
+        tools:layout="@layout/fragment_questions" >
+        <action
+            android:id="@+id/action_questionsFragment2_to_emotionFragment2"
+            app:destination="@id/emotionFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/emotionFragment2"
+        android:name="com.example.appser.ui.emotion.EmotionFragment"
+        android:label="fragment_emotion"
+        tools:layout="@layout/fragment_emotion" >
+        <action
+            android:id="@+id/action_emotionFragment2_to_activityFragment2"
+            app:destination="@id/activityFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/activityFragment2"
+        android:name="com.example.appser.ui.activity.ActivityFragment"
+        android:label="fragment_activity"
+        tools:layout="@layout/fragment_activity" >
+        <action
+            android:id="@+id/action_activityFragment2_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>

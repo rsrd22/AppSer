@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -34,6 +35,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var binding: FragmentHomeBinding
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,8 +67,42 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     }
 
     fun login() {
+        val viewModel by viewModels<UsuarioViewModel> {
+            UsuarioViewModelFactory(
+                UsuarioRepositoryImpl(
+                    UsuarioDataSource(
+                        appDatabase.usuarioDao()
+                    )
+                )
+            )
+        }
         val email = binding.txtUsuario.text
+        if(email.isNotEmpty()){
+            viewModel.fetchUsuarioByEmail(email.toString()).observe(viewLifecycleOwner, Observer { result->
+                when(result){
+                    is Resource.Loading ->{
+                        Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Success ->{
+                        if(result.data != null){
+                            mainViewModel.setPersonaAndUsuario(result.data)
+                            findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
+                        }else{
+                            Toast.makeText(requireContext(), "El correo no se encuentra en el sistema..", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
 
+            })
+
+        }else{
+            Toast.makeText(
+                requireContext(),
+                "Por favor Colocar el correo electronico",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        }
     }
 
     fun cargarPreguntas() {
@@ -226,7 +262,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         Toast.makeText(
                             requireContext(),
                             "Save Pregunta exitoso..",
-                            Toast.LENGTH_LONG
+                            Toast.LENGTH_SHORT
                         ).show()
                     }
                     is Resource.Failure -> {
@@ -691,7 +727,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 }
             })
         }
-        Toast.makeText(requireContext(), "End Cargando Roles..", Toast.LENGTH_LONG).show()
     }
 
 }

@@ -17,5 +17,6 @@ interface UsuarioRepository {
 
     suspend fun insertPersonaWithUsuario(persona: PersonaEntity)
 
+    suspend fun getUsuarioByEmail(email: String): PersonaAndUsuario
 
 }

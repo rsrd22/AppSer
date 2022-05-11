@@ -14,19 +14,25 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.res.ColorStateListInflaterCompat.inflate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.appser.R
+import com.example.appser.presentation.MainViewModel
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_menu_test.*
 import kotlinx.android.synthetic.main.app_bar_menu_test.*
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+    private val mainViewModel: MainViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
+
+
  }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -37,6 +37,15 @@ class UsuarioViewModel(private val repo: UsuarioRepository): ViewModel() {
             emit(Resource.Failure(e))
         }
     }
+
+    fun fetchUsuarioByEmail(email: String) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getUsuarioByEmail(email)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
 }
 
 class UsuarioViewModelFactory(private val repo: UsuarioRepository): ViewModelProvider.Factory{

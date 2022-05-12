@@ -37,19 +37,29 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Home Fragment", "OnCreate")
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("Home Fragment", "onStart")
         appDatabase = AppDatabase.getDatabase(requireContext())
-        binding = FragmentHomeBinding.bind(view)
-
         cargarRoles()
         cargarCiclos()
         cargarCategorias()
         cargarEmociones()
         cargarActividades()
         cargarPreguntas()
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("Home Fragment", "onViewCreated")
+
+        binding = FragmentHomeBinding.bind(view)
 
         val btnLogin = binding.btnLogin
         val btnRegistrarse = binding.txtRegistrarse

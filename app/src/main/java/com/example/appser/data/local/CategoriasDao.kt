@@ -19,7 +19,13 @@ interface CategoriasDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCategoria(categoriaEntity: CategoriasEntity)
 
+
+    @Transaction
+    @Query("SELECT * FROM CategoriasEntity")
+    suspend fun getAllCategoriasWithPreguntas(): List<CategoriasWithPreguntas>
+
     @Transaction
     @Query("SELECT * FROM CategoriasEntity WHERE id = :id")
-    suspend fun getCategoriasWithPreguntas(id: Long): List<CategoriasWithPreguntas>
+    suspend fun getCategoriasWithPreguntasById(id: Long): CategoriasWithPreguntas
+
 }

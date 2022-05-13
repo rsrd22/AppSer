@@ -16,6 +16,7 @@ interface CategoriasDao {
     @Query("SELECT * FROM CicloVitalEntity WHERE id = :id")
     suspend fun getCategoriabyId(id: Long): CategoriasEntity
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCategoria(categoriaEntity: CategoriasEntity)
 

@@ -1,60 +1,102 @@
 package com.example.appser.ui.questions
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.appser.R
+import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.EmocionesList
+import com.example.appser.data.model.relations.CategoriasWithPreguntas
+import com.example.appser.databinding.FragmentDashboardBinding
+import com.example.appser.databinding.FragmentHomeBinding
+import com.example.appser.databinding.FragmentQuestionsBinding
+import com.example.appser.presentation.MainViewModel
+import kotlinx.android.synthetic.main.fragment_questions.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QuestionsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class QuestionsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class QuestionsFragment : Fragment(R.layout.fragment_questions) {
+
+    private lateinit var binding: FragmentQuestionsBinding
+    private lateinit var appDatabase: AppDatabase
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var categorias: List<CategoriasWithPreguntas>
+    private lateinit var emociones: EmocionesList
+    private var indicadorCategoria: Int = 0
+    private var indicadorPregunta: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        appDatabase = AppDatabase.getDatabase(requireContext())
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentQuestionsBinding.bind(view)
+        indicadorCategoria = 0
+        indicadorPregunta = 0
+        Log.d("Question", "Main Question")
+        mainViewModel.getCategoriasWithPreguntas().observe(viewLifecycleOwner, Observer{cat ->
+
+            Log.d("Categorias-->", "cate->${cat}")
+            categorias = cat
+            if(categorias != null){
+                IniciarPreguntas()
+            }
+        })
+
+        mainViewModel.getEmociones().observe(viewLifecycleOwner, Observer { result ->
+            Log.d("Emociones-->", "Emo->${result}")
+            emociones = result
+        })
+
+
+
+
+
+
+        btnSiguiente.setOnClickListener {
+            setSiguentePregunta()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_questions, container, false)
+    fun setEmociones(){
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QuestionsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QuestionsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun setCategorias(){
+
+    }
+
+    fun IniciarPreguntas(){
+        indicadorCategoria = 0
+        indicadorPregunta= 0
+        setPregunta()
+
+    }
+
+    fun setPregunta(){
+        if(categorias != null && emociones != null) {
+            binding.txtPreguntas.text =
+                "${categorias[indicadorCategoria].categoria.descripcion} - ${categorias[indicadorCategoria].preguntas[indicadorPregunta].descripcion}"
+        }else{
+            Log.d("Categorias", "Cat: ${categorias}")
+            Log.d("Emociones", "Emo: ${emociones}")
+        }
+    }
+    fun setSiguentePregunta(){
+        // Guardar la Pregunta anterior en un list
+
+        //Incrementar Indicadores
+        indicadorCategoria++
+        indicadorPregunta++
+        setPregunta()
+        //Setear Nueva Pregunta
     }
 }

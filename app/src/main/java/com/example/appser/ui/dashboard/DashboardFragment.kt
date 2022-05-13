@@ -1,17 +1,9 @@
 package com.example.appser.ui.dashboard
 
-import android.app.ActionBar
-import android.content.Context
-import android.content.Intent
-import android.icu.lang.UCharacter
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.res.ColorStateListInflaterCompat.inflate
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -21,22 +13,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
-import com.example.appser.data.model.EmocionesEntity
 import com.example.appser.data.model.EmocionesList
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
 import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.data.resource.CategoriasDataSource
 import com.example.appser.data.resource.EmocionesDataSource
-import com.example.appser.data.resource.PreguntasDataSource
 import com.example.appser.databinding.FragmentDashboardBinding
-import com.example.appser.databinding.FragmentHomeBinding
 import com.example.appser.presentation.*
 import com.example.appser.repository.CategoriasRepositoryImpl
 import com.example.appser.repository.EmocionesRepositoryImpl
-import com.example.appser.repository.PreguntasRepositoryImpl
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_menu_test.*
-import kotlinx.android.synthetic.main.app_bar_menu_test.*
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
@@ -52,12 +37,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         super.onCreate(savedInstanceState)
         appDatabase = AppDatabase.getDatabase(requireContext())
 
-        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
-            personaAndUsuario = result
-            if (personaAndUsuario != null) {
-                setBienvenidoUsuario()
-            }
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,6 +44,13 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDashboardBinding.bind(view)
+
+        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
+            personaAndUsuario = result
+            if (personaAndUsuario != null) {
+                setBienvenidoUsuario()
+            }
+        })
 
         val btnIdentify = binding.txtIdentifyEmotion
 
@@ -95,6 +81,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 }
                 is Resource.Success -> {
                     emociones = result.data
+
+                    mainViewModel.setEmociones(emociones)
                 }
                 is Resource.Failure -> {
                     Log.d("Error LiveData", "${result.exception}")
@@ -106,6 +94,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                         .show()
                 }
             }
+
         })
     }
 
@@ -127,6 +116,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 }
                 is Resource.Success -> {
                     categorias = result.data
+                    Toast.makeText(requireContext(), "End Carga ..${emociones}", Toast.LENGTH_SHORT).show()
+                    mainViewModel.setCategoriasWithPreguntas(categorias)
                 }
                 is Resource.Failure -> {
                     Log.d("Error LiveData", "${result.exception}")

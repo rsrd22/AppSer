@@ -576,6 +576,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         )
 
         emociones.forEach {
+            Log.d("Emociones", "emocion->${it}")
             viewModel.fetchSaveEmocion(it).observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is Resource.Loading -> {

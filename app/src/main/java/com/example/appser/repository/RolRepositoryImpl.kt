@@ -16,4 +16,8 @@ class RolRepositoryImpl(private val rolDataSource: RolDataSource): RolRepository
     override suspend fun saveRol(rolEntity: RolEntity) {
         return rolDataSource.saveRol(rolEntity)
     }
+
+    override suspend fun getCountRol(): Int {
+        return rolDataSource.getCountRol()
+    }
 }

@@ -11,4 +11,6 @@ interface RolRepository {
     suspend fun getRolById(id: Long): RolEntity
 
     suspend fun saveRol(rolEntity: RolEntity)
+
+    suspend fun getCountRol(): Int
 }

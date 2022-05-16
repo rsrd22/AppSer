@@ -18,5 +18,9 @@ class RolDataSource(private val rolDao: RolDao) {
         rolDao.saveRol(rol)
     }
 
+    suspend fun getCountRol(): Int{
+        return rolDao.getCountRol()
+    }
+
 
 }

@@ -36,6 +36,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var appDatabase: AppDatabase
     private lateinit var binding: FragmentHomeBinding
     private val mainViewModel: MainViewModel by activityViewModels()
+    val viewModelRol by viewModels<RolViewModel> {
+        RolViewModelFactory(
+            RolRepositoryImpl(
+                RolDataSource(
+                    appDatabase.rolDao()
+                )
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,19 +55,22 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     override fun onStart() {
         super.onStart()
         Log.d("Home Fragment", "onStart")
-        appDatabase = AppDatabase.getDatabase(requireContext())
-        cargarRoles()
-        cargarCiclos()
-        cargarCategorias()
-        cargarEmociones()
-        cargarActividades()
-        cargarPreguntas()
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appDatabase = AppDatabase.getDatabase(requireContext())
         Log.d("Home Fragment", "onViewCreated")
-
+        if (validarCargaBd()) {
+            cargarRoles()
+            cargarCiclos()
+            cargarCategorias()
+            cargarEmociones()
+            cargarActividades()
+            cargarPreguntas()
+        }
         binding = FragmentHomeBinding.bind(view)
 
         val btnLogin = binding.btnLogin
@@ -87,25 +99,31 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             )
         }
         val email = binding.txtUsuario.text
-        if(email.isNotEmpty()){
-            viewModel.fetchUsuarioByEmail(email.toString()).observe(viewLifecycleOwner, Observer { result->
-                when(result){
-                    is Resource.Loading ->{
-                        Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_SHORT).show()
-                    }
-                    is Resource.Success ->{
-                        if(result.data != null){
-                            mainViewModel.setPersonaAndUsuario(result.data)
-                            findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
-                        }else{
-                            Toast.makeText(requireContext(), "El correo no se encuentra en el sistema..", Toast.LENGTH_SHORT).show()
+        if (email.isNotEmpty()) {
+            viewModel.fetchUsuarioByEmail(email.toString())
+                .observe(viewLifecycleOwner, Observer { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is Resource.Success -> {
+                            if (result.data != null) {
+                                mainViewModel.setPersonaAndUsuario(result.data)
+                                findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "El correo no se encuentra en el sistema..",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
-                }
 
-            })
+                })
 
-        }else{
+        } else {
             Toast.makeText(
                 requireContext(),
                 "Por favor Colocar el correo electronico",
@@ -699,16 +717,36 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    fun cargarRoles() {
-        val viewModel by viewModels<RolViewModel> {
-            RolViewModelFactory(
-                RolRepositoryImpl(
-                    RolDataSource(
-                        appDatabase.rolDao()
+     fun validarCargaBd(): Boolean {
+        var cargaBd: Boolean = false
+        viewModelRol.fetchCountRol().observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success -> {
+
+                    cargaBd = (result.data > 0)
+                    Log.d("validarCargaBd", "result.data :${result.data} / ")
+                    Log.d("validarCargaBd", "validar Carga  Bd:${cargaBd} / ")
+                }
+                is Resource.Failure -> {
+                    Log.d("Error LiveData", "${result.exception}")
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${result.exception}",
+                        Toast.LENGTH_SHORT
                     )
-                )
-            )
-        }
+                        .show()
+                }
+            }
+        })
+        Log.d("validarCargaBd", "validarCargaBd:${cargaBd} / ")
+        return cargaBd
+    }
+
+    fun cargarRoles() {
+
 
         val roles = listOf(
             RolEntity(0, "Admin", 1, "SAdmin", "2022-04-28"),
@@ -717,13 +755,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
 
         roles.forEach {
-            viewModel.fetchSaveRol(it).observe(viewLifecycleOwner, Observer { result ->
+            viewModelRol.fetchSaveRol(it).observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success -> {
-                        Toast.makeText(requireContext(), "Save Rol exitoso..", Toast.LENGTH_LONG)
+                        Toast.makeText(requireContext(), "Save Rol exitoso..", Toast.LENGTH_SHORT)
                             .show()
                     }
                     is Resource.Failure -> {

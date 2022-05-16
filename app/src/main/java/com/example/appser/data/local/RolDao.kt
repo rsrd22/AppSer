@@ -21,5 +21,7 @@ interface RolDao {
     @Query("SELECT * FROM RolEntity WHERE id = :idRol")
     suspend fun getRolAndUsuario(idRol: Long): List<RolWithUsuario>
 
-
+    @Transaction
+    @Query("SELECT COUNT(*) FROM RolEntity")
+    suspend fun getCountRol(): Int
 }

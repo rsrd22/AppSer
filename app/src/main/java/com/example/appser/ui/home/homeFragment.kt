@@ -28,7 +28,8 @@ import com.example.appser.databinding.FragmentRegisterBinding
 import com.example.appser.presentation.*
 import com.example.appser.repository.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 
 class homeFragment : Fragment(R.layout.fragment_home) {
@@ -36,6 +37,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var appDatabase: AppDatabase
     private lateinit var binding: FragmentHomeBinding
     private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var job: Job
+
     val viewModelRol by viewModels<RolViewModel> {
         RolViewModelFactory(
             RolRepositoryImpl(
@@ -46,10 +49,24 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("Home Fragment", "OnCreate")
 
+        lifecycleScope.launch {
+            val success = withContext(Dispatchers.IO){
+                if(validarCargaBd()){
+                    cargarRoles()
+                    cargarCiclos()
+                    cargarCategorias()
+                    cargarEmociones()
+                    cargarActividades()
+                    cargarPreguntas()
+                }
+            }
+        }
     }
 
     override fun onStart() {
@@ -63,14 +80,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         appDatabase = AppDatabase.getDatabase(requireContext())
         Log.d("Home Fragment", "onViewCreated")
-        if (validarCargaBd()) {
-            cargarRoles()
-            cargarCiclos()
-            cargarCategorias()
-            cargarEmociones()
-            cargarActividades()
-            cargarPreguntas()
-        }
+
         binding = FragmentHomeBinding.bind(view)
 
         val btnLogin = binding.btnLogin

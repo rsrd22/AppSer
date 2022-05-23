@@ -3,8 +3,6 @@ package com.example.appser.data.local
 import androidx.room.*
 import com.example.appser.data.model.CategoriasEntity
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
-import com.example.appser.data.model.relations.EmocionesWithPreguntas
-
 @Dao
 interface CategoriasDao {
 

@@ -20,7 +20,7 @@ class CategoriasDataSource(private val categoriasDao: CategoriasDao) {
         return categoriasDao.saveCategoria(categoria)
     }
 
-    suspend fun getAllCategoriasWithPreguntas(): List<CategoriasWithPreguntas>{
+    suspend fun getAllCategoriasWithPreguntas(): List<CategoriasWithPreguntas> {
         return categoriasDao.getAllCategoriasWithPreguntas()
     }
 

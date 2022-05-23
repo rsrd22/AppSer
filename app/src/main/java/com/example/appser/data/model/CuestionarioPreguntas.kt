@@ -21,3 +21,4 @@ data class CuestionarioPreguntasEntity (
 )
 
 data class CuestionarioPreguntasList (val results: List<CuestionarioPreguntasEntity> = listOf() )
+

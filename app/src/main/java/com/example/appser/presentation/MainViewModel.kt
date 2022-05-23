@@ -36,5 +36,8 @@ class MainViewModel: ViewModel() {
         categorias.value = _categorias
     }
 
+    fun getDatos(): Pair<MutableLiveData<List<CategoriasWithPreguntas>>, MutableLiveData<EmocionesList>> {
+        return Pair(categorias, emociones)
+    }
 
 }

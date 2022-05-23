@@ -51,7 +51,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 setBienvenidoUsuario()
             }
         })
-
+        Log.d("Dashboard", "OnViewCreated")
         val btnIdentify = binding.txtIdentifyEmotion
 
         btnIdentify.setOnClickListener {
@@ -108,7 +108,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 )
             )
         }
-
+        Log.d("Dashboard", "getAllCategorias")
         viewModel.fetchAllCategoriasWithPreguntas().observe(viewLifecycleOwner, Observer {result->
             when(result){
                 is Resource.Loading -> {
@@ -116,8 +116,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 }
                 is Resource.Success -> {
                     categorias = result.data
-                    Toast.makeText(requireContext(), "End Carga ..${emociones}", Toast.LENGTH_SHORT).show()
+                    Log.d("Dashboard", "categorias: ${categorias}")
                     mainViewModel.setCategoriasWithPreguntas(categorias)
+                    Toast.makeText(requireContext(), "End Carga ..${emociones}", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
                     Log.d("Error LiveData", "${result.exception}")

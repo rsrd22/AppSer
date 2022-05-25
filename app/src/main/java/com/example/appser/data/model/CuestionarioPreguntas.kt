@@ -22,3 +22,4 @@ data class CuestionarioPreguntasEntity (
 
 data class CuestionarioPreguntasList (val results: List<CuestionarioPreguntasEntity> = listOf() )
 
+data class modeloPreguntas(val categoriaId: Long, val emocionId: Long, val preguntaId: Long, val respuesta: String)

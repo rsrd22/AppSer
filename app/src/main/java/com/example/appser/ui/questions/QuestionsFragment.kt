@@ -10,9 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.appser.R
 import com.example.appser.data.local.AppDatabase
-import com.example.appser.data.model.CuestionarioPreguntasEntity
-import com.example.appser.data.model.EmocionesList
-import com.example.appser.data.model.PreguntasEntity
+import com.example.appser.data.model.*
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
 import com.example.appser.databinding.FragmentDashboardBinding
 import com.example.appser.databinding.FragmentHomeBinding
@@ -28,8 +26,8 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var categorias: List<CategoriasWithPreguntas>
     private lateinit var emociones: EmocionesList
-    private lateinit var pregunta: PreguntasEntity
-    private lateinit var listaPreguntasCuestionario: List<CuestionarioPreguntasEntity>
+    private lateinit var listaPreguntas: List<PreguntasEntity>
+    private lateinit var listaRespuestasPreguntas: List<modeloPreguntas>
     private var indicadorCategoria: Int = -1
     private var indicadorPregunta: Int = -1
     private var indicadorEmocion: Int = -1
@@ -79,11 +77,24 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
 
     fun IniciarPreguntas(){
         indicadorCategoria = 0
-        indicadorPregunta= 0
+        //indicadorPregunta= 0
         indicadorEmocion  = emocionRandon()
+        setListadoPreguntas()
         setPregunta()
 
     }
+
+    fun setListadoPreguntas(){
+        listaPreguntas = categorias[indicadorCategoria].preguntas.filter { it.emocionId == emociones.result[indicadorEmocion].id }
+        indicadorPregunta = 0
+    }
+
+
+    fun AumentarCategoria(){
+        if(indicadorCategoria < categorias.size)
+            indicadorCategoria++
+    }
+
 
     fun emocionRandon(): Int{
         val position = (0..3).random()
@@ -91,18 +102,12 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     }
 
     fun setPregunta(){
-
-
-        if(categorias != null && emociones != null) {
-            binding.txtPreguntas.text = "${categorias[indicadorCategoria].categoria.descripcion} - ${categorias[indicadorCategoria].preguntas[indicadorPregunta].descripcion}"
-        }else{
-            Log.d("Categorias", "Cat: ${categorias}")
-            Log.d("Emociones", "Emo: ${emociones}")
-        }
+        binding.txtPreguntas.text = "${listaPreguntas[indicadorPregunta].descripcion}"
     }
 
     fun setSiguentePregunta(){
         // Guardar la Pregunta anterior en un list
+
 
         //Incrementar Indicadores
         indicadorCategoria++

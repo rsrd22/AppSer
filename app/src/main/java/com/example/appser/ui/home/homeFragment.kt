@@ -54,7 +54,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         val btnLista = binding.txtLista
 
         btnLogin.setOnClickListener{
-            login()
+            findNavController().navigate(R.id.dashboardFragment)
         }
         btnRegistrarse.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerFragment2)

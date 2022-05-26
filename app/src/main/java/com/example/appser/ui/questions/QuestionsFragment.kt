@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.appser.R
@@ -27,7 +28,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     private lateinit var categorias: List<CategoriasWithPreguntas>
     private lateinit var emociones: EmocionesList
     private lateinit var listaPreguntas: List<PreguntasEntity>
-    private lateinit var listaRespuestasPreguntas: List<modeloPreguntas>
+    private lateinit var listaRespuestasPreguntas: MutableList<modeloPreguntas>
     private var indicadorCategoria: Int = -1
     private var indicadorPregunta: Int = -1
     private var indicadorEmocion: Int = -1
@@ -44,6 +45,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         binding = FragmentQuestionsBinding.bind(view)
         indicadorCategoria = 0
         indicadorPregunta = 0
+        listaRespuestasPreguntas = mutableListOf()
         Log.d("Question", "Main Question")
 
         mainViewModel.getCategoriasWithPreguntas().observe(viewLifecycleOwner, Observer{cat ->
@@ -77,7 +79,6 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
 
     fun IniciarPreguntas(){
         indicadorCategoria = 0
-        //indicadorPregunta= 0
         indicadorEmocion  = emocionRandon()
         setListadoPreguntas()
         setPregunta()
@@ -105,14 +106,43 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         binding.txtPreguntas.text = "${listaPreguntas[indicadorPregunta].descripcion}"
     }
 
+    fun validarRespuesta(): Boolean{
+        return !binding.rbNo.isSelected && !binding.rbSi.isSelected
+
+    }
     fun setSiguentePregunta(){
-        // Guardar la Pregunta anterior en un list
+        if(!validarRespuesta()) {
+            var respuesta: String = if (binding.rbNo.isSelected) "No" else "Si"
 
+            // Guardar la Pregunta anterior en un list
+            listaRespuestasPreguntas.add(
+                modeloPreguntas(
+                    categorias[indicadorCategoria].categoria.id,
+                    emociones.result[indicadorEmocion].id,
+                    listaPreguntas.get(indicadorPregunta).id,
+                    respuesta
+                    )
+            )
 
-        //Incrementar Indicadores
-        indicadorCategoria++
-        indicadorPregunta++
-        setPregunta()
-        //Setear Nueva Pregunta
+            if (binding.rbNo.isSelected) {
+                indicadorEmocion = emocionRandon()
+                setListadoPreguntas()
+            } else {
+                indicadorPregunta++
+                if(indicadorPregunta>= listaPreguntas.size){
+                    indicadorCategoria++
+                    setListadoPreguntas()
+                }else {
+                    indicadorPregunta++
+                }
+            }
+            //Setear Nueva Pregunta
+            setPregunta()
+
+        }else{
+            Toast.makeText(requireContext(), "Por favor seleccione una respuesta.", Toast.LENGTH_SHORT).show()
+
+        }
+
     }
 }

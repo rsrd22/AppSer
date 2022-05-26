@@ -4,7 +4,7 @@ import com.example.appser.data.model.CuestionarioPreguntasEntity
 import com.example.appser.data.model.CuestionarioPreguntasList
 import com.example.appser.data.resource.CuestionarioPreguntasDataSource
 
-class CuestionarioPreguntaRepositoryImpl(private val cuestionarioPreguntasDataSource: CuestionarioPreguntasDataSource) : CuestionarioPreguntasRepository{
+class CuestionarioPreguntasRepositoryImpl(private val cuestionarioPreguntasDataSource: CuestionarioPreguntasDataSource) : CuestionarioPreguntasRepository{
     override suspend fun getAllCuestionarioPreguntas(): CuestionarioPreguntasList {
         return cuestionarioPreguntasDataSource.getAllCuestionarioPreguntas()
     }

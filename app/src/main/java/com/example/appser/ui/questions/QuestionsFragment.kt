@@ -8,16 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.appser.R
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.*
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
+import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.data.resource.CuestionarioPreguntasDataSource
+import com.example.appser.data.resource.UsuarioDataSource
 import com.example.appser.databinding.FragmentDashboardBinding
 import com.example.appser.databinding.FragmentHomeBinding
 import com.example.appser.databinding.FragmentQuestionsBinding
-import com.example.appser.presentation.MainViewModel
+import com.example.appser.presentation.*
+import com.example.appser.repository.CuestionarioPreguntasRepository
+import com.example.appser.repository.CuestionarioPreguntasRepositoryImpl
+import com.example.appser.repository.UsuarioRepositoryImpl
 import kotlinx.android.synthetic.main.fragment_questions.*
+import kotlin.math.max
 
 
 class QuestionsFragment : Fragment(R.layout.fragment_questions) {
@@ -32,6 +40,15 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     private var indicadorCategoria: Int = -1
     private var indicadorPregunta: Int = -1
     private var indicadorEmocion: Int = -1
+    private lateinit var personaAndUsuario: PersonaAndUsuario
+    private val viewModelCuestionarioPreguntas by viewModels<CuestionarioPreguntasViewModel> {
+        CuestionarioPreguntaViewModelFactory(
+            CuestionarioPreguntasRepositoryImpl(
+                CuestionarioPreguntasDataSource(AppDatabase.getDatabase(requireContext()).cuestionariopreguntasDao())
+            )
+        )
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +78,11 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                     IniciarPreguntas()
                 }
             })
+        })
+
+        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
+            personaAndUsuario = result
+
         })
 
 
@@ -114,7 +136,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         if(!validarRespuesta()) {
             var respuesta: String = if (binding.rbNo.isSelected) "No" else "Si"
 
-            // Guardar la Pregunta anterior en un list
+            // Guardar la Pr egunta anterior en un list
             listaRespuestasPreguntas.add(
                 modeloPreguntas(
                     categorias[indicadorCategoria].categoria.id,
@@ -136,13 +158,45 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                     indicadorPregunta++
                 }
             }
-            //Setear Nueva Pregunta
-            setPregunta()
 
+            //Validar Categorias
+            if(indicadorCategoria < categorias.size){
+                //Setear Nueva Pregunta
+                setPregunta()
+            }else{
+                //FINALIZA LA IDENTIFIACION
+                //Empieza la Busqueda de la Emocion
+                val emocionEncontradaId: Long = getEmocionxRespuestas()
+
+                //Llamado Metodo Guardar
+                GuardarCuestionario(emocionEncontradaId)
+
+            }
         }else{
             Toast.makeText(requireContext(), "Por favor seleccione una respuesta.", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun GuardarCuestionario(emocionEncontradaId: Long){
+        var cuestionario = CuestionarioEntity(0, personaAndUsuario.persona.id,)
 
+
+        //Enviar a vista emocionFragment
+    }
+
+    fun getEmocionxRespuestas(): Long{
+        var listaRespuestas: List<modeloPreguntas> = listaRespuestasPreguntas.filter { it.respuesta == "Si" }
+        var idEmocion : Long = -1
+        var sizeEmocion : Int = -1
+        var maxEmocion : Int = -1
+
+        for(emocion in emociones.result){
+            sizeEmocion = listaRespuestas.filter { it.emocionId == emocion.id }.size
+            if(sizeEmocion > maxEmocion ){
+                maxEmocion = sizeEmocion
+                idEmocion = emocion.id
+            }
         }
 
+        return idEmocion
     }
 }

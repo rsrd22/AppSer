@@ -22,4 +22,6 @@ interface ActividadesDao {
     @Transaction
     @Query("SELECT * FROM ActividadesEntity WHERE id = :id")
     suspend fun getActividadesWithCuestionario(id: Long): List<ActividadesWithCuestionario>
+
+
 }

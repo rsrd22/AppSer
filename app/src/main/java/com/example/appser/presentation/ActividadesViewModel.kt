@@ -28,6 +28,16 @@ class ActividadesViewModel(private val repo: ActividadesRepository): ViewModel()
             emit(Resource.Failure(e))
         }
     }
+
+    fun fetchActividadByEmocioByCiclo(idEmocion: Long, idCiclo: Long) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getActividadByEmocionByCiclo(idEmocion, idCiclo)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
     fun fetchSaveActividad(actividadesEntity: ActividadesEntity) = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try{

@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.appser.R
+import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.*
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
@@ -25,6 +27,8 @@ import com.example.appser.repository.CuestionarioPreguntasRepository
 import com.example.appser.repository.CuestionarioPreguntasRepositoryImpl
 import com.example.appser.repository.UsuarioRepositoryImpl
 import kotlinx.android.synthetic.main.fragment_questions.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.max
 
 
@@ -40,7 +44,11 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     private var indicadorCategoria: Int = -1
     private var indicadorPregunta: Int = -1
     private var indicadorEmocion: Int = -1
+    private val sdf = SimpleDateFormat("dd/MM/yyyy")
+    private val currentdate = sdf.format(Date())
+
     private lateinit var personaAndUsuario: PersonaAndUsuario
+
     private val viewModelCuestionarioPreguntas by viewModels<CuestionarioPreguntasViewModel> {
         CuestionarioPreguntaViewModelFactory(
             CuestionarioPreguntasRepositoryImpl(
@@ -176,11 +184,44 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
             Toast.makeText(requireContext(), "Por favor seleccione una respuesta.", Toast.LENGTH_SHORT).show()
         }
     }
+
     fun GuardarCuestionario(emocionEncontradaId: Long){
-        var cuestionario = CuestionarioEntity(0, personaAndUsuario.persona.id,)
+        var user: String = personaAndUsuario.usuario.email
+        var cuestionario = CuestionarioEntity(0, personaAndUsuario.persona.id,-1, currentdate, user, currentdate)
+        var lista: MutableList<CuestionarioPreguntasEntity> = mutableListOf()
+        var cuestionarioId: Long = 0
+        for(item in listaRespuestasPreguntas){
+            lista.add(
+                CuestionarioPreguntasEntity(0, 0, item.preguntaId, item.respuesta, user, currentdate)
+            )
+        }
 
-
+        cuestionario.listaCuestionarioPreguntas = lista
         //Enviar a vista emocionFragment
+        viewModelCuestionarioPreguntas.fetchSaveCuestionarioWithCuestionarioPreguntas(cuestionario).observe(viewLifecycleOwner, Observer { result->
+            when(result){
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success ->{
+                    Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_SHORT).show()
+                    cuestionarioId = result.data
+
+                    mainViewModel.setEmocionCuestionarioId(Pair(emocionEncontradaId, cuestionarioId))
+                    findNavController().navigate(R.id.action_questionsFragment2_to_emotionFragment2)
+                }
+                is Resource.Failure -> {
+                    Log.d("Error LiveData", "${result.exception}")
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+        })
+
     }
 
     fun getEmocionxRespuestas(): Long{

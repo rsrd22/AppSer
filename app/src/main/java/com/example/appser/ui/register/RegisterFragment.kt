@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
@@ -73,6 +74,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     }
                     is Resource.Success ->{
                         Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.homeFragment)
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")

@@ -9,7 +9,7 @@ data class CuestionarioPreguntasEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     @ColumnInfo(name = "id_cuestionario")
-    val cuestionarioId: Long = 0,
+    var cuestionarioId: Long = 0,
     @ColumnInfo(name = "id_pregunta")
     val preguntaId: Long = 0,
     @ColumnInfo(name = "respuesta")

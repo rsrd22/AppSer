@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class EmocionesEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    val nombre: String = "",
     val descripcion: String = "",
     val estado: Int = -1,
     @ColumnInfo(name = "user_create")

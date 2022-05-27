@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.example.appser.core.Resource
+import com.example.appser.data.model.CuestionarioEntity
 import com.example.appser.data.model.CuestionarioPreguntasEntity
 import com.example.appser.repository.CuestionarioPreguntasRepository
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,15 @@ class CuestionarioPreguntasViewModel(private val repo: CuestionarioPreguntasRepo
         emit(Resource.Loading())
         try{
             emit(Resource.Success(repo.saveCuestionarioPregunta(cuestionariopregunta)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
+    fun fetchSaveCuestionarioWithCuestionarioPreguntas(cuestionarioEntity: CuestionarioEntity) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.saveCuestionarioWithCuestionarioPregunta(cuestionarioEntity)))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }

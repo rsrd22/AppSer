@@ -11,6 +11,7 @@ class MainViewModel: ViewModel() {
     private val personaUsuario= MutableLiveData<PersonaAndUsuario>()
     private val emociones = MutableLiveData<EmocionesList>()
     private val categorias= MutableLiveData<List<CategoriasWithPreguntas>>()
+    private val emocioncuestionarioId = MutableLiveData<Pair<Long, Long>>()
 
     fun setPersonaAndUsuario(_personaAndUsuario: PersonaAndUsuario){
         personaUsuario.value = _personaAndUsuario
@@ -38,6 +39,14 @@ class MainViewModel: ViewModel() {
 
     fun getDatos(): Pair<MutableLiveData<List<CategoriasWithPreguntas>>, MutableLiveData<EmocionesList>> {
         return Pair(categorias, emociones)
+    }
+
+    fun getEmocionCuestionarioId(): LiveData<Pair<Long, Long>>{
+        return emocioncuestionarioId
+    }
+
+    fun setEmocionCuestionarioId(datos: Pair<Long, Long>){
+        emocioncuestionarioId.value = datos
     }
 
 }

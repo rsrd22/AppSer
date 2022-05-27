@@ -59,35 +59,55 @@
         app:layout_constraintTop_toBottomOf="@id/txt_DescripcionEmocion"
         />
 
-    <RadioButton
-        tools:ignore="UnknownId"
-        android:id="@+id/rb_OpcionActividad1"
+    <LinearLayout
+        android:id="@+id/activities"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:text="Actividad X"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="434dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_Actividades"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_Actividades"
 
-    <RadioButton
-        tools:ignore="UnknownId"
-        android:id="@+id/rb_OpcionActividad2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:text="Actividad Y"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="434dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rb_OpcionActividad1"/>
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_activities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_activities" />
+    </LinearLayout>
+
+
+<!--    <RadioButton-->
+<!--        tools:ignore="UnknownId"-->
+<!--        android:id="@+id/rb_OpcionActividad1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:text="Actividad X"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        tools:layout_editor_absoluteX="38dp"-->
+<!--        tools:layout_editor_absoluteY="434dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/txt_Actividades"/>-->
+
+<!--    <RadioButton-->
+<!--        tools:ignore="UnknownId"-->
+<!--        android:id="@+id/rb_OpcionActividad2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:text="Actividad Y"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        tools:layout_editor_absoluteX="38dp"-->
+<!--        tools:layout_editor_absoluteY="434dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/rb_OpcionActividad1"/>-->
 
     <Button
         android:layout_width="wrap_content"
@@ -96,9 +116,10 @@
         android:text="VER ACTIVIDAD"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rb_OpcionActividad2"/>
-
+        app:layout_constraintTop_toBottomOf="@id/activities"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

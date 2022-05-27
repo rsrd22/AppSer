@@ -16,6 +16,10 @@ interface ActividadesDao {
     @Query("SELECT * FROM ActividadesEntity WHERE id = :id")
     suspend fun getActividadbyId(id: Long): ActividadesEntity
 
+    @Transaction
+    @Query("SELECT * FROM ActividadesEntity WHERE id_emocion = :idEmocion AND id_ciclo = :idCiclo")
+    suspend fun getActividadByEmocionByCiclo(idEmocion: Long, idCiclo: Long): List<ActividadesEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveActividad(actividad: ActividadesEntity)
 

@@ -13,6 +13,10 @@ class ActividadesRepositoryImpl(private val actividadesDataSource: ActividadesDa
         return actividadesDataSource.getActividadbyId(id)
     }
 
+    override suspend fun getActividadByEmocionByCiclo(idEmocion: Long, idCiclo: Long): List<ActividadesEntity> {
+        return actividadesDataSource.getActividadByEmocionByCiclo(idEmocion, idCiclo)
+    }
+
     override suspend fun saveActividad(actividadesEntity: ActividadesEntity) {
         return actividadesDataSource.saveActividad(actividadesEntity)
     }

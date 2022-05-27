@@ -9,6 +9,8 @@ interface ActividadesRepository {
 
     suspend fun getActividadbyId(id: Long): ActividadesEntity
 
+    suspend fun getActividadByEmocionByCiclo(idEmocion: Long, idCiclo: Long): List<ActividadesEntity>
+
     suspend fun saveActividad(actividadesEntity: ActividadesEntity)
 
 }

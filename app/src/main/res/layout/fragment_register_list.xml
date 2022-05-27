@@ -11,8 +11,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listado de Registrados"
+        android:text="Listado de emociones identificadas"
         android:textStyle="bold"
+        android:textColor="@color/purple_700"
         android:textSize="20dp"
         />
     <androidx.recyclerview.widget.RecyclerView

@@ -60,7 +60,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_registerFragment2)
         }
         btnLista.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
+            findNavController().navigate(R.id.action_homeFragment_to_registerListFragment)
         }
     }
 

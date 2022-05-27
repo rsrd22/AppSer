@@ -13,11 +13,14 @@
             android:id="@+id/action_homeFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
         <action
-            android:id="@+id/action_homeFragment_to_registerListFragment2"
-            app:destination="@id/registerListFragment2" />
-        <action
             android:id="@+id/action_homeFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_pop"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_registerListFragment"
+            app:destination="@id/registerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment2"
@@ -25,9 +28,9 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
-        android:id="@+id/registerListFragment2"
+        android:id="@+id/registerListFragment"
         android:name="com.example.appser.ui.register.RegisterListFragment"
-        android:label="fragment_register_list"
+        android:label="@string/registerListFragment2"
         tools:layout="@layout/fragment_register_list" />
     <fragment
         android:id="@+id/dashboardFragment"
@@ -37,6 +40,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_questionsFragment"
             app:destination="@id/questionsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_registerListFragment2"
+            app:destination="@id/registerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionsFragment"

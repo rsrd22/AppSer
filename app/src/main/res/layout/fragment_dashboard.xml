@@ -27,23 +27,25 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:text="AppSer te ayuda a identificar tus emociones y dispone actividades lúdicas que te permitan entender lo que sientes y como gestionarlo"
+        android:text="Ser (Seguimiento emocional y recreación): es una App que busca promover la gestión emocional sana y el autoconocimiento a nivel individual y familiar"
         android:textSize="20dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_LogoGrande"
        />
 
-    <TextView
-        android:id="@+id/txt_identify_emotion"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_identify_emotion"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Identificar emoción"
-        android:textSize="30dp"
-        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/purple_200"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_DescripcionApp"
-       />
+        app:layout_constraintTop_toBottomOf="@id/txt_DescripcionApp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

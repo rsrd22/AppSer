@@ -13,7 +13,7 @@
             android:icon="@drawable/ic_baseline_person_search_24"
             android:title="@string/questionsFragment" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/registerListFragment"
             android:icon="@drawable/ic_baseline_history_edu_24"
             android:title="Historico Emociones" />
     </group>

@@ -16,4 +16,5 @@
     <string name="dashboardFragment">Inicio</string>
     <string name="homeFragment">Iniciar Sesión</string>
     <string name="questionsFragment">Identificar Emoción</string>
+    <string name="registerListFragment2">Historico Emociones</string>
 </resources>

@@ -21,7 +21,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/reg_name_text"
+            android:id="@+id/act_title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

@@ -48,7 +48,6 @@ class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario
             binding.regAgeText.text = "${item.edad}"
             binding.regGenderText.text = item.genero
 
-            //binding.executePendingBindings()
         }
     }
 }

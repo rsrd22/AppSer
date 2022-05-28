@@ -14,6 +14,7 @@ import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.ActividadesEntity
+import com.example.appser.data.model.CicloVitalEntity
 import com.example.appser.data.model.EmocionesEntity
 import com.example.appser.data.model.EmocionesList
 import com.example.appser.data.model.relations.PersonaAndUsuario
@@ -24,11 +25,13 @@ import com.example.appser.databinding.FragmentQuestionsBinding
 import com.example.appser.presentation.*
 import com.example.appser.repository.ActividadesRepositoryImpl
 import com.example.appser.repository.RolRepositoryImpl
+import com.example.appser.ui.activity.ActivityFragmentDirections
+import com.example.appser.ui.emotion.adapters.ActivitiesListAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class EmotionFragment : Fragment(R.layout.fragment_emotion) {
+class EmotionFragment : Fragment(R.layout.fragment_emotion), ActivitiesListAdapter.OnActivitiesListClickListener {
 
     private lateinit var binding: FragmentEmotionBinding
     private lateinit var appDatabase: AppDatabase
@@ -36,10 +39,12 @@ class EmotionFragment : Fragment(R.layout.fragment_emotion) {
     private val sdf = SimpleDateFormat("dd/MM/yyyy")
     private val currentdate = sdf.format(Date())
     private lateinit var personaAndUsuario: PersonaAndUsuario
+    private lateinit var ciclovital: CicloVitalEntity
     private lateinit var emocioncuestionario: Pair<Long, Long>
     private lateinit var emociones: EmocionesList
     private lateinit var emocion: EmocionesEntity
     private lateinit var actividades: List<ActividadesEntity>
+    private lateinit var adapter: ActivitiesListAdapter
 
     val viewModelActividades by viewModels<ActividadesViewModel> {
         ActividadesViewModelFactory(
@@ -63,6 +68,10 @@ class EmotionFragment : Fragment(R.layout.fragment_emotion) {
 
         mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer{ result->
             personaAndUsuario = result
+        })
+
+        mainViewModel.getCicloVital().observe(viewLifecycleOwner, Observer{ result->
+            ciclovital = result
         })
 
         mainViewModel.getEmocionCuestionarioId().observe(viewLifecycleOwner, Observer { datos->
@@ -92,14 +101,14 @@ class EmotionFragment : Fragment(R.layout.fragment_emotion) {
     }
 
     fun cargarListaActividades(){
-        viewModelActividades.fetchActividadByEmocioByCiclo(emocion.id, emocioncuestionario.second).observe(viewLifecycleOwner, Observer { result ->
+        viewModelActividades.fetchActividadByEmocioByCiclo(emocion.id, ciclovital.id).observe(viewLifecycleOwner, Observer { result ->
             when(result){
                 is Resource.Loading ->{
                     Toast.makeText(requireContext(), "Cargado Actividades..", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
                     actividades = result.data
-
+                    adapter = ActivitiesListAdapter(actividades, this@EmotionFragment)
                 }
                 is Resource.Failure -> {
                     Log.d("Error LiveData", "${result.exception}")
@@ -114,4 +123,7 @@ class EmotionFragment : Fragment(R.layout.fragment_emotion) {
         })
     }
 
+    override fun onActivitiesListClick(actividad: ActividadesEntity) {
+        Log.d("ItemActiviti", "Activit - ${actividad}")
+    }
 }

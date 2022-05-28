@@ -73,6 +73,8 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         listaRespuestasPreguntas = mutableListOf()
         Log.d("Question", "Main Question")
 
+
+
         mainViewModel.getCategoriasWithPreguntas().observe(viewLifecycleOwner, Observer{cat ->
 
             Log.d("Categorias-->", "cate->${cat}")
@@ -137,12 +139,12 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     }
 
     fun validarRespuesta(): Boolean{
-        return !binding.rbNo.isSelected && !binding.rbSi.isSelected
+        return !binding.rbNo.isChecked && !binding.rbSi.isChecked
 
     }
     fun setSiguentePregunta(){
         if(!validarRespuesta()) {
-            var respuesta: String = if (binding.rbNo.isSelected) "No" else "Si"
+            var respuesta: String = if (binding.rbNo.isChecked) "No" else "Si"
 
             // Guardar la Pr egunta anterior en un list
             listaRespuestasPreguntas.add(
@@ -154,18 +156,24 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                     )
             )
 
-            if (binding.rbNo.isSelected) {
+            if (binding.rbNo.isChecked) {
                 indicadorEmocion = emocionRandon()
                 setListadoPreguntas()
             } else {
                 indicadorPregunta++
                 if(indicadorPregunta>= listaPreguntas.size){
                     indicadorCategoria++
-                    setListadoPreguntas()
-                }else {
-                    indicadorPregunta++
+                    if(indicadorCategoria < categorias.size) {
+                        setListadoPreguntas()
+                    }
+//                }else {
+//                    indicadorPregunta++
                 }
             }
+
+            binding.rbSi.isChecked = false
+            binding.rbNo.isChecked = false
+
 
             //Validar Categorias
             if(indicadorCategoria < categorias.size){

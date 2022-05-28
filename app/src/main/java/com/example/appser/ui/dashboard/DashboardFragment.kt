@@ -17,10 +17,12 @@ import com.example.appser.data.model.EmocionesList
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
 import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.data.resource.CategoriasDataSource
+import com.example.appser.data.resource.CicloVitalDataResource
 import com.example.appser.data.resource.EmocionesDataSource
 import com.example.appser.databinding.FragmentDashboardBinding
 import com.example.appser.presentation.*
 import com.example.appser.repository.CategoriasRepositoryImpl
+import com.example.appser.repository.CicloVitalRepositoryImpl
 import com.example.appser.repository.EmocionesRepositoryImpl
 
 
@@ -49,6 +51,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             personaAndUsuario = result
             if (personaAndUsuario != null) {
                 setBienvenidoUsuario()
+                getCicloVital()
             }
         })
         Log.d("Dashboard", "OnViewCreated")
@@ -61,6 +64,40 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         getAllCategorias()
         getAllEmociones()
 
+    }
+
+    private fun getCicloVital() {
+        val viewModelCiclo by viewModels<CicloVitalViewModel> {
+            CicloVitalViewModelFactory(
+                CicloVitalRepositoryImpl(
+                    CicloVitalDataResource(
+                        appDatabase.ciclovitalDao()
+                    )
+                )
+            )
+        }
+        var edad: Int = personaAndUsuario.persona.edad?:0
+        viewModelCiclo.fetchCicloVitalByEdad(edad).observe(viewLifecycleOwner, Observer {result ->
+            when (result) {
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success -> {
+
+                    mainViewModel.setCicloVital(result.data)
+                }
+                is Resource.Failure -> {
+                    Log.d("Error LiveData", "${result.exception}")
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+
+        })
     }
 
     private fun getAllEmociones() {

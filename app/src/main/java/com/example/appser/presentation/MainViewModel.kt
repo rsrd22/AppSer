@@ -3,6 +3,7 @@ package com.example.appser.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.appser.data.model.CicloVitalEntity
 import com.example.appser.data.model.EmocionesList
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
 import com.example.appser.data.model.relations.PersonaAndUsuario
@@ -10,6 +11,7 @@ import com.example.appser.data.model.relations.PersonaAndUsuario
 class MainViewModel: ViewModel() {
     private val personaUsuario= MutableLiveData<PersonaAndUsuario>()
     private val emociones = MutableLiveData<EmocionesList>()
+    private val ciclovital = MutableLiveData<CicloVitalEntity>()
     private val categorias= MutableLiveData<List<CategoriasWithPreguntas>>()
     private val emocioncuestionarioId = MutableLiveData<Pair<Long, Long>>()
 
@@ -47,6 +49,14 @@ class MainViewModel: ViewModel() {
 
     fun setEmocionCuestionarioId(datos: Pair<Long, Long>){
         emocioncuestionarioId.value = datos
+    }
+
+    fun getCicloVital(): LiveData<CicloVitalEntity>{
+        return ciclovital
+    }
+
+    fun setCicloVital(_ciclovital: CicloVitalEntity){
+        ciclovital.value = _ciclovital
     }
 
 }

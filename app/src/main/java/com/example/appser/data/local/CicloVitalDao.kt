@@ -22,5 +22,9 @@ interface CicloVitalDao {
     @Query("SELECT * FROM CicloVitalEntity WHERE id = :id")
     suspend fun getCicloVitalWithActividades(id: Long): List<CicloVitalWithActividades>
 
+    @Transaction
+    @Query("SELECT * FROM CicloVitalEntity WHERE edad_inicial <= :edad and edad_final >= :edad")
+    suspend fun getCicloVitalByEdad(edad: Int): CicloVitalEntity
+
 
 }

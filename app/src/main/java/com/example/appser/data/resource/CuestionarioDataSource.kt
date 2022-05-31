@@ -17,4 +17,8 @@ class CuestionarioDataSource(private val cuestionarioDao: CuestionarioDao) {
     suspend fun saveCuestionario(cuestionario: CuestionarioEntity){
         return cuestionarioDao.saveCuestionario(cuestionario)
     }
+
+    suspend fun updateCuestionario(cuestionarioId: Long, actividadAsignadaId: Long){
+        return cuestionarioDao.updateCuestionario(cuestionarioId, actividadAsignadaId)
+    }
 }

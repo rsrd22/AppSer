@@ -70,6 +70,7 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
     }
 
     override fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario) {
+        Log.d("ItemRegistrado", "Activit - ${personasAndUsuario}")
         Toast.makeText(requireContext(), "Usuario: ${personasAndUsuario.usuario?.email}", Toast.LENGTH_LONG).show()
     }
 }

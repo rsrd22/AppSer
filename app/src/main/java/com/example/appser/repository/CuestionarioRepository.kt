@@ -10,4 +10,6 @@ interface CuestionarioRepository {
     suspend fun getCuestionariobyId(id: Long): CuestionarioEntity
 
     suspend fun saveCuestionario(cuestionario: CuestionarioEntity)
+
+    suspend fun updateCuestionario(cuestionarioId: Long, actividaAsignadaId: Long)
 }

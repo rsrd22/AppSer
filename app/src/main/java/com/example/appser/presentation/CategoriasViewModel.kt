@@ -1,5 +1,6 @@
 package com.example.appser.presentation
 
+import android.widget.ResourceCursorTreeAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
@@ -33,6 +34,24 @@ class CategoriasViewModel(private val repo: CategoriasRepository): ViewModel() {
         emit(Resource.Loading())
         try{
             emit(Resource.Success(repo.getCategoriaById(id)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
+    fun fetchAllCategoriasWithPreguntas() = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getAllCategoriaWithPreguntas()))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
+    fun fetchCategoriaWithPreguntas(id: Long) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getCategoriaWithPreguntasById(id)))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }

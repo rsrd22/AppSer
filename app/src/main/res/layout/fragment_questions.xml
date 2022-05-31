@@ -33,22 +33,31 @@
         app:layout_constraintTop_toBottomOf="@id/img_LogoGrande"
         />
 
-    <RadioButton
-        tools:ignore="UnknownId"
-        android:id="@+id/rb_si"
+    <RadioGroup
+        android:id="@+id/respuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:text="SI"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="434dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_Preguntas"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_Preguntas"
+        tools:ignore="MissingConstraints">
 
-    <RadioButton
+        <RadioButton
+            tools:ignore="UnknownId"
+            android:id="@+id/rb_si"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="SI"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="434dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_Preguntas"/>
+
+        <RadioButton
         tools:ignore="UnknownId"
         android:id="@+id/rb_no"
         android:layout_width="match_parent"
@@ -62,14 +71,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rb_si"/>
-
+    </RadioGroup>
     <Button
+        android:id="@+id/btnSiguiente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SIGUIENTE"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rb_no"/>
+        app:layout_constraintTop_toBottomOf="@id/respuesta"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

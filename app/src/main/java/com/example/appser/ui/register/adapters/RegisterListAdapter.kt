@@ -18,7 +18,7 @@ class RegisterListAdapter(private val personawithCuestionario: PersonaWithCuesti
                           ): RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnRegisterListClickListener{
-        fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario)
+        fun onRegisterListClick(cuestionarioEntity: CuestionarioEntity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -28,7 +28,7 @@ class RegisterListAdapter(private val personawithCuestionario: PersonaWithCuesti
         itemBinding.root.setOnClickListener {
             val position = holder.bindingAdapterPosition.takeIf { it != DiffUtil.DiffResult.NO_POSITION}
                 ?: return@setOnClickListener
-            itemClickListener.onRegisterListClick(personawithCuestionario[position])
+            itemClickListener.onRegisterListClick(personawithCuestionario.cuestionario[position])
         }
         return holder
     }

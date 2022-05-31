@@ -59,9 +59,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         btnRegistrarse.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerFragment2)
         }
-        btnLista.setOnClickListener{
+        /*btnLista.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_registerListFragment)
-        }
+        }*/
     }
 
     fun login(){

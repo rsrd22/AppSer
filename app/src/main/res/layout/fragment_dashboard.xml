@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/wavesfondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
@@ -29,7 +30,7 @@
         android:layout_marginTop="40dp"
         android:text="Ser (Seguimiento emocional y recreación): es una App que busca promover la gestión emocional sana y el autoconocimiento a nivel individual y familiar"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/letter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_LogoGrande"

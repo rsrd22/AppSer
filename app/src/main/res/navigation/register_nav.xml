@@ -14,7 +14,7 @@
             app:destination="@id/registerFragment2" />
         <action
             android:id="@+id/action_homeFragment_to_registerListFragment2"
-            app:destination="@id/registerListFragment2" />
+            app:destination="@id/registerListFragment" />
         <action
             android:id="@+id/action_homeFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_questionsFragment"
-            app:destination="@id/questionsFragment" />
+            app:destination="@id/questionsFragment2" />
     </fragment>
    <fragment
         android:id="@+id/questionsFragment2"

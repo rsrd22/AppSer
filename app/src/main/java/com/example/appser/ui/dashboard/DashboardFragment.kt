@@ -24,6 +24,7 @@ import com.example.appser.presentation.*
 import com.example.appser.repository.CategoriasRepositoryImpl
 import com.example.appser.repository.CicloVitalRepositoryImpl
 import com.example.appser.repository.EmocionesRepositoryImpl
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
@@ -55,9 +56,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
         })
         Log.d("Dashboard", "OnViewCreated")
-        val btnIdentify = binding.txtIdentifyEmotion
-
-        btnIdentify.setOnClickListener {
+        btn_identify_emotion.setOnClickListener {
             identificarEmocion()
         }
 
@@ -171,11 +170,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     }
 
     fun setBienvenidoUsuario(){
-        binding.txtUser.text = "Bienvenido NUEVA: ${personaAndUsuario.persona.nombre_completo}"
+        binding.txtUser.text = "Bienvenido: ${personaAndUsuario.persona.nombre_completo}"
     }
 
     fun identificarEmocion(){
-        findNavController().navigate(R.id.action_dashboardFragment_to_questionsFragment2)
+        findNavController().navigate(R.id.action_dashboardFragment_to_questionsFragment)
     }
 
 

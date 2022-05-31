@@ -179,21 +179,19 @@ class EmotionFragment : Fragment(R.layout.fragment_emotion), ActivitiesListAdapt
     }
 
     override fun onActivitiesListClick(itemBinding: ItemActivitiesBinding, actividad: ActividadesEntity) {
-        binding.root.setBackgroundColor(Color.parseColor("#F8F8F8"))
 
-        binding.rvListActivities.childCount
         for(index in 0..binding.rvListActivities.childCount-1){
             if(binding.rvListActivities.get(index) == itemBinding.root){
                 if(actividadIndex == index){
-                    itemBinding.root.setBackgroundColor(Color.parseColor("#F8F8F8"))
+                    itemBinding.root.setBackgroundColor(Color.parseColor("#00FFFFFF"))
                     actividadIndex = -1
                 }else {
                     actividadIndex = index
-                    itemBinding.root.setBackgroundColor(Color.parseColor("#FFCC44"))
+                    itemBinding.root.setBackgroundColor(Color.parseColor("#4B00BCD4"))
                     actividadAsignada = actividad
                 }
             }else{
-                binding.rvListActivities.get(index).setBackgroundColor(Color.parseColor("#F8F8F8"))
+                binding.rvListActivities.get(index).setBackgroundColor(Color.parseColor("#00FFFFFF"))
             }
         }
     }

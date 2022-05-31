@@ -124,10 +124,10 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     }
 
 
-    fun AumentarCategoria(){
-        if(indicadorCategoria < categorias.size)
-            indicadorCategoria++
-    }
+//    fun AumentarCategoria(){
+//        if(indicadorCategoria < categorias.size)
+//            indicadorCategoria++
+//    }
 
 
     fun emocionRandon(): Int{
@@ -215,7 +215,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                     Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success ->{
-                    Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Guardado exitoso..", Toast.LENGTH_SHORT).show()
                     cuestionarioId = result.data
 
                     mainViewModel.setEmocionCuestionarioId(Pair(emocionEncontradaId, cuestionarioId))

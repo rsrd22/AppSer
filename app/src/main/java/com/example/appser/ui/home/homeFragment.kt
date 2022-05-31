@@ -76,18 +76,19 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         appDatabase = AppDatabase.getDatabase(requireContext())
         Log.d("Home Fragment", "onViewCreated---${currentdate}")
 
-        cargarRoles()
+
         cargarCiclos()
         cargarCategorias()
         cargarEmociones()
         cargarActividades()
         cargarPreguntas()
+        cargarRoles()
 
         binding = FragmentHomeBinding.bind(view)
 
         val btnLogin = binding.btnLogin
         val btnRegistrarse = binding.txtRegistrarse
-        val btnLista = binding.txtLista
+//        val btnLista = binding.txtLista
 
         btnLogin.setOnClickListener {
             login()
@@ -95,9 +96,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         btnRegistrarse.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_registerFragment2)
         }
-        btnLista.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
-        }
+//        btnLista.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
+//        }
     }
 
     fun login() {
@@ -361,14 +362,14 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             viewModel.fetchSavePregunta(pregunta).observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Save Pregunta exitoso..",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Save Pregunta exitoso..",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")
@@ -640,14 +641,14 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             viewModel.fetchSaveActividad(actividad).observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Save Actividad exitoso..",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Save Actividad exitoso..",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")
@@ -715,14 +716,14 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             viewModel.fetchSaveEmocion(emocion).observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Save Emociones exitoso..",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Save Emociones exitoso..",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")
@@ -762,14 +763,14 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             viewModel.fetchSaveCategoria(categoria).observe(viewLifecycleOwner, Observer { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Save CicloVital exitoso..",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Save CicloVital exitoso..",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")
@@ -836,15 +837,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 .observe(viewLifecycleOwner, Observer { result ->
                     when (result) {
                         is Resource.Loading -> {
-                            Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT)
-                                .show()
+//                            Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT)
+//                                .show()
                         }
                         is Resource.Success -> {
-                            Toast.makeText(
-                                requireContext(),
-                                "Save CicloVital exitoso..",
-                                Toast.LENGTH_SHORT
-                            ).show()
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "Save CicloVital exitoso..",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
                         }
                         is Resource.Failure -> {
                             Log.d("Error LiveData", "${result.exception}")
@@ -903,8 +904,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Success -> {
-                        Toast.makeText(requireContext(), "Save Rol exitoso..", Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(requireContext(), "Save Rol exitoso..", Toast.LENGTH_SHORT)
+//                            .show()
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")

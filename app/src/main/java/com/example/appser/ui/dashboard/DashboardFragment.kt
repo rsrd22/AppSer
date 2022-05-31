@@ -148,13 +148,13 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         viewModel.fetchAllCategoriasWithPreguntas().observe(viewLifecycleOwner, Observer {result->
             when(result){
                 is Resource.Loading -> {
-                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
                     categorias = result.data
                     Log.d("Dashboard", "categorias: ${categorias}")
                     mainViewModel.setCategoriasWithPreguntas(categorias)
-                    Toast.makeText(requireContext(), "End Carga ..${emociones}", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "End Carga ..${emociones}", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
                     Log.d("Error LiveData", "${result.exception}")

@@ -50,8 +50,8 @@
     <fragment
         android:id="@+id/emotionFragment2"
         android:name="com.example.appser.ui.emotion.EmotionFragment"
-        android:label="fragment_emotion"
-        tools:layout="@layout/fragment_emotion" >
+        android:label="@string/emotionFragment"
+        tools:layout="@layout/fragment_emotion">
         <action
             android:id="@+id/action_emotionFragment2_to_activityFragment2"
             app:destination="@id/activityFragment2" />
@@ -59,8 +59,8 @@
     <fragment
         android:id="@+id/activityFragment2"
         android:name="com.example.appser.ui.activity.ActivityFragment"
-        android:label="fragment_activity"
-        tools:layout="@layout/fragment_activity" >
+        android:label="@string/activityFragment"
+        tools:layout="@layout/fragment_activity">
         <action
             android:id="@+id/action_activityFragment2_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />

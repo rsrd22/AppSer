@@ -44,20 +44,21 @@
         tools:ignore="MissingConstraints">
 
         <RadioButton
-            tools:ignore="UnknownId"
             android:id="@+id/rb_si"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             android:text="SI"
             android:textColor="@color/letter"
+            android:textColorLink="@color/white"
             android:textSize="20dp"
-            android:layout_marginTop="20dp"
-            tools:layout_editor_absoluteX="38dp"
-            tools:layout_editor_absoluteY="434dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_Preguntas"/>
+            app:layout_constraintTop_toBottomOf="@id/txt_Preguntas"
+            tools:ignore="UnknownId"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="434dp" />
 
         <RadioButton
             tools:ignore="UnknownId"

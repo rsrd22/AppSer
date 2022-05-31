@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/dashboardFragment" />
         <item
-            android:id="@+id/questionsFragment"
+            android:id="@+id/questionsFragment2"
             android:icon="@drawable/ic_baseline_person_search_24"
             android:title="@string/questionsFragment" />
         <item

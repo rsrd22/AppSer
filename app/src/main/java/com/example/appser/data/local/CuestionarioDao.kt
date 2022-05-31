@@ -19,4 +19,7 @@ interface CuestionarioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun  saveCuestionario(cuestionario: CuestionarioEntity)
 
+    @Query("UPDATE cuestionarioentity SET id_actividad_asignada = :actividadAsignadaId WHERE id = :cuestionarioId")
+    suspend fun updateCuestionario(cuestionarioId: Long, actividadAsignadaId: Long)
+
 }

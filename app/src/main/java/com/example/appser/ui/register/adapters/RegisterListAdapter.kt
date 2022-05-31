@@ -49,5 +49,9 @@ class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario
             binding.regGenderText.text = item.genero
 
         }
+
+        override fun bind(item: PersonaEntity, position: Int) {
+            TODO("Not yet implemented")
+        }
     }
 }

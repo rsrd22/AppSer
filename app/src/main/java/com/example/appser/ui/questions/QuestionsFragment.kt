@@ -112,6 +112,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     fun IniciarPreguntas(){
         indicadorCategoria = 0
         indicadorEmocion  = emocionRandon()
+        Log.d("Emocion Random", "indicadorEmocion->${indicadorEmocion}")
         setListadoPreguntas()
         setPregunta()
 
@@ -171,8 +172,10 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                 }
             }
 
-            binding.rbSi.isChecked = false
-            binding.rbNo.isChecked = false
+            binding.respuesta.clearCheck()
+
+//            binding.rbSi.isChecked = false
+//            binding.rbNo.isChecked = false
 
 
             //Validar Categorias

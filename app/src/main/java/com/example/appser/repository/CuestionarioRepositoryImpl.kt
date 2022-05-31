@@ -16,4 +16,8 @@ class CuestionarioRepositoryImpl(private val cuestionarioDataSource: Cuestionari
     override suspend fun saveCuestionario(cuestionario: CuestionarioEntity) {
         return cuestionarioDataSource.saveCuestionario(cuestionario)
     }
+
+    override suspend fun updateCuestionario(cuestionarioId: Long, actividaAsignadaId: Long) {
+        return cuestionarioDataSource.updateCuestionario(cuestionarioId, actividaAsignadaId)
+    }
 }

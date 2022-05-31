@@ -21,7 +21,7 @@ interface PersonaDao {
 
     @Transaction
     @Query("SELECT * FROM PersonaEntity WHERE id = :id")
-    suspend fun getPersonaWithCuestionario(id: Long): List<PersonaWithCuestionario>
+    suspend fun getPersonaWithCuestionario(id: Long): PersonaWithCuestionario
 
 
 

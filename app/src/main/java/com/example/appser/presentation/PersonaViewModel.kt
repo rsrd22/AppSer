@@ -20,6 +20,15 @@ class PersonaViewModel(private val repo: PersonaRepository): ViewModel() {
         }
     }
 
+    fun fetchPersonaWithCuestionario(id: Long) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getPersonaWithCuestionario(id)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
 }
 
 class PersonaViewModelFactory(private val repo: PersonaRepository): ViewModelProvider.Factory{

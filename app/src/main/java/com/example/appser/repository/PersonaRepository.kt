@@ -2,6 +2,7 @@ package com.example.appser.repository
 
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.PersonaList
+import com.example.appser.data.model.relations.PersonaWithCuestionario
 
 interface PersonaRepository {
 
@@ -10,5 +11,7 @@ interface PersonaRepository {
     suspend fun getPersonaById(id: Int): PersonaEntity
 
     suspend fun savePersona(personaEntity: PersonaEntity)
+
+    suspend fun getPersonaWithCuestionario(id: Long): PersonaWithCuestionario
 
 }

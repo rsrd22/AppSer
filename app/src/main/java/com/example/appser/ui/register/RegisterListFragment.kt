@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
@@ -16,10 +17,11 @@ import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.data.resource.PersonaDataSource
 import com.example.appser.data.resource.UsuarioDataSource
 import com.example.appser.databinding.FragmentRegisterListBinding
-import com.example.appser.presentation.UsuarioViewModel
-import com.example.appser.presentation.UsuarioViewModelFactory
+import com.example.appser.presentation.*
+import com.example.appser.repository.PersonaRepositoryImpl
 import com.example.appser.repository.UsuarioRepositoryImpl
 import com.example.appser.ui.register.adapters.RegisterListAdapter
 
@@ -27,12 +29,15 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
 
     private lateinit var adapter: RegisterListAdapter
     private lateinit var binding: FragmentRegisterListBinding
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var personaAndUsuario: PersonaAndUsuario
 
-    private val viewModel by viewModels<UsuarioViewModel>{
-        UsuarioViewModelFactory(
-            UsuarioRepositoryImpl(
-                UsuarioDataSource(
-                    AppDatabase.getDatabase(requireContext()).usuarioDao()
+
+    private val viewModel by viewModels<PersonaViewModel>{
+        PersonaViewModelFactory(
+            PersonaRepositoryImpl(
+                PersonaDataSource(
+                    AppDatabase.getDatabase(requireContext()).personaDao()
                 )
             )
         )
@@ -42,22 +47,28 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterListBinding.bind(view)
 
-        viewModel.fetchPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
+        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
+            personaAndUsuario = result
+            if (personaAndUsuario != null) {
+                cargarListaCuestionario()
+            }
+        })
+
+
+    }
+
+    fun cargarListaCuestionario(){
+        viewModel.fetchPersonaWithCuestionario(personaAndUsuario.persona.id).observe(viewLifecycleOwner, Observer{result->
             when(result){
-                is Resource.Loading->{
-                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Cargando...", Toast.LENGTH_SHORT)
                 }
-                is Resource.Success->{
-
-                    Log.d("Success", "Result: ${result.data}")
-                    adapter = RegisterListAdapter(result.data,
-                        this@RegisterListFragment)
-
-                    Log.d("LIVEDATA", "TERMINO ADAPTER")
+                is Resource.Success -> {
+                    adapter = RegisterListAdapter(result.data, this@RegisterListFragment)
                     binding.rvListRegister.adapter = adapter
                 }
                 is Resource.Failure -> {
-                    Log.d("ErrorPersonaAndUsuario", "${result.exception}")
+                    Log.d("ErrorPersonCuestionario", "${result.exception}")
                     Toast.makeText(
                         requireContext(),
                         "Error: ${result.exception}",

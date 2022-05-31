@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/wavesfondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.emotion.EmotionFragment">
@@ -12,14 +13,30 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border_redondo"
         android:gravity="left"
+
         android:orientation="horizontal"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_launcher_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txt_LabelIntro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="La emocion que estas sintiendo es:"
+        android:textSize="20dp"
+        android:textColor="@color/letter"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_LogoPequeno"
+        />
 
     <TextView
         android:id="@+id/txt_NombreEmocion"
@@ -29,9 +46,11 @@
         android:gravity="center"
         android:text="NOMBRE EMOCIÓN"
         android:textSize="20dp"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_LogoPequeno"
+        app:layout_constraintTop_toBottomOf="@id/txt_LabelIntro"
         />
 
     <TextView
@@ -43,6 +62,7 @@
         android:justificationMode="inter_word"
         android:text="Texto ejemplo de la descripcion de la emocion para poder medir el tamaño"
         android:textSize="20dp"
+        android:textColor="@color/letter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_NombreEmocion"
@@ -56,6 +76,8 @@
         android:layout_marginBottom="5dp"
         android:text="ACTIVIDADES"
         android:textSize="20dp"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_DescripcionEmocion"
@@ -81,35 +103,6 @@
     </LinearLayout>
 
 
-<!--    <RadioButton-->
-<!--        tools:ignore="UnknownId"-->
-<!--        android:id="@+id/rb_OpcionActividad1"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="40dp"-->
-<!--        android:text="Actividad X"-->
-<!--        android:textSize="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        tools:layout_editor_absoluteX="38dp"-->
-<!--        tools:layout_editor_absoluteY="434dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/txt_Actividades"/>-->
-
-<!--    <RadioButton-->
-<!--        tools:ignore="UnknownId"-->
-<!--        android:id="@+id/rb_OpcionActividad2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="40dp"-->
-<!--        android:text="Actividad Y"-->
-<!--        android:textSize="20dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        tools:layout_editor_absoluteX="38dp"-->
-<!--        tools:layout_editor_absoluteY="434dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/rb_OpcionActividad1"/>-->
 
     <Button
         android:id="@+id/btnVerActividad"

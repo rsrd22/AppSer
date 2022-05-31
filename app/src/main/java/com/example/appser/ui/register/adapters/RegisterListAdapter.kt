@@ -44,9 +44,9 @@ class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario
         val context: Context
     ):BaseViewHolder<PersonaEntity>(binding.root){
         override fun bind(item: PersonaEntity) {
-            binding.regNameText.text = item.nombre_completo
-            binding.regAgeText.text = "${item.edad}"
-            binding.regGenderText.text = item.genero
+            binding.regDateText.text = item.nombre_completo
+            binding.regEmotionText.text = "${item.edad}"
+            binding.regActivityText.text = item.genero
 
         }
 

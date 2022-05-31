@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.appser.ui.home.homeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="@string/homeFragment"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
@@ -25,23 +25,23 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
-        android:id="@+id/registerListFragment2"
+        android:id="@+id/registerListFragment"
         android:name="com.example.appser.ui.register.RegisterListFragment"
-        android:label="fragment_register_list"
+        android:label="@string/registerListFragment2"
         tools:layout="@layout/fragment_register_list" />
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.appser.ui.dashboard.DashboardFragment"
-        android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        android:label="@string/dashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/action_dashboardFragment_to_questionsFragment2"
-            app:destination="@id/questionsFragment2" />
+            android:id="@+id/action_dashboardFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
     </fragment>
-    <fragment
+   <fragment
         android:id="@+id/questionsFragment2"
         android:name="com.example.appser.ui.questions.QuestionsFragment"
-        android:label="fragment_questions"
+        android:label="@string/questionsFragment"
         tools:layout="@layout/fragment_questions" >
         <action
             android:id="@+id/action_questionsFragment2_to_emotionFragment2"

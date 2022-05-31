@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/wavesfondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.homeFragment">
@@ -13,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:gravity="center"
-        android:text="Psicología"
+        android:text="Ser"
         android:textSize="40dp"
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +43,8 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:hint="Nombre de usuario" />
+            android:textColor="@color/black"
+            android:hint="Nombre de usuario"/>
 
         <Button
             android:id="@+id/btn_Login"
@@ -62,6 +65,7 @@
         android:gravity="center"
         android:text="No tienes una cuenta?"
         android:textSize="14dp"
+        android:textColor="@color/black"
         android:textStyle="italic"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"

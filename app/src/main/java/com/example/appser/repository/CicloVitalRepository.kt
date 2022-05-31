@@ -12,4 +12,6 @@ interface CicloVitalRepository {
     suspend fun getCicloVitalById(id: Long): CicloVitalEntity
 
     suspend fun saveCicloVital(ciclovitalEntity: CicloVitalEntity)
+
+    suspend fun getCicloVitalByEdad(edad: Int): CicloVitalEntity
 }

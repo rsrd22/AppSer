@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.example.appser.data.model.CuestionarioEntity
 import com.example.appser.data.model.PersonaEntity
+import com.example.appser.data.model.PreguntasEntity
 import com.example.appser.data.model.UsuarioEntity
 
 data class PersonaWithCuestionario (
@@ -15,3 +16,4 @@ data class PersonaWithCuestionario (
     )
     val cuestionario: List<CuestionarioEntity>
 )
+

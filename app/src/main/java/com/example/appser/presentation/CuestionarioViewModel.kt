@@ -37,6 +37,15 @@ class CuestionarioViewModel(private val repo: CuestionarioRepository): ViewModel
             emit(Resource.Failure(e))
         }
     }
+
+    fun fetchUpdateCuestionario(cuestionarioId: Long, actividadAsignadaId: Long) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.updateCuestionario(cuestionarioId, actividadAsignadaId)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
 }
 
 class CuestionarioViewModelFactory(private val repo: CuestionarioRepository): ViewModelProvider.Factory{

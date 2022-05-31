@@ -12,8 +12,13 @@ class ActividadesDataSource(private val actividadesDao: ActividadesDao) {
     suspend fun getActividadbyId(id: Long): ActividadesEntity {
         return actividadesDao.getActividadbyId(id)
     }
+    suspend fun getActividadByEmocionByCiclo(idEmocion: Long, idCiclo: Long): List<ActividadesEntity> {
+        return actividadesDao.getActividadByEmocionByCiclo(idEmocion, idCiclo)
+    }
 
     suspend fun saveActividad(actividad: ActividadesEntity) {
         return actividadesDao.saveActividad(actividad)
     }
+
+
 }

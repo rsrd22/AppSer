@@ -16,4 +16,8 @@ class CicloVitalRepositoryImpl(private val cicloDataSource: CicloVitalDataResour
     override suspend fun saveCicloVital(ciclovitalEntity: CicloVitalEntity) {
         return cicloDataSource.saveCicloVital(ciclovitalEntity)
     }
+
+    override suspend fun getCicloVitalByEdad(edad: Int): CicloVitalEntity {
+        return cicloDataSource.getCicloVitalByEdad(edad)
+    }
 }

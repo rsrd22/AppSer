@@ -1,5 +1,6 @@
 package com.example.appser.ui.register
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
@@ -25,6 +28,7 @@ import com.example.appser.presentation.UsuarioViewModel
 import com.example.appser.presentation.UsuarioViewModelFactory
 import com.example.appser.repository.PersonaRepositoryImpl
 import com.example.appser.repository.UsuarioRepositoryImpl
+import java.time.Instant
 
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -46,6 +50,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
@@ -57,10 +62,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val txtEdad = binding.txtEdad
             val txtGenero = binding.txtGenero
             val txtEmail = binding.txtEmail
+            var persona = PersonaEntity(nombre_completo = txtNombre.text.toString(), edad = Integer.parseInt(txtEdad.text.toString()), genero = txtGenero.text.toString(), user_create =  "SAdmin", create_at =  "${Instant.now().toString()}")
 
-            var persona = PersonaEntity(nombre_completo = txtNombre.text.toString(), edad = Integer.parseInt(txtEdad.text.toString()), genero = txtGenero.text.toString(), user_create =  "rsrd", create_at =  "2022-04-27")
-
-            persona.usuario = UsuarioEntity(0, txtEmail.text.toString(), 1, 0, 1, "rsrd", "2022-04-27")
+            persona.usuario = UsuarioEntity(0, txtEmail.text.toString(), 1, 0, 1, "SAdmin", "${Instant.now().toString()}")
 
 
             viewModel.fetchPersonaWithUsuario(persona).observe(viewLifecycleOwner, Observer{result ->
@@ -70,6 +74,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     }
                     is Resource.Success ->{
                         Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.homeFragment)
                     }
                     is Resource.Failure -> {
                         Log.d("Error LiveData", "${result.exception}")

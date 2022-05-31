@@ -36,6 +36,15 @@ class RolViewModel(private val repo: RolRepository): ViewModel() {
         }
     }
 
+    fun fetchCountRol() = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getCountRol()))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
 }
 
 class RolViewModelFactory(private val repo: RolRepository): ViewModelProvider.Factory{

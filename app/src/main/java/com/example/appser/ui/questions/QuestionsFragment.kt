@@ -1,60 +1,254 @@
 package com.example.appser.ui.questions
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.appser.R
+import com.example.appser.core.Resource
+import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.*
+import com.example.appser.data.model.relations.CategoriasWithPreguntas
+import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.data.resource.CuestionarioPreguntasDataSource
+import com.example.appser.data.resource.UsuarioDataSource
+import com.example.appser.databinding.FragmentDashboardBinding
+import com.example.appser.databinding.FragmentHomeBinding
+import com.example.appser.databinding.FragmentQuestionsBinding
+import com.example.appser.presentation.*
+import com.example.appser.repository.CuestionarioPreguntasRepository
+import com.example.appser.repository.CuestionarioPreguntasRepositoryImpl
+import com.example.appser.repository.UsuarioRepositoryImpl
+import kotlinx.android.synthetic.main.fragment_questions.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.max
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QuestionsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class QuestionsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class QuestionsFragment : Fragment(R.layout.fragment_questions) {
+
+    private lateinit var binding: FragmentQuestionsBinding
+    private lateinit var appDatabase: AppDatabase
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var categorias: List<CategoriasWithPreguntas>
+    private lateinit var emociones: EmocionesList
+    private lateinit var listaPreguntas: List<PreguntasEntity>
+    private lateinit var listaRespuestasPreguntas: MutableList<modeloPreguntas>
+    private var indicadorCategoria: Int = -1
+    private var indicadorPregunta: Int = -1
+    private var indicadorEmocion: Int = -1
+    private val sdf = SimpleDateFormat("dd/MM/yyyy")
+    private val currentdate = sdf.format(Date())
+
+    private lateinit var personaAndUsuario: PersonaAndUsuario
+
+    private val viewModelCuestionarioPreguntas by viewModels<CuestionarioPreguntasViewModel> {
+        CuestionarioPreguntaViewModelFactory(
+            CuestionarioPreguntasRepositoryImpl(
+                CuestionarioPreguntasDataSource(AppDatabase.getDatabase(requireContext()).cuestionariopreguntasDao())
+            )
+        )
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        appDatabase = AppDatabase.getDatabase(requireContext())
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentQuestionsBinding.bind(view)
+        indicadorCategoria = 0
+        indicadorPregunta = 0
+        listaRespuestasPreguntas = mutableListOf()
+        Log.d("Question", "Main Question")
+
+
+
+        mainViewModel.getCategoriasWithPreguntas().observe(viewLifecycleOwner, Observer{cat ->
+
+            Log.d("Categorias-->", "cate->${cat}")
+            categorias = cat
+
+            mainViewModel.getEmociones().observe(viewLifecycleOwner, Observer { result ->
+                Log.d("Emociones-->", "Emo->${result}")
+                emociones = result
+
+                if(categorias != null && emociones != null){
+                    IniciarPreguntas()
+                }
+            })
+        })
+
+        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer { result ->
+            personaAndUsuario = result
+
+        })
+
+
+        btnSiguiente.setOnClickListener {
+            setSiguentePregunta()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_questions, container, false)
+    fun setEmociones(){
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QuestionsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QuestionsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun setCategorias(){
+
+    }
+
+    fun IniciarPreguntas(){
+        indicadorCategoria = 0
+        indicadorEmocion  = emocionRandon()
+        Log.d("Emocion Random", "indicadorEmocion->${indicadorEmocion}")
+        setListadoPreguntas()
+        setPregunta()
+
+    }
+
+    fun setListadoPreguntas(){
+        listaPreguntas = categorias[indicadorCategoria].preguntas.filter { it.emocionId == emociones.result[indicadorEmocion].id }
+        indicadorPregunta = 0
+    }
+
+
+    fun AumentarCategoria(){
+        if(indicadorCategoria < categorias.size)
+            indicadorCategoria++
+    }
+
+
+    fun emocionRandon(): Int{
+        val position = (0..3).random()
+        return position
+    }
+
+    fun setPregunta(){
+        binding.txtPreguntas.text = "${listaPreguntas[indicadorPregunta].descripcion}"
+    }
+
+    fun validarRespuesta(): Boolean{
+        return !binding.rbNo.isChecked && !binding.rbSi.isChecked
+
+    }
+    fun setSiguentePregunta(){
+        if(!validarRespuesta()) {
+            var respuesta: String = if (binding.rbNo.isChecked) "No" else "Si"
+
+            // Guardar la Pr egunta anterior en un list
+            listaRespuestasPreguntas.add(
+                modeloPreguntas(
+                    categorias[indicadorCategoria].categoria.id,
+                    emociones.result[indicadorEmocion].id,
+                    listaPreguntas.get(indicadorPregunta).id,
+                    respuesta
+                    )
+            )
+
+            if (binding.rbNo.isChecked) {
+                indicadorEmocion = emocionRandon()
+                setListadoPreguntas()
+            } else {
+                indicadorPregunta++
+                if(indicadorPregunta>= listaPreguntas.size){
+                    indicadorCategoria++
+                    if(indicadorCategoria < categorias.size) {
+                        setListadoPreguntas()
+                    }
+//                }else {
+//                    indicadorPregunta++
                 }
             }
+
+            binding.respuesta.clearCheck()
+
+//            binding.rbSi.isChecked = false
+//            binding.rbNo.isChecked = false
+
+
+            //Validar Categorias
+            if(indicadorCategoria < categorias.size){
+                //Setear Nueva Pregunta
+                setPregunta()
+            }else{
+                //FINALIZA LA IDENTIFIACION
+                //Empieza la Busqueda de la Emocion
+                val emocionEncontradaId: Long = getEmocionxRespuestas()
+
+                //Llamado Metodo Guardar
+                GuardarCuestionario(emocionEncontradaId)
+
+            }
+        }else{
+            Toast.makeText(requireContext(), "Por favor seleccione una respuesta.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun GuardarCuestionario(emocionEncontradaId: Long){
+        var user: String = personaAndUsuario.usuario.email
+        var cuestionario = CuestionarioEntity(0, personaAndUsuario.persona.id,-1, currentdate, user, currentdate)
+        var lista: MutableList<CuestionarioPreguntasEntity> = mutableListOf()
+        var cuestionarioId: Long = 0
+        for(item in listaRespuestasPreguntas){
+            lista.add(
+                CuestionarioPreguntasEntity(0, 0, item.preguntaId, item.respuesta, user, currentdate)
+            )
+        }
+
+        cuestionario.listaCuestionarioPreguntas = lista
+        //Enviar a vista emocionFragment
+        viewModelCuestionarioPreguntas.fetchSaveCuestionarioWithCuestionarioPreguntas(cuestionario).observe(viewLifecycleOwner, Observer { result->
+            when(result){
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success ->{
+                    Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_SHORT).show()
+                    cuestionarioId = result.data
+
+                    mainViewModel.setEmocionCuestionarioId(Pair(emocionEncontradaId, cuestionarioId))
+                    findNavController().navigate(R.id.action_questionsFragment2_to_emotionFragment2)
+                }
+                is Resource.Failure -> {
+                    Log.d("Error LiveData", "${result.exception}")
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+        })
+
+    }
+
+    fun getEmocionxRespuestas(): Long{
+        var listaRespuestas: List<modeloPreguntas> = listaRespuestasPreguntas.filter { it.respuesta == "Si" }
+        var idEmocion : Long = -1
+        var sizeEmocion : Int = -1
+        var maxEmocion : Int = -1
+
+        for(emocion in emociones.result){
+            sizeEmocion = listaRespuestas.filter { it.emocionId == emocion.id }.size
+            if(sizeEmocion > maxEmocion ){
+                maxEmocion = sizeEmocion
+                idEmocion = emocion.id
+            }
+        }
+
+        return idEmocion
     }
 }

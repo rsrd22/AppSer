@@ -35,6 +35,15 @@ class CicloVitalViewModel(private val repo: CicloVitalRepository): ViewModel() {
         }
     }
 
+    fun fetchCicloVitalByEdad(edad: Int)= liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repo.getCicloVitalByEdad(edad)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
+
 }
 
 class CicloVitalViewModelFactory(private val repo: CicloVitalRepository): ViewModelProvider.Factory{

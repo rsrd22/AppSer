@@ -1,60 +1,200 @@
 package com.example.appser.ui.emotion
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.get
+import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.appser.R
+import com.example.appser.core.Resource
+import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.ActividadesEntity
+import com.example.appser.data.model.CicloVitalEntity
+import com.example.appser.data.model.EmocionesEntity
+import com.example.appser.data.model.EmocionesList
+import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.data.resource.ActividadesDataSource
+import com.example.appser.data.resource.CuestionarioDataSource
+import com.example.appser.data.resource.RolDataSource
+import com.example.appser.databinding.FragmentEmotionBinding
+import com.example.appser.databinding.FragmentQuestionsBinding
+import com.example.appser.databinding.ItemActivitiesBinding
+import com.example.appser.presentation.*
+import com.example.appser.repository.ActividadesRepositoryImpl
+import com.example.appser.repository.CuestionarioRepositoryImpl
+import com.example.appser.repository.RolRepositoryImpl
+import com.example.appser.ui.activity.ActivityFragmentDirections
+import com.example.appser.ui.emotion.adapters.ActivitiesListAdapter
+import kotlinx.android.synthetic.main.fragment_emotion.*
+import kotlinx.android.synthetic.main.fragment_questions.*
+import java.text.SimpleDateFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EmotionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class EmotionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class EmotionFragment : Fragment(R.layout.fragment_emotion), ActivitiesListAdapter.OnActivitiesListClickListener {
+
+    private lateinit var binding: FragmentEmotionBinding
+    private lateinit var appDatabase: AppDatabase
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val sdf = SimpleDateFormat("dd/MM/yyyy")
+    private val currentdate = sdf.format(Date())
+    private lateinit var personaAndUsuario: PersonaAndUsuario
+    private lateinit var ciclovital: CicloVitalEntity
+    private lateinit var emocioncuestionario: Pair<Long, Long>
+    private lateinit var emociones: EmocionesList
+    private lateinit var emocion: EmocionesEntity
+    private lateinit var actividades: List<ActividadesEntity>
+    private lateinit var adapter: ActivitiesListAdapter
+    private lateinit var actividadAsignada : ActividadesEntity
+    private var actividadIndex: Int=-1
+
+    val viewModelActividades by viewModels<ActividadesViewModel> {
+        ActividadesViewModelFactory(
+            ActividadesRepositoryImpl(
+                ActividadesDataSource(
+                    appDatabase.actividadesDao()
+                )
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        appDatabase = AppDatabase.getDatabase(requireContext())
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentEmotionBinding.bind(view)
+
+
+        mainViewModel.getPersonaAndUsuario().observe(viewLifecycleOwner, Observer{ result->
+            personaAndUsuario = result
+        })
+
+        mainViewModel.getCicloVital().observe(viewLifecycleOwner, Observer{ result->
+            ciclovital = result
+        })
+
+        mainViewModel.getEmocionCuestionarioId().observe(viewLifecycleOwner, Observer { datos->
+            emocioncuestionario = datos
+
+            if(emocioncuestionario.first > 0) {
+                mainViewModel.getEmociones().observe(viewLifecycleOwner, Observer { result ->
+                    Log.d("Emociones-->", "Emo->${result}")
+                    emociones = result
+
+                    emocion = emociones.result.filter { it.id == emocioncuestionario.first }.get(0)
+                    if(emocion != null ){
+                        MostrarEmocion()
+                    }
+                })
+            }else{ // COLOCAR OBSERVACION DE NO SE PUDO ENCONTRAR LA EMOCION
+
+            }
+        })
+
+        btnVerActividad.setOnClickListener {
+            asignarActividad()
+        }
+
+    }
+
+    fun asignarActividad(){
+        if(actividadIndex == -1){
+            Toast.makeText(requireContext(), "Por favor seleccione una actividad para seguir con el proceso.", Toast.LENGTH_SHORT).show()
+        }else{
+            val viewModelCuestionario by viewModels<CuestionarioViewModel> {
+                CuestionarioViewModelFactory(
+                    CuestionarioRepositoryImpl(
+                        CuestionarioDataSource(
+                            appDatabase.cuestionarioDao()
+                        )
+                    )
+                )
+            }
+
+            viewModelCuestionario.fetchUpdateCuestionario(emocioncuestionario.second, actividadAsignada.id).observe(viewLifecycleOwner, Observer{result ->
+                when(result){
+                    is Resource.Loading -> {
+                        Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Success ->{
+                        mainViewModel.setActividadAsignada(actividadAsignada)
+                        findNavController().navigate(R.id.action_emotionFragment2_to_activityFragment2)
+                    }
+                    is Resource.Failure -> {
+                        Log.d("Error LiveData", "${result.exception}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${result.exception}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            })
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_emotion, container, false)
+    fun MostrarEmocion(){
+        binding.txtNombreEmocion.text = emocion.nombre
+        binding.txtDescripcionEmocion.text = emocion.descripcion
+        cargarListaActividades()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EmotionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EmotionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun cargarListaActividades(){
+        viewModelActividades.fetchActividadByEmocioByCiclo(emocion.id, ciclovital.id).observe(viewLifecycleOwner, Observer { result ->
+            when(result){
+                is Resource.Loading ->{
+                    Toast.makeText(requireContext(), "Cargado Actividades..", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success -> {
+                    actividades = result.data
+                    Log.d("Actividades", "Lista -- ${actividades}")
+                    adapter = ActivitiesListAdapter(actividades, this@EmotionFragment)
+
+                    binding.rvListActivities.adapter = adapter
+                }
+                is Resource.Failure -> {
+                    Log.d("Error LiveData", "${result.exception}")
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                 }
             }
+        })
+    }
+
+    override fun onActivitiesListClick(itemBinding: ItemActivitiesBinding, actividad: ActividadesEntity) {
+        binding.root.setBackgroundColor(Color.parseColor("#F8F8F8"))
+
+        binding.rvListActivities.childCount
+        for(index in 0..binding.rvListActivities.childCount-1){
+            if(binding.rvListActivities.get(index) == itemBinding.root){
+                if(actividadIndex == index){
+                    itemBinding.root.setBackgroundColor(Color.parseColor("#F8F8F8"))
+                    actividadIndex = -1
+                }else {
+                    actividadIndex = index
+                    itemBinding.root.setBackgroundColor(Color.parseColor("#FFCC44"))
+                    actividadAsignada = actividad
+                }
+            }else{
+                binding.rvListActivities.get(index).setBackgroundColor(Color.parseColor("#F8F8F8"))
+            }
+        }
     }
 }

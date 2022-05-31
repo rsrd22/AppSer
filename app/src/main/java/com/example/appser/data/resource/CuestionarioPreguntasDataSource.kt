@@ -1,6 +1,7 @@
 package com.example.appser.data.resource
 
 import com.example.appser.data.local.CuestionarioPreguntasDao
+import com.example.appser.data.model.CuestionarioEntity
 import com.example.appser.data.model.CuestionarioPreguntasEntity
 import com.example.appser.data.model.CuestionarioPreguntasList
 
@@ -16,6 +17,10 @@ class CuestionarioPreguntasDataSource(private val cuestionariopreguntasDao: Cues
 
     suspend fun saveCuestionarioPregunta(cuestionariopreguntas: CuestionarioPreguntasEntity){
         return cuestionariopreguntasDao.saveCuestionarioPreguntas(cuestionariopreguntas)
+    }
+
+    suspend fun saveCuestionarioWithCuestionarioPregunta(cuestionario: CuestionarioEntity): Long{
+        return cuestionariopreguntasDao.saveCuestionarioWithCuestionarioPregunta(cuestionario)
     }
 
 }

@@ -48,7 +48,10 @@ class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario
             binding.regEmotionText.text = "${item.edad}"
             binding.regActivityText.text = item.genero
 
-            //binding.executePendingBindings()
+        }
+
+        override fun bind(item: PersonaEntity, position: Int) {
+            TODO("Not yet implemented")
         }
     }
 }

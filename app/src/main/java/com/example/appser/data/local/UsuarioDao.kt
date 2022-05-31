@@ -36,5 +36,9 @@ interface UsuarioDao {
 
     }
 
+    @Transaction
+    @Query("SELECT * FROM UsuarioEntity, personaentity WHERE email= :email")
+    suspend fun getUsuarioByEmail(email: String): PersonaAndUsuario
+
 
 }

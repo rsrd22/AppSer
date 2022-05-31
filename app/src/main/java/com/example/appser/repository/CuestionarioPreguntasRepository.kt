@@ -11,4 +11,6 @@ interface CuestionarioPreguntasRepository {
     suspend fun getCuestionarioPreguntabyId(id: Long): CuestionarioPreguntasEntity
 
     suspend fun saveCuestionarioPregunta(cuestionarioPregunta: CuestionarioPreguntasEntity)
+
+    suspend fun saveCuestionarioWithCuestionarioPregunta(cuestionario: CuestionarioEntity): Long
 }

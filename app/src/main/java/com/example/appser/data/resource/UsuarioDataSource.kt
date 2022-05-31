@@ -31,4 +31,8 @@ class UsuarioDataSource(private val usuarioDao: UsuarioDao) {
         usuarioDao.insertPersonaWithUsuario(persona)
     }
 
+    suspend fun getUsuarioByEmail(email: String): PersonaAndUsuario {
+        return usuarioDao.getUsuarioByEmail(email)
+    }
+
 }

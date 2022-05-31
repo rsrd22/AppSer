@@ -2,6 +2,7 @@ package com.example.appser.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity
@@ -18,6 +19,13 @@ data class CuestionarioEntity (
     val user_create: String = "",
     @ColumnInfo(name = "create_at")
     val create_at: String = ""
-)
+
+
+){
+    @Ignore
+    var listaCuestionarioPreguntas: List<CuestionarioPreguntasEntity>? = mutableListOf()
+}
+
+
 
 data class CuestionarioList (val results: List<CuestionarioEntity> = listOf() )

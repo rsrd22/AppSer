@@ -26,4 +26,8 @@ class UsuarioRepositoryImpl(private val usuarioDataSource: UsuarioDataSource): U
     override suspend fun insertPersonaWithUsuario(persona: PersonaEntity) {
         return usuarioDataSource.insertPersonaWithUsuario(persona)
     }
+
+    override suspend fun getUsuarioByEmail(email: String): PersonaAndUsuario {
+        return usuarioDataSource.getUsuarioByEmail(email)
+    }
 }

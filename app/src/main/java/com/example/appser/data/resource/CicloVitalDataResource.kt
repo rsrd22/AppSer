@@ -17,4 +17,7 @@ class CicloVitalDataResource(private val ciclovitalDao: CicloVitalDao) {
         return ciclovitalDao.saveCicloVital(cicloVital)
     }
 
+    suspend fun getCicloVitalByEdad(edad: Int): CicloVitalEntity{
+        return ciclovitalDao.getCicloVitalByEdad(edad)
+    }
 }

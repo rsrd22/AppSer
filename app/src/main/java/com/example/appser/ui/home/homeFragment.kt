@@ -24,6 +24,7 @@ import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.*
+import com.example.appser.data.preference.SerApplication.Companion.prefs
 import com.example.appser.data.resource.*
 import com.example.appser.databinding.FragmentHomeBinding
 import com.example.appser.databinding.FragmentRegisterBinding
@@ -84,11 +85,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         cargarPreguntas()
         cargarRoles()
 
+
         binding = FragmentHomeBinding.bind(view)
 
         val btnLogin = binding.btnLogin
         val btnRegistrarse = binding.txtRegistrarse
 //        val btnLista = binding.txtLista
+        checkUserValues()
 
         btnLogin.setOnClickListener {
             login()
@@ -99,6 +102,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 //        btnLista.setOnClickListener {
 //            findNavController().navigate(R.id.action_homeFragment_to_registerListFragment2)
 //        }
+    }
+
+    fun checkUserValues(){
+        if(prefs.getName().isNotEmpty() && prefs.getName().isNotEmpty()){
+
+            findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
+        }
     }
 
     fun login() {
@@ -123,6 +133,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         is Resource.Success -> {
                             if (result.data != null) {
                                 mainViewModel.setPersonaAndUsuario(result.data)
+                                prefs.saveName(result.data.persona.nombre_completo.toString())
+                                prefs.saveEmail(result.data.usuario.email.toString())
+                                prefs.saveIdUser(result.data.persona.id)
                                 findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
                             } else {
                                 Toast.makeText(

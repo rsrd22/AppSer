@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.HistoricoCuestionario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.data.resource.PersonaDataSource
@@ -58,7 +59,7 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
     }
 
     fun cargarListaCuestionario(){
-        viewModel.fetchPersonaWithCuestionario(personaAndUsuario.persona.id).observe(viewLifecycleOwner, Observer{result->
+        viewModel.fetchHistoricoCuestionario(personaAndUsuario.persona.id).observe(viewLifecycleOwner, Observer{result->
             when(result){
                 is Resource.Loading -> {
                     Toast.makeText(requireContext(), "Cargando...", Toast.LENGTH_SHORT)
@@ -80,8 +81,8 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
         })
     }
 
-    override fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario) {
-        Log.d("ItemRegistrado", "Activit - ${personasAndUsuario}")
-        Toast.makeText(requireContext(), "Usuario: ${personasAndUsuario.usuario?.email}", Toast.LENGTH_LONG).show()
+    override fun onRegisterListClick(historicoCuestionario: HistoricoCuestionario) {
+        Log.d("ItemHistorico", "Activit - ${historicoCuestionario}")
+        Toast.makeText(requireContext(), "Usuario: ${historicoCuestionario.emocion}", Toast.LENGTH_LONG).show()
     }
 }

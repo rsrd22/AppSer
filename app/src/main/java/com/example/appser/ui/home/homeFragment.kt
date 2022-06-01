@@ -58,6 +58,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     }
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("Home Fragment", "OnCreate")
@@ -106,21 +107,33 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     fun checkUserValues(){
         if(prefs.getName().isNotEmpty() && prefs.getName().isNotEmpty()){
+            viewModel.fetchUsuarioByEmail(email.toString())
+                .observe(viewLifecycleOwner, Observer { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is Resource.Success -> {
+                            findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
+                        }
+                        is Resource.Failure -> {
+                            Log.d("Error LiveData", "${result.exception}")
+                            Toast.makeText(
+                                requireContext(),
+                                "Error: ${result.exception}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+                })
 
-            findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
         }
     }
 
     fun login() {
-        val viewModel by viewModels<UsuarioViewModel> {
-            UsuarioViewModelFactory(
-                UsuarioRepositoryImpl(
-                    UsuarioDataSource(
-                        appDatabase.usuarioDao()
-                    )
-                )
-            )
-        }
+
         val email = binding.txtUsuario.text
         if (email.isNotEmpty()) {
             viewModel.fetchUsuarioByEmail(email.toString())
@@ -144,6 +157,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
+                        }
+                        is Resource.Failure -> {
+                            Log.d("Error LiveData", "${result.exception}")
+                            Toast.makeText(
+                                requireContext(),
+                                "Error: ${result.exception}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
                         }
                     }
 

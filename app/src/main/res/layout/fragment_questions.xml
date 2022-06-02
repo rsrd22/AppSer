@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
+            android:buttonTint="@color/purple_500"
             android:text="SI"
             android:textColor="@color/letter"
             android:textColorLink="@color/white"
@@ -61,20 +62,21 @@
             tools:layout_editor_absoluteY="434dp" />
 
         <RadioButton
-            tools:ignore="UnknownId"
             android:id="@+id/rb_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:buttonTint="@color/purple_500"
             android:text="NO"
             android:textColor="@color/letter"
             android:textSize="20dp"
-            android:layout_marginTop="10dp"
-            tools:layout_editor_absoluteX="38dp"
-            tools:layout_editor_absoluteY="434dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rb_si"/>
+            app:layout_constraintTop_toBottomOf="@id/rb_si"
+            tools:ignore="UnknownId"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="434dp" />
     </RadioGroup>
     <Button
         android:id="@+id/btnSiguiente"

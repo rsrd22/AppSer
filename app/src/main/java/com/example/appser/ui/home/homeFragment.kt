@@ -400,53 +400,59 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
             ActividadesEntity(
                 1, "Caras Dibujadas",
-                " Los padres o acudientes dibujan caras que reflejen emociones como la tristeza y alegría (Pueden guiarse de las que ofrece SER). La idea es mostrar las caras al niño/a. Luego, los padres simularán, actuarán y gesticularán las emociones mencionadas y cada uno le pondrá en el rostro al otro la carita pintada correspondiente a la emoción. Esto pueden repetirlo un par de veces y expresar verbalmente cómo se sienten. Luego será el turno del/a niño/a. Se le entregan las caras y este deberá asignar la cara triste cuando el acudiente que refleje tristeza y la cara feliz al acudiente refleje alegría.",
+                "Los padres o acudientes dibujan caras que reflejen emociones como la tristeza y alegría (Pueden guiarse de las que ofrece SER). La idea es mostrar las caras al niño/a.\n" +
+                        "Luego, los padres simularán, actuarán y gesticularán las emociones mencionadas y cada uno le pondrá en el rostro al otro la carita pintada correspondiente a la emoción. Esto pueden repetirlo un par de veces y expresar verbalmente cómo se sienten. \n" +
+                        "Luego será el turno del/a niño/a. Se le entregan las caras y este deberá asignar la cara triste cuando el acudiente que refleje tristeza y la cara feliz al acudiente refleje alegría.\n",
                 "", 1, 1, 1, "SAdmin", "${currentdate}"
             ),
 
             ActividadesEntity(
                 2, "Caja Misteriosa",
-                " adaptación de una caja de cartón como depósito de objetos que el/a niño/a desconozca. La caja puede pintarse de negro por dentro y por fuera para dar la sensación de oscuridad y hacerle un agujero en el frente en donde el niño puede meter su mano con cuidado y solo usando su sentido del tacto seleccionar y sacar el objeto desconocido. Los padres pudieran simular que ellos mismos sienten un poco de miedo de meter la mano en la caja para ver qué hay, pero animar al/a niño/a que se atreva a sacar algo de la caja. En ocasiones el/la acudiente podría sacar primero algo de la caja para que el/la niño/a se sienta más en confianza de meter la mano en la caja",
+                "Se realizará la adaptación de una caja de cartón como depósito de objetos que el/a niño/a desconozca. \n" +
+                        "La caja puede pintarse de negro por dentro y por fuera para dar la sensación de oscuridad y hacerle un agujero en el frente en donde el niño puede meter su mano con cuidado y solo usando su sentido del tacto seleccionar y sacar el objeto desconocido. \n" +
+                        "Los padres pudieran simular que ellos mismos sienten un poco de miedo de meter la mano en la caja para ver qué hay, pero animar al/a niño/a que se atreva a sacar algo de la caja. En ocasiones el/la acudiente podría sacar primero algo de la caja para que el/la niño/a se sienta más en confianza de meter la mano en la caja",
                 "", 2, 1, 1, "SAdmin", "${currentdate}"
             ),
 
             ActividadesEntity(
                 3, "Frecuencias",
-                " el/la ñiño/a tenga que realizar una acción (ej: aplaudir, emitir un sonido, reír, toca un botón, etc) en un determinado ritmo o frecuencia que proporcionará la aplicación SER. Esta frecuencia corresponderá con la frecuencia cardiaca de una persona en reposo que puede ir de los 50 a 70 latidos por minuto.",
+                "El/la ñiño/a tiene que realizar una acción (ej: aplaudir, emitir un sonido, reír, toca un botón, etc) en un determinado ritmo o frecuencia que proporcionará la aplicación SER. Esta frecuencia corresponderá con la frecuencia cardiaca de una persona en reposo que puede ir de los 50 a 70 latidos por minuto.",
                 "", 3, 1, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 4, "¡Hagamos Plastilina!",
-                " elaboración de plastilina casera con materiales de fácil acceso (500g gr de harina de trigo, una taza de aceite comestible, una taza de agua, y colorantes comestibles). Solo bastará mezclar los primeros tres ingredientes y dividir porciones, dependiendo del número de colores que se consigan. Luego agregar los colorantes. Cuando tengamos masas similares a la plastilina se pueden hacer diferentes figuras. La idea es que niños/as y acudientes participen en el proceso de amasado de las plastilinas, interactúen con las diferentes texturas y resultados de la experiencia.",
+                "Elaboración de plastilina casera con materiales de fácil acceso (500g gr de harina de trigo, una taza de aceite comestible, una taza de agua, y colorantes comestibles). \n" +
+                        "Solo bastará mezclar los primeros tres ingredientes y dividir porciones, dependiendo del número de colores que se consigan. Luego agregar los colorantes. Cuando tengamos masas similares a la plastilina se pueden hacer diferentes figuras. La idea es que niños/as y acudientes participen en el proceso de amasado de las plastilinas, interactúen con las diferentes texturas y resultados de la experiencia.",
                 "", 4, 1, 1, "SAdmin", "${currentdate}"
             ),
 
 
             ActividadesEntity(
                 5, "Diccionario de emociones",
-                " En familia  se colorean o se buscan imagenes  (se imprimen o se recortan de revistas) de personas que expresen tristeza. Una ves identifcadas las imagenes, se dialoga sobre cuando se siente la emocion de tristeza, en que situaciones y como se expresa la emocion de trsiteza. Los padres incluyen situaciones donde se da el analisis y se compara con otra emoción. ",
+                "En familia  se colorean o se buscan imagenes  (se imprimen o se recortan de revistas) de personas que expresen tristeza. Una ves identifcadas las imágenes, se dialoga sobre cuando se siente la emoción de tristeza, en que situaciones y como se expresa la emoción de trsiteza. Los padres incluyen situaciones donde se da el análisis y se compara con otra emoción. ",
                 "", 1, 2, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 6, "Compartir en familia",
-                "Al estar el niño triste, como padres compartir una ocasiones cuando se sintio triste. Qué paso? cuando paso? que hizo? se quedo triste siempre",
+                "Al estar el niño triste, como padres compartir una ocasiones cuando se sintio triste. Qué pasó? cuando pasó? que hizo? se quedo triste siempre",
                 "", 1, 2, 1, "SAdmin", "${currentdate}"
             ),
 
             ActividadesEntity(
                 7, "Caja de miedos",
-                " Con ayuda de los padres construir una caja donde se depositen dibujos alusivos a los miedos de los niños. En familia, los integrantes dibujan sus miedos y explican el contenido de ello. Al final todos depositan los dibujos en la caja, es importante decorar la caja y buscar accesorio de seguridad; para que  se simbolice el echo que los miedos estan asegurados en esa caja. Si el niño vuelve a tener la sensacion de miedo. Se consulta a la caja identificando que los miedos se escaparon y hay que buscar una forma de proteger y asegurar mas la caja. Padres e hijos buscan un seguro más eficaz.",
+                "Con ayuda de los padres, construir una caja donde se depositen dibujos alusivos a los miedos de los niños. \n" +
+                        "En familia, los integrantes dibujan sus miedos y explican el contenido de ello. Al final todos depositan los dibujos en la caja, es importante decorar la caja y buscar accesorio de seguridad; para que  se simbolice el echo que los miedos estan asegurados en esa caja. Si el niño vuelve a tener la sensacion de miedo. Se consulta a la caja identificando que los miedos se escaparon y hay que buscar una forma de proteger y asegurar mas la caja. Padres e hijos buscan un seguro más eficaz.",
                 "", 2, 2, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 8, "Vamos a casar un oso",
-                " Leer el cuento \"Vamos a cazar un oso\" (Michael Rosen y Helen oxenbury) ",
+                "Leer el cuento \"Vamos a cazar un oso\" (Michael Rosen y Helen oxenbury) ",
                 "", 2, 2, 1, "SAdmin", "${currentdate}"
             ),
 
             ActividadesEntity(
                 9, "Técnica de la Tortuga",
-                " Leer el cuento de la tortuga tucker y llevar estos pasos con el infante:\n" +
+                "Leer el cuento de la tortuga tucker y llevar estos pasos con el infante:\n" +
                         "– Primera Etapa: Reconocer sus emociones. \n" +
                         "– Segunda Etapa: Pensar y “Parar”\n" +
                         "– Tercera Etapa: Meterse adentro de su caparazón y tomar tres profundas respiraciones para calmarse\n" +
@@ -458,7 +464,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             ActividadesEntity(
                 10,
                 "Veamos un video",
-                " en familia ver el video y preguntar como se siente Teo, luego de las respuestas del video; pensar ¿cuándo me siento alegre?  cada integrante debe pensar una situación y contarla y asi compartir la experiencia. ",
+                "En familia ver el video y preguntar como se siente Teo, luego de las respuestas del video; pensar ¿cuándo me siento alegre? \n" +
+                        "Cada integrante debe pensar una situación y contarla y asi compartir la experiencia. ",
                 "https://www.youtube.com/watch?v=3wcc_oIxX10",
                 4,
                 2,
@@ -470,27 +477,33 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
             ActividadesEntity(
                 11, "Cuentos para usar",
-                " Lagrimas bajo la cama (Ana Meilán), Ladron de Sonrisas (Susana Isern)",
+                "Leer alguno de los siguientes cuentos: lagrimas bajo la cama (Ana Meilán)\n" +
+                        "Ladrón de Sonrisas (Susana Isern)",
                 "", 1, 3, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 12, "El bote de lagrimas",
-                "en bote construido con una hoja de papel colocarlo en una valdesito con agua, asi mismo depositar  gotas de lagrimas de papel o cartulina las situaciones que nos generan tristeza, cuando este lleno el bote, debemos vaciar el bote para que las lagrimas no lo hundan, ayudados con el dialogo idear la forma de hablar de despedir la tristeza arrojando cada gota de lagrima de papel al agua. ",
+                "Construir un bote con una hoja de papel, colocarlo en una valdesito con agua, asi mismo depositar gotas de lagrimas de papel o cartulina las situaciones que nos generan tristeza, cuando este lleno el bote, debemos vaciar el bote para que las lagrimas no lo hundan, ayudados con el dialogo idear la forma de hablar de despedir la tristeza arrojando cada gota de lagrima de papel al agua. ",
                 "", 1, 3, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 13, "La pócima mágica de los miedos",
-                " En familia tomar un recipiente o frasco  con tapa, el niño debera inventar una mezcla de ingredientes o materiales  y depositarlo en el tarro o recipiente, el  cual  al terminar y cerrar,  debera colocarla en un sitio especifico de su cuarto o de la casa. El  niño desde la fantasia identifica que la pocima mágica no permitira que se acerquen los miedos. . ",
+                "En familia tomar un recipiente o frasco con tapa, el niño debera inventar una mezcla de ingredientes o materiales  y depositarlo en el tarro o recipiente, el  cual  al terminar y cerrar,  debera colocarla en un sitio especifico de su cuarto o de la casa. \n" +
+                        "El  niño desde la fantasia identifica que la pocima mágica no permitira que se acerquen los miedos. . ",
                 "", 2, 3, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 14, "El semáforo",
-                "  Rojo: Para, respira,  piensa antes de actuar. Amarillo:  Alerta, respira y  piensa en las  posibles consecuencias. Verde: Adelante con el buen comportamiento.",
+                "Realizar un semáforo y asignar a los colores lo siguinte:\n" +
+                        "Rojo: Para, respira,  piensa antes de actuar. \n" +
+                        "Amarillo:  Alerta, respira y  piensa en las  posibles consecuencias. \n" +
+                        "Verde: Adelante con el buen comportamiento.",
                 "", 3, 3, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 15, "Burbujas para la Ira",
-                " El adulto estara atento cuando el niño este pasando por un momento de ira y este no logra calmarse, se le dara un burbujero el cual para funcionar necesita que el niño haga uso del aire de sus pulmones y asi logra respirar mas profundo y calmarse, luego promover el dialogo para analizar la situación.",
+                "El adulto estara atento cuando el niño este pasando por un momento de ira y este no logra calmarse, se le dara un burbujero el cual para funcionar necesita que el niño haga uso del aire de sus pulmones y asi logra respirar mas profundo y calmarse.\n" +
+                        "Luego promover el dialogo para analizar la situación.",
                 "", 3, 3, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
@@ -507,7 +520,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             ActividadesEntity(
                 17,
                 "Ruleta de la felicidad",
-                "Con ayuda de los padres construir una ruleta con cartulina,  los integrantes de la familia identifican acciones o actividades que generen o expresen alegria (abrazar, dar un elogio, hacer ejercicio etc). estas seran las opciones de la ruleta. al finalizar jugar con la ruleta y el integrante de la familia debera realizar la acción o actividad que propueve la alegria. ",
+                "Con ayuda de los padres construir una ruleta con cartulina,  los integrantes de la familia identifican acciones o actividades que generen o expresen alegria (abrazar, dar un elogio, hacer ejercicio etc). Estas serán las opciones de la ruleta.\n" +
+                        "Al finalizar jugar con la ruleta y el integrante de la familia debera realizar la acción o actividad que propueve la alegria.",
                 "",
                 4,
                 3,
@@ -523,57 +537,69 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 "", 1, 4, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
-                19, "AUTOVALORACIÓN Yo me reconozco por",
+                19, "AUTOVALORACIÓN. Yo me reconozco por",
                 "Llevar un diario de reconocimientos y al final del día escribir 5 cosas por las que te reconocer haber realizado",
                 "", 1, 4, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 20, "Cosificación",
-                "se trata de un ejercicio visual , donde se esculpen con materiales a libre elección el miedo de la persona, la idea es convertirlo en un objeto visible y manpulable; dotar de propiedades fisicas al miedo.",
+                "Se trata de un ejercicio visual, donde se esculpen con materiales a libre elección el miedo de la persona, la idea es convertirlo en un objeto visible y manpulable; dotar de propiedades fisicas al miedo.",
                 "", 2, 4, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 21, "Cambiar significados: Diccionario de palabras molestas",
-                " En este ejercicio el joven debe identificar las palabras \"groseras\" y frases molestas que usa o que suelen usar las personas a su alrededor cuando se enojan . Colocarán a su lado su significado y con ayuda de los padres buscarán alternativas de palabras y frases asertivas para comunicar la molestia.",
+                "En este ejercicio el joven debe identificar las palabras \"groseras\" y frases molestas que usa o que suelen usar las personas a su alrededor cuando se enojan . Colocarán a su lado su significado y con ayuda de los padres buscarán alternativas de palabras y frases asertivas para comunicar la molestia.",
                 "", 3, 4, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 22, "Proyección: Mapa de sueños",
-                " En un corcho o tablero , se seleccionan imágenes alusivas a los sueños , metas y propósitos de vida a cumplir , se debe pegar en un lugar visible del cuarto",
+                "En un corcho o tablero, se seleccionan imágenes alusivas a los sueños, metas y propósitos de vida a cumplir, se debe pegar en un lugar visible del cuarto",
                 "", 4, 4, 1, "SAdmin", "${currentdate}"
             ),
 
 
             ActividadesEntity(
                 23, "Cuadros vivos collage",
-                "  crear un cuadro con material y plantas muertas. Es un ejercicio que implica salir en busqueda de material a un lugar abierto o jardín; se puede realizar de manera grupal o individual, se trata de dar una segunda oportunidad a aquello que se cree inútil",
+                "Crear un cuadro con material y plantas muertas.\n " +
+                        "Es un ejercicio que implica salir en búsqueda de material a un lugar abierto o jardín; se puede realizar de manera grupal o individual.\n" +
+                        "Se trata de dar una segunda oportunidad a aquello que se cree inútil",
                 "", 1, 5, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 24, "Meditación inversa",
-                " es un ejercico de autorreflexión en donde e un espacio silencioso  y privado cerrarás los ojos intentando focalizarte en ltu propio cuerpo. identificaras todas las imágenes y pensamientos que se te vengan a la mente, los revisaras y aceptaras y luego uno a uno irás dejando la mente en blanco",
+                "Este es un ejercicio de autorreflexión en donde en un espacio silencioso  y privado cerrarás los ojos intentando focalizarte en tu propio cuerpo.\n " +
+                        "Identificaras todas las imágenes y pensamientos que se te vengan a la mente, los revisaras y aceptaras y luego uno a uno irás dejando la mente en blanco",
                 "", 2, 5, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 25, "Cómo nos ven",
-                "( ejercicio grupal- familiar) Cada persona tendra una silueta con su nombre , la idea es rotar entre el grupo las siluetas y que cada integrante escriba como ve a la otra persona ; al final se hace la retroalimentación siempre diciendo \"yo te veo....\" Evita usar las frases : tu eres, tu siempre , tu nunca. ",
+                "Este es un ejercicio grupal - familiar.\n" +
+                        "Cada persona tendra una silueta con su nombre, la idea es rotar entre el grupo las siluetas y que cada integrante escriba como ve a la otra persona; al final se hace la retroalimentación siempre diciendo \"yo te veo....\" \n" +
+                        "Evita usar las frases: tu eres, tu siempre , tu nunca. ",
                 "", 3, 5, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 26, "Limpieza de espacios",
-                "para mantener las relaciones afectivas sanas estás deben limpiarse tal cual se limpia la casa, en este ejercicio tendrás dos recipientes uno llamado \"lo que no me funciona \" y otro \"lo que sí me funciona \". En caso que tu rabia sea con una persona , deberán reunirse en un espacio privado y leerán en voz alta las cosas que no le funcionan en primer lugar, con el fin de facilitar el dialogo sobre los puntos contrarios , al final se leen las cosas que si les funcionan. Evita usar las frases : tu eres, tu siempre , tu nunca ",
+                "Para mantener las relaciones afectivas sanas estás deben limpiarse tal cual se limpia la casa.\n" +
+                        "En este ejercicio tendrás dos recipientes uno llamado \"Lo que no me funciona \" y otro \"Lo que sí me funciona \". \n" +
+                        "En caso que tu rabia sea con una persona, deberán reunirse en un espacio privado y leerán en voz alta las cosas que no le funcionan en primer lugar, con el fin de facilitar el dialogo sobre los puntos contrarios , al final se leen las cosas que si les funcionan.\n " +
+                        "Evita usar las frases : tu eres, tu siempre , tu nunca ",
                 "", 3, 5, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 27, "Ruta de metas",
-                "se elabora con camino donde hay un punto de inicio y un punto final de la meta a cumplir por ejemplo: \"graduarme de la médico\" . En el punto de inicio se responde a la pregunta ¿ dónde estoy ahora? se debe colocar el momento de vida en el que esta actualmente ( acción puntual desempeñada por ejemplo \"no incrito en la universidad)\", en la ruta intermedia se colocan las acciones coherentes a desempeñar para poder alcanzar la meta deseada. Es importante contar con la ayuda de los padres para identificar los recursos a necesitar en cada acción.",
+                "Se elabora un camino donde hay un punto de inicio y un punto final de la meta a cumplir, por ejemplo: \"Graduarme como médico\" . \n" +
+                        "En el punto de inicio se responde a la pregunta ¿dónde estoy ahora? se debe colocar el momento de vida en el que esta actualmente (acción puntual desempeñada por ejemplo \"no incrito en la universidad)\". \n" +
+                        "En la ruta intermedia se colocan las acciones coherentes a desempeñar para poder alcanzar la meta deseada. \n" +
+                        "Es importante contar con la ayuda de los padres para identificar los recursos a necesitar en cada acción.",
                 "", 4, 5, 1, "SAdmin", "${currentdate}"
             ),
 
 
             ActividadesEntity(
                 28, "Escribir un cuento",
-                " A traves de la expresión verbal se puede metaforizar la experiencia que ha producido la emoción o bien darle a la experiencia alguna forma de resolución distinta a la ocurrida. El sujeto puede simplemente narrar los hechos que le acontecieron y cómo los vivencia o bien, crear historias fantásticas, acorde con su estilo narrativo",
+                "A traves de la expresión verbal se puede metaforizar la experiencia que ha producido la emoción o bien darle a la experiencia alguna forma de resolución distinta a la ocurrida. \n" +
+                        "El sujeto puede simplemente narrar los hechos que le acontecieron y cómo los vivencia o bien, crear historias fantásticas, acorde con su estilo narrativo",
                 "", 1, 6, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
@@ -589,22 +615,29 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             ),
             ActividadesEntity(
                 30, "La ruta",
-                " esquematizar en un diagrama el origen del miedo, las posibles consecuencias del objeto u evento temido (positivas y negativas). Evaluar las áreas y la magnitud en las que percibe la amenaza.  Si quiere, dele a cada aspecto del esquema un color que le ayude a representar cómo se siente a ese respecto. Plantee las posibles herramientas que necesitará para enfrentar la amenaza. ¿no las tiene? ¡es posible que alguien cerca de usted si las tenga? ¿correría el riesgo de pedir ayuda? si no es así ¿es mas valioso para usted onservar una imagen frente a otros o enfrentar ese miedo?",
+                "Esquematizar en un diagrama el origen del miedo, las posibles consecuencias del objeto u evento temido (positivas y negativas). \n" +
+                        "Evaluar las áreas y la magnitud en las que percibe la amenaza.  Si quiere, dele a cada aspecto del esquema un color que le ayude a representar cómo se siente a ese respecto.\n " +
+                        "Plantee las posibles herramientas que necesitará para enfrentar la amenaza. ¿no las tiene? ¿es posible que alguien cerca de usted si las tenga? ¿correría el riesgo de pedir ayuda? si no es así ¿es mas valioso para usted onservar una imagen frente a otros o enfrentar ese miedo?",
                 "", 2, 6, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 31, "Mirarse al espejo",
-                " Tome un espejo en el que pueda ver de cerca sus expresiones faciales e incluso corporales. Tómese el tiempo para ver cada parte de su rostro, lineas, colores, formas.  Dese el espacio para ver desde afuera lo que está ocurriendo con su cuerpo en ese momento. la expresión de la ira es un evento que puede llegar a tornarse complejo por la experiencia fisica que se vive; verlo desde afuera puede darle elementos para el autocontrol así como la posibilidad de tener un factor distractor, que no lo va a desconectar de la emoción pero si le va a permitir conocerse mas de cerca",
+                "Tome un espejo en el que pueda ver de cerca sus expresiones faciales e incluso corporales.\n " +
+                        "Tómese el tiempo para ver cada parte de su rostro, lineas, colores, formas.  Dese el espacio para ver desde afuera lo que está ocurriendo con su cuerpo en ese momento.\n " +
+                        "La expresión de la ira es un evento que puede llegar a tornarse complejo por la experiencia fisica que se vive; verlo desde afuera puede darle elementos para el autocontrol así como la posibilidad de tener un factor distractor, que no lo va a desconectar de la emoción pero si le va a permitir conocerse mas de cerca",
                 "", 3, 6, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 32, "Organizar",
-                "Puede ser una habitación desordenada, una caja de objetos varios o un juego de organización como un rompecabezas. Dar orden a los objetos materiales puede contribuir a reorganizar las ideas y dar lugar tanto a la emoción como a los eventos desencadenantes de la misma",
+                "Puede ser una habitación desordenada, una caja de objetos varios o un juego de organización como un rompecabezas.\n " +
+                        "Dar orden a los objetos materiales puede contribuir a reorganizar las ideas y dar lugar tanto a la emoción como a los eventos desencadenantes de la misma",
                 "", 3, 6, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 33, "Bailar",
-                "Bailar musica acorde a la emoción del o los participantes, bailar, puede ser de manera libre o siguiendo una coreografía.  Utilizar el cuerpo como medio de expresión artistica que permita la manifestación de la emocion y que termina por generar mayor sensación de bienestar.  el baile puede ser tambien utilizado como canal de las relaciones sociales y ayuda a fortalecer este tipo de vínculos",
+                "Bailar musica acorde a la emoción del o los participantes, bailar, puede ser de manera libre o siguiendo una coreografía.\n  " +
+                        "Utilizar el cuerpo como medio de expresión artistica que permita la manifestación de la emoción y que termina por generar mayor sensación de bienestar.\n " +
+                        "El baile puede ser tambien utilizado como canal de las relaciones sociales y ayuda a fortalecer este tipo de vínculos.",
                 "", 4, 6, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
@@ -616,7 +649,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
             ActividadesEntity(
                 35, "Caminata con un propósito",
-                "Preferiblemente en un espacio que permita reconectar con la naturaleza. Los sentimientos de tristeza pueden aparecer por una situación particular o sin ninguna razon aparente. En ambos casos es necesario darle el espacio y la atención a cada pensamiento o sensación fisica o emocional que tenga lugar. Por ello, una caminata que tenga un fin básico, como hallar 5 tipos de flores, o 10 tipos de aves, permite a la vez que enfocarse en la tarea, darle al individuo el tiempo para estar solo con sus pensamientos y volcar la emoción sobre una actividad placentera que conecte la situación con el aquí y el ahora",
+                "Preferiblemente en un espacio que permita reconectar con la naturaleza. \n" +
+                        "Los sentimientos de tristeza pueden aparecer por una situación particular o sin ninguna razón aparente. En ambos casos es necesario darle el espacio y la atención a cada pensamiento o sensación fisica o emocional que tenga lugar.\n " +
+                        "Por ello, una caminata que tenga un fin básico, como hallar 5 tipos de flores, o 10 tipos de aves, permite a la vez que enfocarse en la tarea, darle al individuo el tiempo para estar solo con sus pensamientos y volcar la emoción sobre una actividad placentera que conecte la situación con el aquí y el ahora",
                 "", 1, 7, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
@@ -626,13 +661,18 @@ class homeFragment : Fragment(R.layout.fragment_home) {
             ),
             ActividadesEntity(
                 37, "Respiración con la mano",
-                "La actividad consiste en delinear la forma de la mano con los dedos abiertos. Cada  ascenso desde el abajo hasta la punta del dedo es un inspiración, desde la punta del dedo hacia la primer falange es una exhalación. Repetir cuantas veces sea necesario hasta disminuir el conteo de lpm",
+                "La actividad consiste en delinear la forma de la mano con los dedos abiertos. \n" +
+                        "Cada  ascenso desde el abajo hasta la punta del dedo es un inspiración.\n" +
+                        "Desde la punta del dedo hacia la primer falange es una exhalación. \n" +
+                        "Repetir cuantas veces sea necesario hasta disminuir el conteo de lpm",
                 "", 3, 7, 1, "SAdmin", "${currentdate}"
             ),
             ActividadesEntity(
                 38, "Bolitas de colores",
-                "amazando pedaciotos de papeles de colores, crear cientos de bolitas de colores. Luego pegarlas en una cartulina. Se pueden crear paisajes, figuras o imágenes abstractas llenas de colores.  Los paricipantes reparten su producto final con un compañero, que debe tratar de identificar las emociones que el otro plasmó en su imagen\n" +
-                        "ejercicio para fortalecer los vínculos con la familia o los pares,  que utiliza la empatía como forma de conexión social",
+                "Amazando pedaciotos de papeles de colores, crear cientos de bolitas de colores. Luego pegarlas en una cartulina. \n" +
+                        "Se pueden crear paisajes, figuras o imágenes abstractas llenas de colores. \n " +
+                        "Los participantes reparten su producto final con un compañero, que debe tratar de identificar las emociones que el otro plasmó en su imagen\n" +
+                        "Este ejercicio sirve para fortalecer los vínculos con la familia o los pares, que utiliza la empatía como forma de conexión social",
                 "", 4, 7, 1, "SAdmin", "${currentdate}"
             ),
         )

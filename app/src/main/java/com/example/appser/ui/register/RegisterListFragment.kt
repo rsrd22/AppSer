@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.CuestionarioEntity
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.data.resource.PersonaDataSource
@@ -80,8 +81,7 @@ class RegisterListFragment : Fragment(R.layout.fragment_register_list), Register
         })
     }
 
-    override fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario) {
-        Log.d("ItemRegistrado", "Activit - ${personasAndUsuario}")
-        Toast.makeText(requireContext(), "Usuario: ${personasAndUsuario.usuario?.email}", Toast.LENGTH_LONG).show()
+    override fun onRegisterListClick(cuestionarioEntity: CuestionarioEntity) {
+        TODO("Not yet implemented")
     }
 }

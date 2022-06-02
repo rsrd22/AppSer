@@ -73,7 +73,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         Toast.makeText(requireContext(), "Cargando..", Toast.LENGTH_LONG).show()
                     }
                     is Resource.Success ->{
-                        Toast.makeText(requireContext(), "Save exitoso..", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Registro exitoso..", Toast.LENGTH_LONG).show()
                         findNavController().navigate(R.id.homeFragment)
                     }
                     is Resource.Failure -> {

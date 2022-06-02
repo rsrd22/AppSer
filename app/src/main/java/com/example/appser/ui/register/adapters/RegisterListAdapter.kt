@@ -6,51 +6,55 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appser.core.BaseViewHolder
+import com.example.appser.data.model.CuestionarioEntity
+import com.example.appser.data.model.HistoricoCuestionario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.PersonaList
 import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.data.model.relations.PersonaWithCuestionario
+import com.example.appser.databinding.ItemHistoricoEmocionBinding
 import com.example.appser.databinding.ItemRegisterBinding
 
-class RegisterListAdapter(private val personasAndUsuario: List<PersonaAndUsuario>,
+class RegisterListAdapter(private val historicoCuestionarios: List<HistoricoCuestionario>,
                           private val itemClickListener: OnRegisterListClickListener
                           ): RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnRegisterListClickListener{
-        fun onRegisterListClick(personasAndUsuario: PersonaAndUsuario)
+        fun onRegisterListClick(historicoCuestionario: HistoricoCuestionario)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        val itemBinding = ItemRegisterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =  ItemHistoricoEmocionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = RegisterListViewHolder(itemBinding, parent.context)
 
         itemBinding.root.setOnClickListener {
             val position = holder.bindingAdapterPosition.takeIf { it != DiffUtil.DiffResult.NO_POSITION}
                 ?: return@setOnClickListener
-            itemClickListener.onRegisterListClick(personasAndUsuario[position])
+            itemClickListener.onRegisterListClick(historicoCuestionarios[position])
         }
         return holder
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when(holder){
-            is RegisterListViewHolder -> holder.bind(personasAndUsuario[position].persona)
+            is RegisterListViewHolder -> holder.bind(historicoCuestionarios[position])
         }
     }
 
-    override fun getItemCount(): Int = personasAndUsuario.size
+    override fun getItemCount(): Int = historicoCuestionarios.size
 
     private inner class RegisterListViewHolder(
-        val binding: ItemRegisterBinding,
+        val binding: ItemHistoricoEmocionBinding,
         val context: Context
-    ):BaseViewHolder<PersonaEntity>(binding.root){
-        override fun bind(item: PersonaEntity) {
-            binding.regDateText.text = item.nombre_completo
-            binding.regEmotionText.text = "${item.edad}"
-            binding.regActivityText.text = item.genero
+    ):BaseViewHolder<HistoricoCuestionario>(binding.root){
+        override fun bind(item: HistoricoCuestionario) {
+            binding.txtFecha.text = item.fecha
+            binding.txtEmocion.text = "${item.emocion}"
+            binding.txtActividad.text = "${item.actividad}"
 
         }
 
-        override fun bind(item: PersonaEntity, position: Int) {
+        override fun bind(item: HistoricoCuestionario, position: Int) {
             TODO("Not yet implemented")
         }
     }

@@ -27,5 +27,10 @@ data class CuestionarioEntity (
 }
 
 
+data class HistoricoCuestionario(
+    @ColumnInfo(name = "fecha") val fecha: String?,
+    @ColumnInfo(name = "titulo") val actividad: String?,
+    @ColumnInfo(name = "nombre") val emocion: String?
+)
 
 data class CuestionarioList (val results: List<CuestionarioEntity> = listOf() )

@@ -33,5 +33,8 @@ class Prefs(val context: Context) {
         return storage.getString(SHARED_EMAIL_USER, "")!!
     }
 
+    fun wipe(){
+        storage.edit().clear().apply()
+    }
 
 }

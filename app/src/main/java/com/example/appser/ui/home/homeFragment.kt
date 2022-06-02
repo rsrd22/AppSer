@@ -57,7 +57,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-
+    val viewModel by viewModels<UsuarioViewModel> {
+        UsuarioViewModelFactory(
+            UsuarioRepositoryImpl(
+                UsuarioDataSource(
+                    appDatabase.usuarioDao()
+                )
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,8 +114,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     }
 
     fun checkUserValues(){
-        if(prefs.getName().isNotEmpty() && prefs.getName().isNotEmpty()){
-            viewModel.fetchUsuarioByEmail(email.toString())
+        if(prefs.getName().isNotEmpty() && prefs.getEmail().isNotEmpty()){
+            viewModel.fetchUsuarioByEmail(prefs.getEmail().toString())
                 .observe(viewLifecycleOwner, Observer { result ->
                     when (result) {
                         is Resource.Loading -> {
@@ -115,6 +123,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                                 .show()
                         }
                         is Resource.Success -> {
+                            mainViewModel.setPersonaAndUsuario(result.data)
                             findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
                         }
                         is Resource.Failure -> {
@@ -128,7 +137,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         }
                     }
                 })
-
         }
     }
 
@@ -149,6 +157,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                                 prefs.saveName(result.data.persona.nombre_completo.toString())
                                 prefs.saveEmail(result.data.usuario.email.toString())
                                 prefs.saveIdUser(result.data.persona.id)
+                                binding.txtUsuario.text.clear()
                                 findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
                             } else {
                                 Toast.makeText(

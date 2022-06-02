@@ -12,6 +12,7 @@ import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.PersonaList
 import com.example.appser.data.model.relations.PersonaAndUsuario
 import com.example.appser.data.model.relations.PersonaWithCuestionario
+import com.example.appser.databinding.ItemHistoricoEmocionBinding
 import com.example.appser.databinding.ItemRegisterBinding
 
 class RegisterListAdapter(private val historicoCuestionarios: List<HistoricoCuestionario>,
@@ -23,7 +24,7 @@ class RegisterListAdapter(private val historicoCuestionarios: List<HistoricoCues
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        val itemBinding = ItemRegisterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =  ItemHistoricoEmocionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = RegisterListViewHolder(itemBinding, parent.context)
 
         itemBinding.root.setOnClickListener {
@@ -43,13 +44,13 @@ class RegisterListAdapter(private val historicoCuestionarios: List<HistoricoCues
     override fun getItemCount(): Int = historicoCuestionarios.size
 
     private inner class RegisterListViewHolder(
-        val binding: ItemRegisterBinding,
+        val binding: ItemHistoricoEmocionBinding,
         val context: Context
     ):BaseViewHolder<HistoricoCuestionario>(binding.root){
         override fun bind(item: HistoricoCuestionario) {
-            binding.regDateText.text = item.fecha
-            binding.regEmotionText.text = "${item.emocion}"
-            binding.regActivityText.text = "${item.actividad}"
+            binding.txtFecha.text = item.fecha
+            binding.txtEmocion.text = "${item.emocion}"
+            binding.txtActividad.text = "${item.actividad}"
 
         }
 

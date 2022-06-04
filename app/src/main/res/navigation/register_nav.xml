@@ -13,9 +13,6 @@
             android:id="@+id/action_homeFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
         <action
-            android:id="@+id/action_homeFragment_to_registerListFragment2"
-            app:destination="@id/registerListFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
     </fragment>
@@ -37,6 +34,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_questionsFragment"
             app:destination="@id/questionsFragment2" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_registerListFragment"
+            app:destination="@id/registerListFragment" />
     </fragment>
    <fragment
         android:id="@+id/questionsFragment2"

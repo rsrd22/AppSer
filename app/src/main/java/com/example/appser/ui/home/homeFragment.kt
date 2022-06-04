@@ -24,6 +24,7 @@ import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.*
+import com.example.appser.data.preference.SerApplication.Companion.prefs
 import com.example.appser.data.resource.*
 import com.example.appser.databinding.FragmentHomeBinding
 import com.example.appser.databinding.FragmentRegisterBinding
@@ -56,6 +57,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
+    val viewModel by viewModels<UsuarioViewModel> {
+        UsuarioViewModelFactory(
+            UsuarioRepositoryImpl(
+                UsuarioDataSource(
+                    appDatabase.usuarioDao()
+                )
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,11 +94,13 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         cargarPreguntas()
         cargarRoles()
 
+
         binding = FragmentHomeBinding.bind(view)
 
         val btnLogin = binding.btnLogin
         val btnRegistrarse = binding.txtRegistrarse
 //        val btnLista = binding.txtLista
+        checkUserValues()
 
         btnLogin.setOnClickListener {
             login()
@@ -101,16 +113,35 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 //        }
     }
 
-    fun login() {
-        val viewModel by viewModels<UsuarioViewModel> {
-            UsuarioViewModelFactory(
-                UsuarioRepositoryImpl(
-                    UsuarioDataSource(
-                        appDatabase.usuarioDao()
-                    )
-                )
-            )
+    fun checkUserValues(){
+        if(prefs.getName().isNotEmpty() && prefs.getEmail().isNotEmpty()){
+            viewModel.fetchUsuarioByEmail(prefs.getEmail().toString())
+                .observe(viewLifecycleOwner, Observer { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            Toast.makeText(requireContext(), "Consultando..", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is Resource.Success -> {
+                            mainViewModel.setPersonaAndUsuario(result.data)
+                            findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
+                        }
+                        is Resource.Failure -> {
+                            Log.d("Error LiveData", "${result.exception}")
+                            Toast.makeText(
+                                requireContext(),
+                                "Error: ${result.exception}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+                })
         }
+    }
+
+    fun login() {
+
         val email = binding.txtUsuario.text
         if (email.isNotEmpty()) {
             viewModel.fetchUsuarioByEmail(email.toString())
@@ -123,6 +154,10 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                         is Resource.Success -> {
                             if (result.data != null) {
                                 mainViewModel.setPersonaAndUsuario(result.data)
+                                prefs.saveName(result.data.persona.nombre_completo.toString())
+                                prefs.saveEmail(result.data.usuario.email.toString())
+                                prefs.saveIdUser(result.data.persona.id)
+                                binding.txtUsuario.text.clear()
                                 findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
                             } else {
                                 Toast.makeText(
@@ -131,6 +166,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
+                        }
+                        is Resource.Failure -> {
+                            Log.d("Error LiveData", "${result.exception}")
+                            Toast.makeText(
+                                requireContext(),
+                                "Error: ${result.exception}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
                         }
                     }
 

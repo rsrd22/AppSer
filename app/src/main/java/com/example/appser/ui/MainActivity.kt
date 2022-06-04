@@ -1,11 +1,14 @@
 package com.example.appser.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
@@ -19,6 +22,7 @@ import com.example.appser.R
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.RolEntity
 import com.example.appser.data.preference.SerApplication
+import com.example.appser.data.preference.SerApplication.Companion.prefs
 import com.example.appser.data.resource.RolDataSource
 import com.example.appser.data.resource.UsuarioDataSource
 import com.example.appser.databinding.ActivityMenuTestBinding
@@ -28,6 +32,7 @@ import com.example.appser.presentation.UsuarioViewModel
 import com.example.appser.presentation.UsuarioViewModelFactory
 import com.example.appser.repository.RolRepositoryImpl
 import com.example.appser.repository.UsuarioRepositoryImpl
+import com.example.appser.ui.home.homeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_menu_test.*
@@ -87,5 +92,24 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_menu_test)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if(item.itemId == R.id.logout) {
+            Logout()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun Logout(){
+        prefs.wipe()
+        irHome()
+    }
+
+    fun irHome(){
+        val home: Intent = Intent(this, MainActivity::class.java)
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(home)
     }
 }

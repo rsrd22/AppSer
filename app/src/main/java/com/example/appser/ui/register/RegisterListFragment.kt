@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.example.appser.R
 import com.example.appser.core.Resource
 import com.example.appser.data.local.AppDatabase
+import com.example.appser.data.model.CuestionarioEntity
 import com.example.appser.data.model.HistoricoCuestionario
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.relations.PersonaAndUsuario

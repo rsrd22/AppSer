@@ -23,6 +23,4 @@
 
     <include layout="@layout/content_menu_test"/>
 
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

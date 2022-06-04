@@ -3,6 +3,9 @@ package com.example.appser.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
@@ -15,6 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.appser.R
 import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.RolEntity
+import com.example.appser.data.preference.SerApplication
 import com.example.appser.data.resource.RolDataSource
 import com.example.appser.data.resource.UsuarioDataSource
 import com.example.appser.databinding.ActivityMenuTestBinding
@@ -26,6 +30,8 @@ import com.example.appser.repository.RolRepositoryImpl
 import com.example.appser.repository.UsuarioRepositoryImpl
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_menu_test.*
+import kotlinx.android.synthetic.main.content_menu_test.*
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +63,19 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        LoadData()
+    }
+
+    fun LoadData(){
+        val vistaHeader: View = binding.navView.getHeaderView(0)
+        val tvNombreCompleto: TextView = vistaHeader.findViewById(R.id.txtNombreCompleto)
+        val tvCorreo: TextView = vistaHeader.findViewById(R.id.txtCorreo)
+        tvNombreCompleto.text = SerApplication.prefs.getName()
+        tvCorreo.text = SerApplication.prefs.getEmail()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

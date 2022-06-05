@@ -46,6 +46,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
     private var indicadorEmocion: Int = -1
     private val sdf = SimpleDateFormat("dd/MM/yyyy")
     private val currentdate = sdf.format(Date())
+    private var idsEmocion = mutableListOf<Int>()
 
     private lateinit var personaAndUsuario: PersonaAndUsuario
 
@@ -62,7 +63,7 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         super.onCreate(savedInstanceState)
 
         appDatabase = AppDatabase.getDatabase(requireContext())
-
+        initIdsEmocion()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,8 +102,10 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         }
     }
 
-    fun setEmociones(){
-
+    fun initIdsEmocion(){
+        for(x in 0..3){
+            idsEmocion.add(x)
+        }
     }
 
     fun setCategorias(){
@@ -131,9 +134,13 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
 
 
     fun emocionRandon(): Int{
-        val position = (0..3).random()
+        val position = idsEmocion.random()
+        idsEmocion.remove(position)
         return position
     }
+
+
+
 
     fun setPregunta(){
         binding.txtPreguntas.text = "${listaPreguntas[indicadorPregunta].descripcion}"
@@ -158,8 +165,17 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
             )
 
             if (binding.rbNo.isChecked) {
-                indicadorEmocion = emocionRandon()
-                setListadoPreguntas()
+                if(idsEmocion.size>0) {
+                    indicadorEmocion = emocionRandon()
+                    setListadoPreguntas()
+                }else{
+                    indicadorCategoria++
+                    initIdsEmocion()
+                    indicadorEmocion = emocionRandon()
+                    if(indicadorCategoria < categorias.size) {
+                        setListadoPreguntas()
+                    }
+                }
             } else {
                 indicadorPregunta++
                 if(indicadorPregunta>= listaPreguntas.size){
@@ -186,10 +202,11 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                 //FINALIZA LA IDENTIFIACION
                 //Empieza la Busqueda de la Emocion
                 val emocionEncontradaId: Long = getEmocionxRespuestas()
-
+                if(emocionEncontradaId.equals(-1)){
+                    Toast.makeText(requireContext(), "No ha sido posible identificar la emoción.", Toast.LENGTH_SHORT).show()
+                }
                 //Llamado Metodo Guardar
                 GuardarCuestionario(emocionEncontradaId)
-
             }
         }else{
             Toast.makeText(requireContext(), "Por favor seleccione una respuesta.", Toast.LENGTH_SHORT).show()
@@ -240,12 +257,22 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
         var idEmocion : Long = -1
         var sizeEmocion : Int = -1
         var maxEmocion : Int = -1
+        var empate: Boolean = false
+        var maxsEmocion = mutableListOf<Pair<Long, Int>>()
 
         for(emocion in emociones.result){
             sizeEmocion = listaRespuestas.filter { it.emocionId == emocion.id }.size
-            if(sizeEmocion > maxEmocion ){
-                maxEmocion = sizeEmocion
-                idEmocion = emocion.id
+            maxsEmocion.add(Pair(emocion.id, sizeEmocion))
+        }
+
+        for(dat in maxsEmocion){
+            if(dat.second>maxEmocion){
+                maxEmocion = dat.second
+                idEmocion = dat.first
+                empate = false
+            }else if(dat.second == maxEmocion){
+                idEmocion = -1
+                empate = true
             }
         }
 

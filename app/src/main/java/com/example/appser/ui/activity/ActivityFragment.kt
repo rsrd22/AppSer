@@ -50,9 +50,11 @@ class ActivityFragment : Fragment(R.layout.fragment_activity) {
         binding.txtNombreActividad.text = actividadAsignada.titulo
         binding.txtDescripcionActividad.text = actividadAsignada.descripcion
         if(actividadAsignada.enlace == ""){
-
+            binding.txtLinkActivity.text = ""
+            binding.txtLinkActivity.visibility = View.GONE
         }else{
-
+            binding.txtLinkActivity.text = actividadAsignada.enlace
+            binding.txtLinkActivity.visibility = View.GONE
         }
 
     }

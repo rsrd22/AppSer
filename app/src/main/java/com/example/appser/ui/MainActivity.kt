@@ -36,6 +36,7 @@ import com.example.appser.ui.home.homeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_menu_test.*
+import kotlinx.android.synthetic.main.app_bar_menu_test.*
 import kotlinx.android.synthetic.main.content_menu_test.*
 import kotlinx.coroutines.launch
 
@@ -61,15 +62,21 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_menu_test)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.dashboardFragment, R.id.questionsFragment2, R.id.registerListFragment,
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-    }
+        navController.addOnDestinationChangedListener { navController, destination, arguments ->
+            if (destination.id == R.id.homeFragment) {
+                binding.appBarMenuTest.toolbar.navigationIcon = null
 
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            appBarConfiguration = AppBarConfiguration(
+                setOf(
+                    R.id.dashboardFragment, R.id.questionsFragment2, R.id.registerListFragment,
+                ), drawerLayout
+            )
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            navView.setupWithNavController(navController)
+        }}
+    }
     override fun onStart() {
         super.onStart()
         LoadData()
@@ -83,10 +90,11 @@ class MainActivity : AppCompatActivity() {
         tvCorreo.text = SerApplication.prefs.getEmail()
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
+         menuInflater.inflate(R.menu.main_menu, menu)
+            return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

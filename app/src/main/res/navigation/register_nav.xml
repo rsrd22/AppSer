@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_registerListFragment"
             app:destination="@id/registerListFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
     </fragment>
    <fragment
         android:id="@+id/questionsFragment2"
@@ -65,4 +68,9 @@
             android:id="@+id/action_activityFragment2_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.appser.ui.gallery.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" />
 </navigation>

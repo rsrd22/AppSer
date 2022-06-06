@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity() {
         if(item.itemId == R.id.logout) {
             Logout()
         }
+        if(item.itemId == R.id.info){
+            findNavController(R.id.galleryFragment).navigate(R.id.action_dashboardFragment_to_galleryFragment)
+        }
         return super.onOptionsItemSelected(item)
     }
 

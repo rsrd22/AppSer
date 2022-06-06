@@ -236,7 +236,11 @@ class QuestionsFragment : Fragment(R.layout.fragment_questions) {
                     cuestionarioId = result.data
 
                     mainViewModel.setEmocionCuestionarioId(Pair(emocionEncontradaId, cuestionarioId))
-                    findNavController().navigate(R.id.action_questionsFragment2_to_emotionFragment2)
+                    if(emocionEncontradaId.equals(-1)){
+                        findNavController().navigate(R.id.action_questionsFragment2_to_dashboardFragment)
+                    }else {
+                        findNavController().navigate(R.id.action_questionsFragment2_to_emotionFragment2)
+                    }
                 }
                 is Resource.Failure -> {
                     Log.d("Error LiveData", "${result.exception}")

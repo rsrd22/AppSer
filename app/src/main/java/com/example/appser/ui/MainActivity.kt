@@ -14,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -53,10 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMenuTest.toolbar)
 
-        /*binding.appBarMenuTest.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_menu_test)
@@ -65,12 +63,11 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { navController, destination, arguments ->
             if (destination.id == R.id.homeFragment) {
                 binding.appBarMenuTest.toolbar.navigationIcon = null
-
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.dashboardFragment, R.id.questionsFragment2, R.id.registerListFragment,
+                    R.id.dashboardFragment, R.id.questionsFragment2, R.id.registerListFragment,R.id.galleryFragment,
                 ), drawerLayout
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
@@ -107,9 +104,7 @@ class MainActivity : AppCompatActivity() {
         if(item.itemId == R.id.logout) {
             Logout()
         }
-        if(item.itemId == R.id.info){
-            findNavController(R.id.galleryFragment).navigate(R.id.action_dashboardFragment_to_galleryFragment)
-        }
+
         return super.onOptionsItemSelected(item)
     }
 

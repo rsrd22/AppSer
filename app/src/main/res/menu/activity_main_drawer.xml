@@ -16,5 +16,9 @@
             android:id="@+id/registerListFragment"
             android:icon="@drawable/ic_baseline_history_edu_24"
             android:title="Historico Emociones" />
+        <item
+            android:id="@+id/galleryFragment"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="Acerca de" />
     </group>
 </menu>

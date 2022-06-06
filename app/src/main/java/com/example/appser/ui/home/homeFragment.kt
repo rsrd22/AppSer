@@ -1,10 +1,12 @@
 package com.example.appser.ui.home
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -18,6 +20,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStore
+import androidx.navigation.findNavController
 
 import androidx.navigation.fragment.findNavController
 import com.example.appser.R
@@ -30,6 +33,7 @@ import com.example.appser.databinding.FragmentHomeBinding
 import com.example.appser.databinding.FragmentRegisterBinding
 import com.example.appser.presentation.*
 import com.example.appser.repository.*
+import com.example.appser.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -69,9 +73,15 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         Log.d("Home Fragment", "OnCreate")
 
 
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
     }
 
     override fun onStart() {
@@ -152,12 +162,17 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                                 .show()
                         }
                         is Resource.Success -> {
+                            Log.d("Login", "ResourceSuccess")
                             if (result.data != null) {
+                                Log.d("USUarioPersona", "User--${result.data}")
                                 mainViewModel.setPersonaAndUsuario(result.data)
                                 prefs.saveName(result.data.persona.nombre_completo.toString())
-                                prefs.saveEmail(result.data.usuario.email.toString())
+                                prefs.saveEmail(result.data.usuario.email)
                                 prefs.saveIdUser(result.data.persona.id)
                                 binding.txtUsuario.text.clear()
+
+
+
                                 findNavController().navigate(R.id.action_homeFragment_to_dashboardFragment)
                             } else {
                                 Toast.makeText(

@@ -20,4 +20,5 @@
     <string name="emotionFragment">Emoción</string>
     <string name="activityFragment">Actividad</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="info">Info</string>
 </resources>

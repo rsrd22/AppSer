@@ -1,5 +1,6 @@
 package com.example.appser.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -17,6 +18,7 @@ import com.example.appser.data.local.AppDatabase
 import com.example.appser.data.model.EmocionesList
 import com.example.appser.data.model.relations.CategoriasWithPreguntas
 import com.example.appser.data.model.relations.PersonaAndUsuario
+import com.example.appser.data.preference.SerApplication
 import com.example.appser.data.preference.SerApplication.Companion.prefs
 import com.example.appser.data.resource.CategoriasDataSource
 import com.example.appser.data.resource.CicloVitalDataResource
@@ -26,6 +28,7 @@ import com.example.appser.presentation.*
 import com.example.appser.repository.CategoriasRepositoryImpl
 import com.example.appser.repository.CicloVitalRepositoryImpl
 import com.example.appser.repository.EmocionesRepositoryImpl
+import com.example.appser.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_menu_test.*
 import kotlinx.android.synthetic.main.content_menu_test.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -75,6 +78,14 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     }
 
     private fun loadData(){
+        val header : View? = activity?.findViewById(R.id.navigation_header_container)
+        if(header != null) {
+            val tvNombreCompleto: TextView = header.findViewById(R.id.txtNombreCompleto)
+            val tvCorreo: TextView = header.findViewById(R.id.txtCorreo)
+            tvNombreCompleto.text = prefs.getName()
+            tvCorreo.text = prefs.getEmail()
+        }
+
 
     }
 

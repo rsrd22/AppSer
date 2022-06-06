@@ -37,11 +37,11 @@ interface UsuarioDao {
     }
 
     @Transaction
-    @Query("SELECT * FROM UsuarioEntity, personaentity WHERE email= :email")
+    @Query("SELECT * FROM UsuarioEntity AS user INNER JOIN personaentity AS pers ON user.id_persona = pers.id  WHERE user.email= :email")
     suspend fun getUsuarioByEmail(email: String): PersonaAndUsuario
 
     @Transaction
-    @Query("SELECT * FROM UsuarioEntity, personaentity WHERE id_persona= :id")
+    @Query("SELECT * FROM UsuarioEntity AS user INNER JOIN personaentity AS pers ON user.id_persona = pers.id WHERE user.id_persona= :id")
     suspend fun getUsuarioByIdPersona(id: Long): PersonaAndUsuario
 
 

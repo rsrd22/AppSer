@@ -162,10 +162,12 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                                 .show()
                         }
                         is Resource.Success -> {
+                            Log.d("Login", "ResourceSuccess")
                             if (result.data != null) {
+                                Log.d("USUarioPersona", "User--${result.data}")
                                 mainViewModel.setPersonaAndUsuario(result.data)
                                 prefs.saveName(result.data.persona.nombre_completo.toString())
-                                prefs.saveEmail(result.data.usuario.email.toString())
+                                prefs.saveEmail(result.data.usuario.email)
                                 prefs.saveIdUser(result.data.persona.id)
                                 binding.txtUsuario.text.clear()
 

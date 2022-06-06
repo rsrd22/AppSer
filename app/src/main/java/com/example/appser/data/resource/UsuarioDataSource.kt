@@ -1,5 +1,6 @@
 package com.example.appser.data.resource
 
+import android.util.Log
 import com.example.appser.data.local.UsuarioDao
 import com.example.appser.data.model.PersonaEntity
 import com.example.appser.data.model.UsuarioEntity
@@ -32,6 +33,7 @@ class UsuarioDataSource(private val usuarioDao: UsuarioDao) {
     }
 
     suspend fun getUsuarioByEmail(email: String): PersonaAndUsuario {
+        Log.d("source", "email: ${email}")
         return usuarioDao.getUsuarioByEmail(email)
     }
 

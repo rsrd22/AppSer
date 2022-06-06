@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/registerFragment2"
         android:name="com.example.appser.ui.register.RegisterFragment"
-        android:label="fragment_register"
+        android:label="Datos de Registro"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/registerListFragment"
